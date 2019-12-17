@@ -5,6 +5,53 @@ author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
 date: 2019-12-04
 ---
 
+<!-- MarkdownTOC -->
+
+- Front matter issues
+	- Introduction
+	- Preamble
+- Tools
+	- Tools we use
+	- Tools we develop and maintain
+		- R packages
+- Metadata database
+	- Installation and admin
+		- Issues I've run into
+			- Server/service not running
+		- How to set up remote connection to locally hosted Postgres database on Windows
+			- 1. General things you need
+			- 2. On the server PC
+				- Figure out where the data "cluster" is
+				- Change the cluster configuration
+				- Change firewall rules to open port
+			- On the client PC
+	- Add-ons to vanilla metabase that are specific to BLE
+		- Addition of two year columns to DataSetPersonnel
+- Metadata template
+- Data processing
+- EML
+- Core Program quirks
+	- Personnel / Responsible Parties
+		- Creator
+		- Other people
+	- Stations
+- Data and metadata styling guide or style rules
+	- Core Program
+	- Other datasets \(PI-driven datasets in BLE terminology\)
+- Website
+	- Our website technologies
+	- How to update website
+		- Minor content updates
+		- Less minor updates
+	- Miscellaneous website notes
+- Bibliographic management
+	- Zotero
+	- Misc. Zotero notes
+- Personnel management
+
+<!-- /MarkdownTOC -->
+
+
 # Front matter issues
 
 ## Introduction
@@ -27,7 +74,7 @@ I speak in first person throughout this handbook. Writing in passive or imperati
 
 3. bleutils
 
-# Metabase
+# Metadata database
 
 See https://github.com/LTER/lter-core-metabase for primary documentation on LTER-core-metabase as a product and a project. This section in the handbook primarly concerns usage of metabase at BLE and certain issues I've encountered.
 
@@ -202,3 +249,40 @@ File names:
 ## Other datasets (PI-driven datasets in BLE terminology)
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible.
+
+# Website
+
+## Our website technologies
+
+Our website is built from static HTML pages and hosted with Netlify. There is no content management system (e.g. Drupal, Wordpress). In fact, there is no static website generator (e.g. Hugo, Jekyll) involved either. 
+
+Somewhat exhaustive list of website technologies we use: 
+- Netlify for hosting and deployment
+- A Github repo as both production and development source code
+- Bootstrap 4
+- FontAwesome for icons
+- Leaflet for map
+- Custom apps: 
+	- Data Catalog built on PASTA API
+	- Zotero search interface
+	- 
+
+## How to update website 
+
+### Minor content updates
+
+I.e. adding text or images to existing pages.
+
+### Less minor updates
+
+## Miscellaneous website notes
+
+- Job postings need to be include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
+
+# Bibliographic management
+
+## Zotero
+
+## Misc. Zotero notes
+
+# Personnel management
