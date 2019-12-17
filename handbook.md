@@ -7,65 +7,69 @@ date: 2019-12-04
 
 <!-- MarkdownTOC -->
 
-- Front matter issues
-	- Introduction
-	- Preamble
-- Tools
-	- Tools we use
-	- Tools we develop and maintain
-		- R packages
-- Metadata database
-	- Installation and admin
-		- Issues I've run into
-			- Server/service not running
-		- How to set up remote connection to locally hosted Postgres database on Windows
-			- 1. General things you need
-			- 2. On the server PC
-				- Figure out where the data "cluster" is
-				- Change the cluster configuration
-				- Change firewall rules to open port
-			- On the client PC
-	- Add-ons to vanilla metabase that are specific to BLE
-		- Addition of two year columns to DataSetPersonnel
-- Metadata template
-- Data processing
-- EML
-- Core Program quirks
-	- Personnel / Responsible Parties
-		- Creator
-		- Other people
-	- Stations
-- Data and metadata styling guide or style rules
-	- Core Program
-	- Other datasets \(PI-driven datasets in BLE terminology\)
-- Website
-	- Our website technologies
-	- How to update website
-		- Minor content updates
-		- Less minor updates
-	- Miscellaneous website notes
-- Bibliographic management
-	- Zotero
-	- Misc. Zotero notes
-- Personnel management
+- [Front matter issues](#front-matter-issues)
+	- [Introduction](#introduction)
+	- [Preamble](#preamble)
+- [Tools](#tools)
+	- [Tools we use](#tools-we-use)
+	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
+		- [R packages](#r-packages)
+- [Metadata database](#metadata-database)
+	- [Installation and admin](#installation-and-admin)
+		- [Issues I've run into](#issues-ive-run-into)
+			- [Server/service not running](#serverservice-not-running)
+		- [How to set up remote connection to locally hosted Postgres database on Windows](#how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows)
+			- [1. General things you need](#1-general-things-you-need)
+			- [2. On the server PC](#2-on-the-server-pc)
+			- [On the client PC](#on-the-client-pc)
+	- [Add-ons to vanilla metabase that are specific to BLE](#add-ons-to-vanilla-metabase-that-are-specific-to-ble)
+		- [Addition of two year columns to DataSetPersonnel](#addition-of-two-year-columns-to-datasetpersonnel)
+- [Metadata template](#metadata-template)
+- [Data processing](#data-processing)
+- [EML](#eml)
+- [Core Program quirks](#core-program-quirks)
+	- [Personnel / Responsible Parties](#personnel--responsible-parties)
+		- [Creator](#creator)
+		- [Other people](#other-people)
+	- [Stations](#stations)
+- [Data and metadata styling guide or style rules](#data-and-metadata-styling-guide-or-style-rules)
+	- [Core Program](#core-program)
+	- [Other datasets \(PI-driven datasets in BLE terminology\)](#other-datasets-pi-driven-datasets-in-ble-terminology)
+- [Website](#website)
+	- [Our website technologies](#our-website-technologies)
+	- [How to update website](#how-to-update-website)
+		- [Minor content updates](#minor-content-updates)
+		- [Less minor updates](#less-minor-updates)
+	- [Miscellaneous website notes](#miscellaneous-website-notes)
+- [Bibliographic management](#bibliographic-management)
+	- [Zotero](#zotero)
+	- [Misc. Zotero notes](#misc-zotero-notes)
+- [Personnel management](#personnel-management)
 
 <!-- /MarkdownTOC -->
 
 
+<a id="front-matter-issues"></a>
 # Front matter issues
 
+<a id="introduction"></a>
 ## Introduction
 
+<a id="preamble"></a>
 ## Preamble
 
 I speak in first person throughout this handbook. Writing in passive or imperative voice is tiring.
 
+<a id="tools"></a>
 # Tools
 
+<a id="tools-we-use"></a>
 ## Tools we use
 
+<a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
 
+<a id="r-packages"></a>
 ### R packages
 
 1. MetaEgress
@@ -74,10 +78,12 @@ I speak in first person throughout this handbook. Writing in passive or imperati
 
 3. bleutils
 
+<a id="metadata-database"></a>
 # Metadata database
 
 See https://github.com/LTER/lter-core-metabase for primary documentation on LTER-core-metabase as a product and a project. This section in the handbook primarly concerns usage of metabase at BLE and certain issues I've encountered.
 
+<a id="installation-and-admin"></a>
 ## Installation and admin
 
 
@@ -90,8 +96,10 @@ Assuming a vanilla installation from executable (.exe) on Windows. Some assumpti
 
 **NOTE:** A good chunk of trouble might be avoided if PostgreSQL is _not_ installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
 
+<a id="issues-ive-run-into"></a>
 ### Issues I've run into
 
+<a id="serverservice-not-running"></a>
 #### Server/service not running
 One day as fine as any other, you log on to your computer and open up DBeaver ready to do some ecological data management. The database refuse to connect, citing "Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections." Boom. What's happening? 
 
@@ -109,13 +117,16 @@ Follow these directions since it is fairly comprehensive (while everything else 
 
 Do all of the clusters fail to start? I have at least two clusters on my computer thatr 
 
+<a id="how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows"></a>
 ### How to set up remote connection to locally hosted Postgres database on Windows
 
+<a id="1-general-things-you-need"></a>
 #### 1. General things you need
 You need:
 - To know the IP addresses of both the server and client machines, aka the PCs hosting the database and the PC trying to access it. This might mean a public-facing address or an internal one. Consult whoever is the network admin, since you'll need to talk to them by the end of this guide anyway. 
 - To have set up a user and password with at minimum CONNECT rights to the database in question.
 
+<a id="2-on-the-server-pc"></a>
 #### 2. On the server PC
 
 ##### Figure out where the data "cluster" is
@@ -155,6 +166,7 @@ with md5 authentication.
 ##### Change firewall rules to open port
 Now that we're done telling Postgres to expect and allow connection, we need to tell the operating system the same. Create a Windows Defender Firewall inbound rule to open up port TCP 5432, or whatever port your cluster uses. Enable this rule. Contact your network admin if you can't do this or don't have the right to do so. This is likely the case if you see anything that says "group policy".
 
+<a id="on-the-client-pc"></a>
 #### On the client PC
 Use this connection information:
 
@@ -164,22 +176,30 @@ Database: <your database name>
 User: <your username>
 Password: <your password>
 
+<a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
 ## Add-ons to vanilla metabase that are specific to BLE
 
+<a id="addition-of-two-year-columns-to-datasetpersonnel"></a>
 ### Addition of two year columns to DataSetPersonnel
 
 After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL. 
 
+<a id="metadata-template"></a>
 # Metadata template
 
+<a id="data-processing"></a>
 # Data processing
 
+<a id="eml"></a>
 # EML
 
+<a id="core-program-quirks"></a>
 # Core Program quirks
 
+<a id="personnel--responsible-parties"></a>
 ## Personnel / Responsible Parties
 
+<a id="creator"></a>
 ### Creator
 
 Core Program packages only have one creator with only a surname "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
@@ -190,6 +210,7 @@ So that they are analogous to this citation from a PI-driven dataset (see comm. 
 
 > Beaufort Lagoon Ecosystems LTER, V. Lougheed. 2019. Carbon flux from aquatic ecosystems of the Arctic Coastal Plain along the Beaufort Sea, Alaska, 2010-2018. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
+<a id="other-people"></a>
 ### Other people
 
 Other people involved in the dataset will be credited as an associated party in the EML record. The order might still matter, so order as the PI have written them down in the template. To be listed as an associated party, a person has to have handled/been responsible for the data at some point, so as to be able to answer questions if necessary. The PI supplies this list normally, so not an action item for us, just FYI. 
@@ -206,12 +227,15 @@ I call this function from inside the directory with other data files. I list the
 
 Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way to duplicating the same set of attributes from a previous Core Program dataset. 
 
+<a id="stations"></a>
 ## Stations
 
 Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). I make it a practice to 
 
+<a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
+<a id="core-program"></a>
 ## Core Program
 
 Rough conventions that frankly I made up some of the time. 
@@ -246,12 +270,15 @@ File names:
 	- Then one or two word descriptive moniker for data
 	- Example: BLE_LTER_CTD.csv
 
+<a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ## Other datasets (PI-driven datasets in BLE terminology)
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible.
 
+<a id="website"></a>
 # Website
 
+<a id="our-website-technologies"></a>
 ## Our website technologies
 
 Our website is built from static HTML pages and hosted with Netlify. There is no content management system (e.g. Drupal, Wordpress). In fact, there is no static website generator (e.g. Hugo, Jekyll) involved either. 
@@ -267,22 +294,30 @@ Somewhat exhaustive list of website technologies we use:
 	- Zotero search interface
 	- 
 
+<a id="how-to-update-website"></a>
 ## How to update website 
 
+<a id="minor-content-updates"></a>
 ### Minor content updates
 
 I.e. adding text or images to existing pages.
 
+<a id="less-minor-updates"></a>
 ### Less minor updates
 
+<a id="miscellaneous-website-notes"></a>
 ## Miscellaneous website notes
 
 - Job postings need to be include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
 
+<a id="bibliographic-management"></a>
 # Bibliographic management
 
+<a id="zotero"></a>
 ## Zotero
 
+<a id="misc-zotero-notes"></a>
 ## Misc. Zotero notes
 
+<a id="personnel-management"></a>
 # Personnel management
