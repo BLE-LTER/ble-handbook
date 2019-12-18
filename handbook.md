@@ -40,11 +40,14 @@ date: 2019-12-04
 	- [How to update website](#how-to-update-website)
 		- [Minor content updates](#minor-content-updates)
 		- [Less minor updates](#less-minor-updates)
+	- [Branding](#branding)
+		- [Logo color reference](#logo-color-reference)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 - [Bibliographic management](#bibliographic-management)
-	- [Zotero](#zotero)
+	- [Zotero best practices](#zotero-best-practices)
 	- [Misc. Zotero notes](#misc-zotero-notes)
 - [Personnel management](#personnel-management)
+- [Resources](#resources)
 
 <!-- /MarkdownTOC -->
 
@@ -286,13 +289,16 @@ Our website is built from static HTML pages and hosted with Netlify. There is no
 Somewhat exhaustive list of website technologies we use: 
 - Netlify for hosting and deployment
 - A Github repo as both production and development source code
-- Bootstrap 4
+- Bootstrap 4 for pre cooked CSS and Javascript
 - FontAwesome for icons
-- Leaflet for map
+- Leaflet for maps
+- Google Fonts for webfonts (Libre Franklin)
+- Google Analytics for tracking usage
+- Twitter embedded timeline
 - Custom apps: 
 	- Data Catalog built on PASTA API
 	- Zotero search interface
-	- 
+	- Search tool
 
 <a id="how-to-update-website"></a>
 ## How to update website 
@@ -300,10 +306,67 @@ Somewhat exhaustive list of website technologies we use:
 <a id="minor-content-updates"></a>
 ### Minor content updates
 
-I.e. adding text or images to existing pages.
+i.e. adding text or images to existing layout element in existing pages.
+
+Open corresponding HTML file from the master branch and edit away. Each page might have different layout setup so it takes a bit of sleuthing to figure out where to add stuff if you're not familiar with it.
 
 <a id="less-minor-updates"></a>
 ### Less minor updates
+
+i.e. changing layout, styles or add new pages.
+
+To change styling of existing layout elements:
+- Experiment with devtools in whatever browser you're using. Or use inline style first. 
+- When it looks good, migrate the styling to Bootstrap class, existing custom class, or add new class/id styling in `public/css/app.css`. 
+- Check out this Bootstrap4 all classes reference from W3schools too: https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp. I used it a lot when trying to figure out if there's an already existing class that fits what I'm trying to do, or what a class Tim put in there does. 
+
+To add a new layout element:
+- Hard to say anything generally applicable here. 
+
+To add a new page:
+
+To change footer/header/common HTML `<header>` element: 
+- Edit `template.html`. Run `public/js/apply_template.js` with NodeJS to apply the change to all HTML files in the `public` folder. I do this in Windows' Command Prompt:
+
+Assuming NodeJS is installed and in the system PATH. First we navigate to the `public/js` folder then simply
+```
+node apply_template.js
+```
+
+<a id="branding"></a>
+## Branding
+
+<a id="logo-color-reference"></a>
+### Logo color reference
+Colors as used in our official logo, RGB version:
+
+ocean
+dark blue
+hex #015cab
+rgb(1, 92, 171)
+
+1st lighter blue
+hex #1e63af
+rgb(30, 99, 175)
+
+2nd lighter blue
+hex #3170b7
+rgb(49, 112, 183)
+
+ice
+
+land
+dark green
+hex #51612b
+rgb(81, 97, 43)
+
+1st lighter green
+hex #637724
+rgb(99, 119, 36)
+
+2nd lighter green
+hex #798e36
+rgb(121, 142, 54)
 
 <a id="miscellaneous-website-notes"></a>
 ## Miscellaneous website notes
@@ -313,11 +376,24 @@ I.e. adding text or images to existing pages.
 <a id="bibliographic-management"></a>
 # Bibliographic management
 
-<a id="zotero"></a>
-## Zotero
+We use Zotero to manage our non-data publications. 
+<a id="zotero-best-practices"></a>
+## Zotero best practices
+
 
 <a id="misc-zotero-notes"></a>
 ## Misc. Zotero notes
 
 <a id="personnel-management"></a>
 # Personnel management
+
+We do not yet have a dedicated tool for centrally personnel management beyond 
+
+1. Tracking who's involved with which datasets in what role (so far for all datasets) during what years (Core Program only). This takes place mostly in our metadata database (metabase). See section on Core Program personnel.
+
+2. What's under "People" or "Team" on our website. This is edited manually when called for.
+
+3. A Box spreadsheet for purposes of (I surmise) LTER/NSF reporting requirements. 
+
+<a id="resources"></a>
+# Resources
