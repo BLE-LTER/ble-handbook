@@ -45,6 +45,7 @@ date: 2019-12-04
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
+		- [How to add a new item](#how-to-add-a-new-item)
 	- [Misc. Zotero notes](#misc-zotero-notes)
 - [Personnel management](#personnel-management)
 - [Resources](#resources)
@@ -380,6 +381,21 @@ We use Zotero to manage our non-data publications.
 <a id="zotero-best-practices"></a>
 ## Zotero best practices
 
+<a id="how-to-add-a-new-item"></a>
+### How to add a new item
+
+Easiest way is to use the Zotero connector, browser add-on for Chrome/Firefox/etc. Navigate to the web page for the journal article (or book chapter, or what have you) with the Zotero desktop app open and the LTER-BLE group library open. (Zotero Connector will always save items to whatever library/collections you have open and have write access to.) Click on the Zotero Connector button on the browser toolbar. Zotero will pick up existing metadata from the publisher, and save you a lot of trouble. For journal articles in most cases there won't be any need to go in and edit anything. 
+
+Make sure to: 
+- add item to appropriate sub-collection under the LTER-BLE group library:
+	- "For Website" if item is to appear on publication page
+	- "For Network" if item is to appear in the broad LTER network group library
+- add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
+	- LTER-Funded for work funded by BLE
+	- Foundational for work we are building our work on
+	- LTER-BLE for everything
+- add data URL if applicable to "Extra" field. URL needs to have "https://doi.org" format
+- edit metadata fields as needed if Zotero wasnt able to fill them out
 
 <a id="misc-zotero-notes"></a>
 ## Misc. Zotero notes
