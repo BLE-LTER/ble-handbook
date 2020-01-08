@@ -307,6 +307,41 @@ If UT Web is no longer an option, you could try:
 - TACC.  It may be a pain because they are now requiring two-factor
   authentication, but perhaps they have worked those bumps out.
 - Send a hard disk to EDI.
+- Send list of 3rd party URLs such as for Box.com for your entities to
+  support@edi and ask them to supply a working URL that you can insert into your
+  EML.
+
+Note that file sharing services such as Box and Google Drive will not work as
+direct links in EML, not even if you ask for a direct link from those services,
+because behind the scenes they use redirects without proper responses. The links
+work fine in a browser but not for the PASTA harvester, hence the last bullet in
+the list above, in which the EDI manually downloads the file from Box, uploads
+it somewhere, and then sends the link so you can insert it into EML.
+
+Care to know more about why those supposedly direct links won't work? EDI uses
+an initial test with an HTTP HEAD call to ascertain the liveness of URLs.
+Because the assume that an HTML response is generally either an error or a
+request to login - that is, not data (unless clearly stated in EML in the
+"physical/dataFormat/externallyDefinedFormat/formatName" as "text/html", they
+judge the quality test as a failure when they do receive a "Content-Type" as
+"text/html". In the case of the UTexas Box URLs for a CSV file, for example,
+they see a "text/html" content type for the HEAD method (in addition to a 404
+Not Found response), but a "text/csv" for the GET method.  For example, the
+following two requests entered in a command window would return different
+responses (assuming the BOX link is valid):
+
+```shell
+curl -i -L -X HEAD https://utexas.box.com/shared/static/4yti3q0sbvytbfk078eimwxfrlw5cccz.csv
+
+curl -i -L -X GET https://utexas.box.com/shared/static/4yti3q0sbvytbfk078eimwxfrlw5cccz.csv
+```
+
+What **should** happen is that the responses are the same. In this case, even
+redirects are OK. For example, try
+
+```shell
+curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/kelp_microsatellite_markers_CARP_20090910_geospatial.csv
+```
 
 <a id="core-program-quirks"></a>
 # Core Program quirks
