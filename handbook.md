@@ -27,6 +27,14 @@ date: 2019-12-04
 - [Metadata template](#metadata-template)
 - [Data processing](#data-processing)
 - [EML](#eml)
+- [Data archiving](#data-archiving)
+	- [Where we archive](#where-we-archive)
+		- [Which member node are we](#which-member-node-are-we)
+		- [Replication](#replication)
+		- [Why we archive at EDI](#why-we-archive-at-edi)
+	- [Who does the archiving](#who-does-the-archiving)
+	- [How we archive at EDI](#how-we-archive-at-edi)
+		- [Handling large files](#handling-large-files)
 - [Core Program quirks](#core-program-quirks)
 	- [Personnel / Responsible Parties](#personnel--responsible-parties)
 		- [Creator](#creator)
@@ -196,6 +204,109 @@ After deciding to eschew listing people as creators in core program datasets, we
 
 <a id="eml"></a>
 # EML
+
+<a id="data-archiving"></a>
+# Data archiving
+
+<a id="where-we-archive"></a>
+## Where we archive
+
+We archive most data packages at the Environmental Data Initiative (EDI).  The
+exception is for entities for which a more suitable archive already exists, such
+as GenBank for genomics data.
+
+Because we use EDI as the sole source of our online data catalog, we still
+archive in EDI at least a summary table for externally archived datasets such as
+genomics data.
+
+<a id="which-member-node-are-we"></a>
+### Which member node are we
+
+When signing in to the EDI data portal and asked for a member node, we're urn:node:LTER.  EDI filters on the package identifier (knb-lter-ble): any of the "knb-lter-*" packages go through urn:node:LTER, while the rest go through urn:node:EDI.
+
+<a id="replication"></a>
+### Replication
+
+We replicate our EDI data packages so that they show up in the Arctic Data Center
+catalog.  There's a single DOI for a data package, which resolves to the LTER
+Data Portal (i.e., EDI).
+
+Replication requires these two steps:
+
+1. The dataset must be synced and indexed at search.dataone.org.  If you search
+   for ble-lter and find the dataset, then it is indexed.  Syncing is something
+   EDI manages, but sometimes the process lags, so if you notice something isn't
+   synced after a couple of weeks, contact EDI to see what's going on.
+2. Once the dataset is synced to DataONE, the BLE information manager must
+   provide the DOI of the dataset to ADC so they can harvest the metadata.
+
+<a id="why-we-archive-at-edi"></a>
+### Why we archive at EDI
+
+We want our datasets to show up in both the LTER data portal (which EDI handles)
+and the Arctic Data Center (ADC), so we must replicate. Replication is currently
+(2020-01-08) one-way.  PASTA is not intrinsically tied to DataONE so data does not flow in from
+DataONE.  (This is for flexibility; EDI is not dependent on where DataONE goes down
+the road.)  ADC uses MetaCat so is intrinsically tied to DataONE.
+
+So, we can only go from EDI to ADC, which is why we archive at EDI.
+
+When BLE started, we discussed this with our program officer Roberto Delgado,
+and he approved our plan of EDI being the primary data site with replication at
+ADC, in an email sent on April 26, 2019.  He documented this in the eJacket
+under Diary notes for the record.
+
+<a id="who-does-the-archiving"></a>
+## Who does the archiving
+
+The BLE information manager archives data packages at EDI. For entities that are
+not archived at EDI, such as genomics data going to GenBank, the individual
+researcher typically archives that entity, since they probably are already
+familiar with the archives for their field.
+
+<a id="how-we-archive-at-edi"></a>
+## How we archive at EDI
+
+We currently submit data and EML metadata manually via the [EDI data portal](https://portal.edirepository.org/nis/harvester.jsp).
+
+<a id="handling-large-files"></a>
+### Handling large files
+
+As of 2020-01-08, EDI has a maximum upload limit of 500 MB per file. If a file
+in your data package exceeds this limit, you must place the file online, and
+provide a link to the file in EML. EDI's PASTA system will harvest the file and
+update the link in EML.
+
+At The University of Texas, the easiest way to place the file online is to
+upload it to UT Web until it is harvested, and then remove it. This has been
+tested on a 2 GB file.  There is a UT Web website for some of BLE PI Ken
+Dunton's various Arctic projects, arcticstudies.org, which can be used
+for temporary BLE big file storage.
+
+To upload a file to UT Web:
+
+1. Submit a service request ticket for access to utw10130, the UT Web space for
+   what is the arcticstudies.org website.  You will need a UT EID for this.
+2. Install FileZilla.
+3. In FileZilla, connect to panel.utweb.utexas.edu, port 22, using your EID
+   credentials.
+4. Browse to /home/utweb/utw10130/public_html/tmp.
+5. Upload the file(s) to that folder. After the upload, be sure the file has
+   "read" permissions for public users by viewing the file's properties in
+   FileZilla.
+6. Update the EML file for the data package to includes links to the files.  For
+   example, for a file named big_file.csv, the link would be <https://arcticstudies.org/tmp/big_file.csv>.
+
+If UT Web is no longer an option, you could try:
+
+- Box with sftp. Not sure of the details, but you can create some sort of
+  AUTHID with keys for automated processes to put and get things from Box.
+- Office 365 Teams (backend SharePoint). You could ask IT to create a Microsoft
+  Team for you and you could try their cloud storage to see if it works any
+  differently than Box. Every Team has 25 TB of storage available.
+- TACC.  It may be a pain because they are now requiring two-factor
+  authentication, but perhaps they have worked those bumps out.
+- Send a hard disk to EDI.
 
 <a id="core-program-quirks"></a>
 # Core Program quirks
