@@ -13,6 +13,7 @@ date: 2019-12-04
 - [Tools](#tools)
 	- [Tools we use](#tools-we-use)
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
+		- [Javascript apps](#javascript-apps)
 		- [R packages](#r-packages)
 - [Metadata database](#metadata-database)
 	- [Installation and admin](#installation-and-admin)
@@ -82,25 +83,55 @@ I speak in first person throughout this handbook. Writing in third person, passi
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
 
+<a id="javascript-apps"></a>
+### Javascript apps
+
+1. PASTA-JavaScript-Search-Client
+
+Search and show result data packages from PASTA (EDI) on website.
+
+https://github.com/BLE-LTER/PASTA-JavaScript-Search-Client
+
+2. Zotero-JavaScript-Search-Client
+
+Search and show result publications from a Zotero library on website.
+
+https://github.com/BLE-LTER/Zotero-JavaScript-Search-Client
+
+3. Lunr-Index-and-Search-for-Static-Sites
+
+Simple index and search for static sites.
+
+https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites
+
 <a id="r-packages"></a>
 ### R packages
 
 1. MetaEgress
 
+Create EML (Ecological Metadata Language) documents from LTER-core-metabase.
+
+https://github.com/BLE-LTER/MetaEgress
+
 2. insitu
 
+Read, process, and flag hydrography data from BLE LTER Core Program sampling.
+
+https://github.com/BLE-LTER/insitu
+
 3. bleutils
+
+Utility functions for BLE IMs.
+
+https://github.com/BLE-LTER/BLE-LTER-utils
 
 <a id="metadata-database"></a>
 # Metadata database
 
-See https://github.com/LTER/lter-core-metabase for primary documentation on LTER-core-metabase as a product and a project. This section in the handbook primarly concerns usage of metabase at BLE and certain issues I've encountered.
+See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarly concerns usage of metabase at BLE and certain issues I've encountered.
 
 <a id="installation-and-admin"></a>
 ## Installation and admin
-
-
-
 Postgres woes and how to overcome them
 
 Very verbose -- for complete newbs to the DB admin world. Windows specific, but I think once you get an idea of how the pieces get together, operating system doesn't matter as much.
@@ -381,17 +412,25 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 <a id="stations"></a>
 ## Stations
 
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). I make it a practice to 
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon).
+
+Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
+
+Example usage: 
+
+```r
+# df is a R data.frame with "station" column containing station codes
+df <- bleutils::add_cp_cols(df, "station")
+```
+
 
 <a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
-First, refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" as it's without context and avoid the hyphenated form "BLE-LTER". 
+Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" as it's without context and avoid the hyphenated form "BLE-LTER". 
 
 <a id="core-program"></a>
 ## Core Program
-
-Rough conventions that frankly I made up some of the time. 
 
 - Column names
 	- lowercase (station not Station)
@@ -450,7 +489,7 @@ Somewhat exhaustive list of website technologies we use:
 - Google Fonts for webfonts (Libre Franklin)
 - Google Analytics for tracking usage
 - Twitter embedded timeline
-- Custom apps: 
+- Custom apps (see Tools we develop section): 
 	- Data Catalog built on PASTA API
 	- Zotero search interface
 	- Search tool
