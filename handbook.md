@@ -50,6 +50,7 @@ date: 2019-12-04
 		- [Less minor updates](#less-minor-updates)
 	- [Branding](#branding)
 		- [Logo color reference](#logo-color-reference)
+			- [Where we use these colors:](#where-we-use-these-colors)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
@@ -70,7 +71,7 @@ date: 2019-12-04
 <a id="preamble"></a>
 ## Preamble
 
-I speak in first person throughout this handbook. Writing in passive or imperative voice is tiring.
+I speak in first person throughout this handbook. Writing in third person, passive, or imperative voice is tiring. Apologies.
 
 <a id="tools"></a>
 # Tools
@@ -234,7 +235,7 @@ Data Portal (i.e., EDI).
 Replication requires these two steps:
 
 1. The dataset must be synced and indexed at search.dataone.org.  If you search
-   for ble-lter and find the dataset, then it is indexed.  Syncing is something
+   for "knb-lter-ble" and find the dataset, then it is indexed.  Syncing is something
    EDI manages, but sometimes the process lags, so if you notice something isn't
    synced after a couple of weeks, contact EDI to see what's going on.
 2. Once the dataset is synced to DataONE, the BLE information manager must
@@ -308,7 +309,7 @@ If UT Web is no longer an option, you could try:
   authentication, but perhaps they have worked those bumps out.
 - Send a hard disk to EDI.
 - Send list of 3rd party URLs such as for Box.com for your entities to
-  support@edi and ask them to supply a working URL that you can insert into your
+  support@environmentaldatainitiative.org and ask them to supply a working URL that you can insert into your
   EML.
 
 Note that file sharing services such as Box and Google Drive will not work as
@@ -385,6 +386,8 @@ Core Program sampling makes use of a certain number of fixed stations. Normal pr
 <a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
+First, refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" as it's without context and avoid the hyphenated form "BLE-LTER". 
+
 <a id="core-program"></a>
 ## Core Program
 
@@ -402,10 +405,14 @@ Some standard columns
 	- water_column_position: surface/mid-column/bottom/not_applicable where not_applicable is a missing value code and used in river or other non-stratified stations.
 
 Entity names
-	- 
+	- Include variables in data
+	- Include timeframe to year resolution
+	- Do not include "BLE LTER"
+	- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
 
 Data table entity descriptions
 	- Include variables in data
+	- Include timeframe to year or month resolution
 	- End with some variation to the effect of "from BLE LTER Core Program, [month and year this dataset starts]-ongoing"
 	- Example: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
 	- If raw data or some other variation of data, prepend designation to description of finished data. E.g. Raw data: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
@@ -418,7 +425,8 @@ File names:
 	- underscored
 	- Prepend with "BLE_LTER"
 	- Then one or two word descriptive moniker for data
-	- Example: BLE_LTER_CTD.csv
+	- Example: "BLE_LTER_CTD.csv"
+	- I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ## Other datasets (PI-driven datasets in BLE terminology)
@@ -435,7 +443,7 @@ Our website is built from static HTML pages and hosted with Netlify. There is no
 
 Somewhat exhaustive list of website technologies we use: 
 - Netlify for hosting and deployment
-- A Github repo as both production and development source code
+- A Github repo as both production and development source code at https://github.com/BLE-LTER/LTER-website
 - Bootstrap 4 for pre cooked CSS and Javascript
 - FontAwesome for icons
 - Leaflet for maps
@@ -483,37 +491,48 @@ node apply_template.js
 <a id="branding"></a>
 ## Branding
 
+Currently (2020-01-08), we use a set of web-safe sans-serif fonts as an all-purpose font. After the website design update (some time before summer 2020), we'll use Libre Franklin (free webfont available through Google Fonts) for all copy. Libre Franklin is the approved sans-serif typeface alternative for UT Austin.
+
 <a id="logo-color-reference"></a>
 ### Logo color reference
 Colors as used in our official logo, RGB version:
 
-ocean
-dark blue
-hex #015cab
-rgb(1, 92, 171)
+ocean: 
+- dark blue
+	- hex #015cab
+	- rgb(1, 92, 171)
 
-1st lighter blue
-hex #1e63af
-rgb(30, 99, 175)
+- 1st lighter blue
+	- hex #1e63af
+	- rgb(30, 99, 175)
 
-2nd lighter blue
-hex #3170b7
-rgb(49, 112, 183)
+- 2nd lighter blue
+	- hex #3170b7
+	- rgb(49, 112, 183)
 
-ice
+ice:
 
-land
-dark green
-hex #51612b
-rgb(81, 97, 43)
+land:
+- dark green
+	- hex #51612b
+	- rgb(81, 97, 43)
 
-1st lighter green
-hex #637724
-rgb(99, 119, 36)
+- 1st lighter green
+	- hex #637724
+	- rgb(99, 119, 36)
 
-2nd lighter green
-hex #798e36
-rgb(121, 142, 54)
+- 2nd lighter green
+	- hex #798e36
+	- rgb(121, 142, 54)
+
+<a id="where-we-use-these-colors"></a>
+#### Where we use these colors:
+
+This pertains to the upcoming website redesign:
+
+Ocean dark blue (#015cab) as primary "dark" background color. Use white text against it. Might also use as text color, preferably in bolded big heading text (font-weight 700 or above). 
+
+Land dark green (#51612b) as accent "dark" background color. Use white text against it. Might also use as text color but prolly only in very big bolded heading text.
 
 <a id="miscellaneous-website-notes"></a>
 ## Miscellaneous website notes
@@ -525,7 +544,10 @@ rgb(121, 142, 54)
 
 We use Zotero to manage our non-data publications. 
 <a id="zotero-best-practices"></a>
+
+<a id="zotero-best-practices"></a>
 ## Zotero best practices
+See Zotero best practices here https://environmentaldatainitiative.files.wordpress.com/2019/04/zotero_best_practices.pdf.
 
 <a id="how-to-add-a-new-item"></a>
 ### How to add a new item
