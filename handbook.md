@@ -8,7 +8,8 @@ date: 2019-12-04
 <!-- MarkdownTOC -->
 
 - [Front matter issues](#front-matter-issues)
-	- [Introduction](#introduction)
+	- [Introduction to BLE LTER Information Management](#introduction-to-ble-lter-information-management)
+	- [Our philosophies](#our-philosophies)
 	- [Preamble](#preamble)
 - [Tools](#tools)
 	- [Tools we use](#tools-we-use)
@@ -66,13 +67,26 @@ date: 2019-12-04
 <a id="front-matter-issues"></a>
 # Front matter issues
 
-<a id="introduction"></a>
-## Introduction
+<a id="introduction-to-ble-lter-information-management"></a>
+## Introduction to BLE LTER Information Management
+
+Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term Ecological Research Network. The project was first funded in 2017 as one of three sites newest to the network. 
+
+Information management was integral to the project from the start; our NSF proposal included a detailed section on the data types we will produce and how each of them will be treated. The information management team has been important project members ever since.
+
+Tim Whiteaker (Tim after) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An after) was recruited by team in November 2018 and officially started in March 2019.
+
+<a id="our-philosophies"></a>
+## Our philosophies
+
+We use modular components in our IM system and workflow -- as opposed to a comprehensive solution like DEIMS. We try to use existing solutions whenever possible and not modify them willy nilly; we've found that there's almost always a tool somewhere suited to our purposes even in its vanilla form.
+
+See our website summary on our information management system here at https://ble.lternet.edu/ims.
 
 <a id="preamble"></a>
 ## Preamble
 
-I speak in first person throughout this handbook. Writing in third person, passive, or imperative voice is tiring. Apologies.
+I speak in first person throughout this handbook. Writing in third person, passive, or imperative voice is tiring.
 
 <a id="tools"></a>
 # Tools
@@ -582,7 +596,6 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 # Bibliographic management
 
 We use Zotero to manage our non-data publications. 
-<a id="zotero-best-practices"></a>
 
 <a id="zotero-best-practices"></a>
 ## Zotero best practices
