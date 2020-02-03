@@ -631,5 +631,23 @@ We do not yet have a dedicated tool for centrally personnel management beyond
 
 3. A Box spreadsheet for purposes of (I surmise) LTER/NSF reporting requirements. 
 
+## Mailing list admin
+
+We maintain several mailing lists for BLE LTER. Distribution and management are based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa software. 
+
+There are three lists as of Feb 2020:
+
+1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
+
+Includes everybody: PIs, PMs, IMs, students, postdocs. Excludes affiliates on a case by case basis. 2020 PI meeting in Anchoraged agreed on using a listserv like this for potential paper and project discussions.
+
+2. [ble-lter-pi@utlists.utexas.edu](ble-lter-pi@utlists.utexas.edu)
+
+Includes all PIs and project managers. 
+
+3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
+
+Includes all officially affiliated students. Christina/Nathan/An can post messages to the list but not see conversations they didn't initiate.
+
 <a id="resources"></a>
 # Resources
