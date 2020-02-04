@@ -59,6 +59,7 @@ date: 2019-12-04
 		- [How to add a new item](#how-to-add-a-new-item)
 	- [Misc. Zotero notes](#misc-zotero-notes)
 - [Personnel management](#personnel-management)
+	- [Mailing List Admin](#mailing-list-admin)
 - [Resources](#resources)
 
 <!-- /MarkdownTOC -->
@@ -631,19 +632,28 @@ We do not yet have a dedicated tool for centrally personnel management beyond
 
 3. A Box spreadsheet for purposes of (I surmise) LTER/NSF reporting requirements. 
 
+<a id="mailing-list-admin"></a>
 ## Mailing list admin
 
-We maintain several mailing lists for BLE LTER. Distribution and management are based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa software. 
+We maintain several mailing lists for BLE LTER. Distribution and management are
+based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa
+software. Only list members can send messages. Messages are not moderated. Replies to messages from others will be sent to the entire list, i.e., default reply behavior is reply-all. Email the original poster directly for tangential thoughts, specific questions, etc.
+
+List members can invite others to join, but a list owner must approve once a
+person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own the lists.
 
 There are three lists as of Feb 2020:
 
 1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
 
-Includes everybody: PIs, PMs, IMs, students, postdocs. Excludes affiliates on a case by case basis. 2020 PI meeting in Anchoraged agreed on using a listserv like this for potential paper and project discussions.
+Includes everybody: PIs, PMs, IMs, students, postdocs. Excludes affiliates on a
+case by case basis. 2020 PI meeting in Anchorage agreed on using a listserv like
+this for potential paper and project discussions. Since potential works could be
+discussed, this list is limited to BLE people only.
 
 2. [ble-lter-pi@utlists.utexas.edu](ble-lter-pi@utlists.utexas.edu)
 
-Includes all PIs and project managers. 
+Includes all PIs, IMs, and project managers.
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
