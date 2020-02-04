@@ -637,10 +637,16 @@ We do not yet have a dedicated tool for centrally personnel management beyond
 
 We maintain several mailing lists for BLE LTER. Distribution and management are
 based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa
-software. Only list members can send messages. Messages are not moderated. Replies to messages from others will be sent to the entire list, i.e., default reply behavior is reply-all. Email the original poster directly for tangential thoughts, specific questions, etc.
+software. 
+
+We have settled on these settings:
+
+Only list members can send messages. Messages are not moderated. Replies to messages from others will be sent to the entire list, i.e., default reply behavior is reply-all. Email the original poster directly for tangential thoughts, specific questions, etc. 
+
+However, see config section below if you ever wanna change settings.
 
 List members can invite others to join, but a list owner must approve once a
-person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own the lists.
+person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed will not be included on conversations they didn't initiate. 
 
 There are three lists as of Feb 2020:
 
@@ -657,7 +663,31 @@ Includes all PIs, IMs, and project managers.
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
-Includes all officially affiliated students. Christina/Nathan/An can post messages to the list but not see conversations they didn't initiate.
+Includes all officially affiliated students. Christina/Nathan/An/Tim/BLE PIs can post messages to the list but would not see regular conversations they didn't initiate. This was changed so that PIs can post e.g. for grad reading group or forward job ads, etc.
+
+### List maintenance
+
+These tasks need to be done periodically:
+
+- Review membership and subscribe/un-subscribe people manually as they join/leave the project. We might want to ask graduating students if they want to be unsubscribed. In the future we might want to give people DIY instructions instead. E.g. point people to the UTlists webpage to subscribe or give them instructions how to subscribe via an email to sympa@utlists.utexas.edu. 
+
+- Review for bouncing (invalid) addresses. 
+
+- Check if messages are getting past spam filters. We'll assume the best and look  into this as issues come up. 
+
+### List config
+
+Most of this is done at initial setup. Adjust as needed.
+
+For documentation, I've found that [this article collection from UChicago](https://uchicago.service-now.com/it?id=kb_article&kb=KB00016472) is more helpful that what UT offers. Both unis seem to have similar Sympa instances; the admin config options are named similarly. The UChicago articles expand on how different options behave. 
+
+config options of note: 
+
+- Who can post? "Restricted to subscribers". We mostly want only members of any given list posting. Owners/admins/mods can always post. Exception for the student list: "Private, moderated for subscribers". Essentially means anyone who knows this address can post, but an admin needs to approve. Only other BLE people are really meant to post. 
+
+- Who can see the list? "No conceal". Essentially this means our lists show up on the UTLists website, and there are web interfaces for each one people can go to (even w/o an account) to subscribe. 
+
+- Who can (un)subscribe? "Owners approval". Admin needs to approve (un)sub requests.
 
 <a id="resources"></a>
 # Resources
