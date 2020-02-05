@@ -639,14 +639,12 @@ We maintain several mailing lists for BLE LTER. Distribution and management are
 based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa
 software. 
 
-We have settled on these settings:
+We have settled on these settings. However, see config section below if you ever wanna change.
 
 Only list members can send messages. Messages are not moderated. Replies to messages from others will be sent to the entire list, i.e., default reply behavior is reply-all. Email the original poster directly for tangential thoughts, specific questions, etc. 
 
-However, see config section below if you ever wanna change settings.
-
 List members can invite others to join, but a list owner must approve once a
-person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed will not be included on conversations they didn't initiate. 
+person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed, will not be included on conversations they didn't initiate. 
 
 There are three lists as of Feb 2020:
 
@@ -663,13 +661,13 @@ Includes all PIs, IMs, and project managers.
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
-Includes all officially affiliated students. Christina/Nathan/An/Tim/BLE PIs can post messages to the list but would not see regular conversations they didn't initiate. This was changed so that PIs can post e.g. for grad reading group or forward job ads, etc.
+Includes all officially affiliated students. PIs/PMs/IMs can post messages to the list but would not see regular conversations. This is so that PIs can post e.g. papers reading group or forwarded job ads, etc.
 
 ### List maintenance
 
 These tasks need to be done periodically:
 
-- Review membership and subscribe/un-subscribe people manually as they join/leave the project. We might want to ask graduating students if they want to be unsubscribed. In the future we might want to give people DIY instructions instead. E.g. point people to the UTlists webpage to subscribe or give them instructions how to subscribe via an email to sympa@utlists.utexas.edu. 
+- Review membership and subscribe/un-subscribe people manually as they join/leave the project. We might want to ask graduating students if they want to remain subscribed. In the future we might want to give people DIY instructions instead. E.g. point people to the UTlists webpage to subscribe or give them instructions how to subscribe via emailing sympa@utlists.utexas.edu. 
 
 - Review for bouncing (invalid) addresses. 
 
@@ -677,7 +675,7 @@ These tasks need to be done periodically:
 
 ### List config
 
-Most of this is done at initial setup. Adjust as needed.
+Most of this is done at initial setup. Adjust as needed. Note that An also created and is admin on another list called [ble-lter-test@utlists.utexas.edu](ble-lter-test@utlists.utexas.edu) for config testing purposes; e.g. all subscribers are just me. 
 
 For documentation, I've found that [this article collection from UChicago](https://uchicago.service-now.com/it?id=kb_article&kb=KB00016472) is more helpful that what UT offers. Both unis seem to have similar Sympa instances; the admin config options are named similarly. The UChicago articles expand on how different options behave. 
 
@@ -688,6 +686,8 @@ config options of note:
 - Who can see the list? "No conceal". Essentially this means our lists show up on the UTLists website, and there are web interfaces for each one people can go to (even w/o an account) to subscribe. 
 
 - Who can (un)subscribe? "Owners approval". Admin needs to approve (un)sub requests.
+
+- Include a footer message under "message templates". I go with variations on "Distribution list for BLE LTER *insert audience*. Replies will be sent to the whole group. Email *insert list email* to send a message to the group."
 
 <a id="resources"></a>
 # Resources
