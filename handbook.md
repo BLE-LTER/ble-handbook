@@ -140,6 +140,37 @@ Utility functions for BLE IMs.
 
 https://github.com/BLE-LTER/BLE-LTER-utils
 
+## Getting access to things
+
+aka primitive personnel handover action plan
+
+We use many, many tools that will need logins, some needing certain privilege levels. A new person on BLE's IM team will need to make sure they have access to:
+
+- Stache *
+- UTBox (shared drived with BLE team as a whole, we also use this for  sharable file links) +
+- Austin Disk (more day-to-day IM working directories) *
+- Access to the official IM email BLE-IM@utexas.edu address +
+- Access to our copy of metabase *
+- Netlify (static website host) $
+- Collaborator to the BLE-LTER Github organization
+- EDI's three portals: production, staging, and development
+- UTLists (Sympa mailing list management software) +
+- Slack groups for LTER IMs. Optional: EDI/NCEAS groups
+- Subscribe to the im@lternet.edu mailing list, plus imc@lternet.edu if main IM
+- Taskade (project management app, we're trying it out as of Feb 2020)
+
+Legend:
+* UT Austin service, requires affiliation to UT (UT EID)
++ UT Austin service, does not require affiliation to UT
+$ Tim has it
+
+Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials. EDI will eventually roll out 'identity mapping', i.e. allowing IM team members from sites to log on to EDI portal(s) with their own Google/Github/ORCID account. Until then, BLE has one account.
+
+Tim and An have their own individual accounts to metabase. However there are accounts set to do certain things (e.g. 'backup_user' has read-only access to be able to dump database contents everyday). 
+
+Stache (UT service) contains the passwords to these shared accounts. 
+For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights. 
+
 <a id="metadata-database"></a>
 # Metadata database
 
@@ -269,7 +300,7 @@ genomics data.
 <a id="which-member-node-are-we"></a>
 ### Which member node are we
 
-When signing in to the EDI data portal and asked for a member node, we're urn:node:LTER.  EDI filters on the package identifier (knb-lter-ble): any of the "knb-lter-*" packages go through urn:node:LTER, while the rest go through urn:node:EDI.
+When signing in to the EDI data portal and asked for a member node, we're urn:node:LTER.  EDI filters on the package identifier (knb-lter-ble): any of the "knb-lter-[site acronym]" packages go through urn:node:LTER, while the rest go through urn:node:EDI.
 
 <a id="replication"></a>
 ### Replication
