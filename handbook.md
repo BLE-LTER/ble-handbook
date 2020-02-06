@@ -16,6 +16,7 @@ date: 2019-12-04
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
 		- [Javascript apps](#javascript-apps)
 		- [R packages](#r-packages)
+	- [Getting access to things](#getting-access-to-things)
 - [Metadata database](#metadata-database)
 	- [Installation and admin](#installation-and-admin)
 		- [Issues I've run into](#issues-ive-run-into)
@@ -137,9 +138,10 @@ https://github.com/BLE-LTER/insitu
 3. bleutils
 
 Utility functions for BLE IMs.
-
+ 
 https://github.com/BLE-LTER/BLE-LTER-utils
 
+<a id="getting-access-to-things"></a>
 ## Getting access to things
 
 aka primitive personnel handover action plan
