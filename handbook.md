@@ -162,8 +162,11 @@ We use many, many tools that will need logins, some needing certain privilege le
 - Taskade (project management app, we're trying it out as of Feb 2020)
 
 Legend:
+
 `*` UT Austin service, requires affiliation to UT (UT EID)
+
 `+` UT Austin service, does not require affiliation to UT
+
 `$` Tim has it
 
 Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials. EDI will eventually roll out 'identity mapping', i.e. allowing IM team members from sites to log on to EDI portal(s) with their own Google/Github/ORCID account. Until then, BLE has one account.
@@ -173,6 +176,7 @@ Tim and An have their own individual accounts to metabase. However there are acc
 Stache (UT service) contains the passwords to these shared accounts. 
 For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights. 
 
+<a href="#header">Back to top</a>
 <a id="metadata-database"></a>
 # Metadata database
 
@@ -276,15 +280,19 @@ Password: <your password>
 
 After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL. 
 
+<a href="#header">Back to top</a>
 <a id="metadata-template"></a>
 # Metadata template
 
+<a href="#header">Back to top</a>
 <a id="data-processing"></a>
 # Data processing
 
+<a href="#header">Back to top</a>
 <a id="eml"></a>
 # EML
 
+<a href="#header">Back to top</a>
 <a id="data-archiving"></a>
 # Data archiving
 
@@ -423,6 +431,7 @@ redirects are OK. For example, try
 curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/kelp_microsatellite_markers_CARP_20090910_geospatial.csv
 ```
 
+<a href="#header">Back to top</a>
 <a id="core-program-quirks"></a>
 # Core Program quirks
 
@@ -471,7 +480,7 @@ Example usage:
 df <- bleutils::add_cp_cols(df, "station")
 ```
 
-
+<a href="#header">Back to top</a>
 <a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
@@ -520,6 +529,7 @@ File names:
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible.
 
+<a href="#header">Back to top</a>
 <a id="website"></a>
 # Website
 
@@ -626,6 +636,7 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 
 - Job postings need to be include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
 
+<a href="#header">Back to top</a>
 <a id="bibliographic-management"></a>
 # Bibliographic management
 
@@ -651,9 +662,11 @@ Make sure to:
 - add data URL if applicable to "Extra" field. URL needs to have "https://doi.org" format
 - edit metadata fields as needed if Zotero wasnt able to fill them out
 
+
 <a id="misc-zotero-notes"></a>
 ## Misc. Zotero notes
 
+<a href="#header">Back to top</a>
 <a id="personnel-management"></a>
 # Personnel management
 
