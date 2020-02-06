@@ -5,6 +5,8 @@ author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
 date: 2019-12-04
 ---
 
+<a id="header"></a>
+
 <!-- MarkdownTOC -->
 
 - [Front matter issues](#front-matter-issues)
