@@ -16,34 +16,20 @@ date: 2019-12-04
 - [Tools](#tools)
 	- [Tools we use](#tools-we-use)
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
-		- [Javascript apps](#javascript-apps)
-		- [R packages](#r-packages)
 	- [Getting access to things](#getting-access-to-things)
 - [Metadata database](#metadata-database)
 	- [Installation and admin](#installation-and-admin)
-		- [Issues I've run into](#issues-ive-run-into)
-			- [Server/service not running](#serverservice-not-running)
-		- [How to set up remote connection to locally hosted Postgres database on Windows](#how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows)
-			- [1. General things you need](#1-general-things-you-need)
-			- [2. On the server PC](#2-on-the-server-pc)
-			- [On the client PC](#on-the-client-pc)
 	- [Add-ons to vanilla metabase that are specific to BLE](#add-ons-to-vanilla-metabase-that-are-specific-to-ble)
-		- [Addition of two year columns to DataSetPersonnel](#addition-of-two-year-columns-to-datasetpersonnel)
 - [Metadata template](#metadata-template)
 - [Data processing](#data-processing)
+	- [How to initiate a new](#how-to-initiate-a-new)
 - [EML](#eml)
 - [Data archiving](#data-archiving)
 	- [Where we archive](#where-we-archive)
-		- [Which member node are we](#which-member-node-are-we)
-		- [Replication](#replication)
-		- [Why we archive at EDI](#why-we-archive-at-edi)
 	- [Who does the archiving](#who-does-the-archiving)
 	- [How we archive at EDI](#how-we-archive-at-edi)
-		- [Handling large files](#handling-large-files)
 - [Core Program quirks](#core-program-quirks)
 	- [Personnel / Responsible Parties](#personnel--responsible-parties)
-		- [Creator](#creator)
-		- [Other people](#other-people)
 	- [Stations](#stations)
 - [Data and metadata styling guide or style rules](#data-and-metadata-styling-guide-or-style-rules)
 	- [Core Program](#core-program)
@@ -51,18 +37,13 @@ date: 2019-12-04
 - [Website](#website)
 	- [Our website technologies](#our-website-technologies)
 	- [How to update website](#how-to-update-website)
-		- [Minor content updates](#minor-content-updates)
-		- [Less minor updates](#less-minor-updates)
 	- [Branding](#branding)
-		- [Logo color reference](#logo-color-reference)
-			- [Where we use these colors:](#where-we-use-these-colors)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
-		- [How to add a new item](#how-to-add-a-new-item)
 	- [Misc. Zotero notes](#misc-zotero-notes)
 - [Personnel management](#personnel-management)
-	- [Mailing List Admin](#mailing-list-admin)
+	- [Mailing list admin](#mailing-list-admin)
 - [Resources](#resources)
 
 <!-- /MarkdownTOC -->
@@ -157,6 +138,7 @@ We use many, many tools that will need logins, some needing certain privilege le
 - Access to our copy of metabase `*`
 - Netlify (static website host) `$`
 - Collaborator to the BLE-LTER Github organization
+- Editor on Zotero group library
 - EDI's three portals: production, staging, and development
 - UTLists (Sympa mailing list management software) `+`
 - Slack groups for LTER IMs. Optional: EDI/NCEAS groups
@@ -286,9 +268,16 @@ After deciding to eschew listing people as creators in core program datasets, we
 <a id="metadata-template"></a>
 # Metadata template
 
+We use a metadata template to collect information about datasets from scientists. It resides at. 
+
+
+
 <a href="#header">Back to top</a>
 <a id="data-processing"></a>
 # Data processing
+
+<a id="how-to-initiate-a-new"></a>
+## How to initiate a new 
 
 <a href="#header">Back to top</a>
 <a id="eml"></a>
@@ -486,7 +475,7 @@ df <- bleutils::add_cp_cols(df, "station")
 <a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
-Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" as it's without context and avoid the hyphenated form "BLE-LTER". 
+Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
 
 <a id="core-program"></a>
 ## Core Program
@@ -711,6 +700,7 @@ Includes all PIs, IMs, and project managers.
 
 Includes all officially affiliated students. PIs/PMs/IMs can post messages to the list but would not see regular conversations. This is so that PIs can post e.g. papers reading group or forwarded job ads, etc.
 
+<a id="list-maintenance"></a>
 ### List maintenance
 
 These tasks need to be done periodically:
@@ -721,6 +711,7 @@ These tasks need to be done periodically:
 
 - Check if messages are getting past spam filters. We'll assume the best and look  into this as issues come up. 
 
+<a id="list-config"></a>
 ### List config
 
 Most of this is done at initial setup. Adjust as needed. Note that An also created and is admin on another list called [ble-lter-test@utlists.utexas.edu](ble-lter-test@utlists.utexas.edu) for config testing purposes; e.g. all subscribers are just me. 
