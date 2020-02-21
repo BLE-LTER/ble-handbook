@@ -22,7 +22,6 @@ date: 2019-12-04
 	- [Add-ons to vanilla metabase that are specific to BLE](#add-ons-to-vanilla-metabase-that-are-specific-to-ble)
 - [Metadata template](#metadata-template)
 	- [How to update template](#how-to-update-template)
-	- [Common steps after editing](#common-steps-after-editing)
 - [Data processing](#data-processing)
 	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
 - [EML](#eml)
@@ -306,7 +305,7 @@ This is a copy of the README on the git repo with a tiny bit more.
 7. See common steps.
 
 <a id="common-steps-after-editing"></a>
-## Common steps after editing
+### Common steps after editing
 
 After any updates, be sure to:
 - Git commit and push changes
@@ -315,9 +314,6 @@ After any updates, be sure to:
 	- PDF
 	- sample package
 - Save to Box > Beaufort LTER > Website > FileLinks > "metadata_template.zip". Using that exact archive name will ensure links and version control work.
-
-
-
 
 <a href="#header">Back to top</a>
 <a id="data-processing"></a>
