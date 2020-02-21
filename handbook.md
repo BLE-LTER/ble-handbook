@@ -21,8 +21,10 @@ date: 2019-12-04
 	- [Installation and admin](#installation-and-admin)
 	- [Add-ons to vanilla metabase that are specific to BLE](#add-ons-to-vanilla-metabase-that-are-specific-to-ble)
 - [Metadata template](#metadata-template)
+	- [How to update template](#how-to-update-template)
+	- [Common steps after editing](#common-steps-after-editing)
 - [Data processing](#data-processing)
-	- [How to initiate a new](#how-to-initiate-a-new)
+	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
 - [EML](#eml)
 - [Data archiving](#data-archiving)
 	- [Where we archive](#where-we-archive)
@@ -268,7 +270,52 @@ After deciding to eschew listing people as creators in core program datasets, we
 <a id="metadata-template"></a>
 # Metadata template
 
-We use a metadata template to collect information about datasets from scientists. It resides at. 
+We use a metadata template to collect information about datasets from scientists. It resides at, well, several places. 
+
+On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version.
+
+Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
+
+<a id="how-to-update-template"></a>
+## How to update template
+This is a copy of the README on the git repo with a tiny bit more.
+
+### Template Excel
+
+1. Open file `metadata_template.xlsx`
+2. Make changes. Make changes to sample package if applicable. Make changes to instructions if applicable.
+3. Save file(s)
+4. See common steps.
+
+### PDF instructions
+
+1. Open file `data_submission_instructions.md`
+2. Make changes. Hit save on source Markdown.
+3. Open command prompt on a computer with pandoc enabled and saved in the system PATH. 
+4. Navigate to the current directory containing template and source Markdown. 
+5. Execute command 
+
+```
+>K:
+
+>cd "K:\Data-Notes\BLE-Practices\metadata_templates\canon"
+
+>pandoc data_submission_instructions.md --pdf-engine=xelatex -o data_submission_instructions.pdf
+```
+6. Check result PDF to make sure your edits appear.
+7. See common steps.
+
+<a id="common-steps-after-editing"></a>
+## Common steps after editing
+
+After any updates, be sure to:
+- Git commit and push changes
+- Zip template package up, be sure to include:
+	- Excel
+	- PDF
+	- sample package
+- Save to Box > Beaufort LTER > Website > FileLinks > "metadata_template.zip". Using that exact archive name will ensure links and version control work.
+
 
 
 
@@ -276,8 +323,8 @@ We use a metadata template to collect information about datasets from scientists
 <a id="data-processing"></a>
 # Data processing
 
-<a id="how-to-initiate-a-new"></a>
-## How to initiate a new 
+<a id="how-to-initiate-a-new-data-package"></a>
+## How to initiate a new data package
 
 <a href="#header">Back to top</a>
 <a id="eml"></a>
