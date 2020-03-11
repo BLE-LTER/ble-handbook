@@ -25,6 +25,7 @@ date: 2020-03-20
 	- [How to update template](#how-to-update-template)
 - [Data processing](#data-processing)
 	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
+	- [Processing](#processing)
 - [EML](#eml)
 - [Data archiving](#data-archiving)
 	- [Where we archive](#where-we-archive)
@@ -471,7 +472,7 @@ This is a copy of the README on the git repo with a tiny bit more.
 2. Make changes. Hit save on source Markdown.
 3. Open command prompt on a computer with pandoc enabled and saved in the system PATH. 
 4. Navigate to the current directory containing template and source Markdown. 
-5. Execute command 
+5. Execute these commands in Windows Command Prompt. pandoc needs to be installed and visible on your system (e.g. in the system PATH). In my case, pandoc comes bundled with RMarkdown/RStudio and RStudio kindly adds it to the PATH environment variable for me.  
 
 ```
 >K:
@@ -500,6 +501,43 @@ After any updates, be sure to:
 
 <a id="how-to-initiate-a-new-data-package"></a>
 ## How to initiate a new data package
+
+Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in any R console. This will (1) create a folder named datasetid_nickname under our Austin disk Data folder, with sub-folders called FromPI and Clean > EML_generation, and (2) create a R script named datasetid.R from template with the appropriate IDs subbed into function calls. The parent folder defaults to "K:/Data" on my machine. Modify the `base_path` argument in `init_datapkg()` if needed.
+
+- Our dataset IDs increment from 1. `init_datapkg()` will return error if you attempt to use an ID already existing within that folder, and tell you the next available ID (i.e. the largest existing ID + 1). I don't see any reason right now to skip numbers, so this should work. 
+
+- I do this fairly early on in the process: normally, as soon as PI have sent us a file somewhere, even if it's a sample with no metadata, since we know there's data coming at some point. I do not enter any information into metabase until we receive complete good quality metadata.
+
+- Create a new R project under EML_generation for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far.
+
+<a id="processing"></a>
+## Processing
+
+All data processing should be performed in scripts for transparency and reproducibility, and also for our convenience: PIs often re-send data, and all changes by us made manually in Excel will be lost. I use R and therefore a lot of our workflows and helper functions are centered around R, but there's no reason another scripting language would not work. 
+
+The R script created by `init_datapkg()` has pre laid-out sections (but no code, can't template processing code) for light data processing. For tasks beyond renaming columns or fixing small typos, I would create a new script.
+
+### netCDF
+
+#### When to use
+
+Gridded data with lots of observations can be packaged a lot smaller in netCDF than CSV form. Generally, we do this when a CSV would exceed circa 20 million rows and 5/6 columns in long table form, resulting in a CSV file > 1 GB. Remember that lat/lon/time/site codes already take up 3-4 columns.
+
+netCDF cannot be checked for data-metadata congruency by PASTA's ECC.
+
+#### How to generate netCDFs
+
+This of course depends on the source format. We have done and attempted to do this twice as of March 2020 for datasets 5 (hydrology model by Mike Rawlins) and 7 (moorings by Jeremy Kasper) and have some insights.
+
+- R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. 
+
+- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes, well, I never stuck around long enough to see if it can even execute to completion, but at least 2 hours. Yes, R is quite a bit slower than python. I still use it.
+
+### Metadata in netCDF
+
+We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML. 
+
+Our goal for netCDFs need to comply
 
 <a href="#header">Back to top</a>
 <a id="eml"></a>
