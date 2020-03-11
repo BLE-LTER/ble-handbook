@@ -296,17 +296,17 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 #### Existing structures
 
-      Role name      |                         Attributes                         |                        Member of                         |                   Notes
+    |  Role name      |                         Attributes                         |                        Member of                         |                   Notes    |
 ---------------------+------------------------------------------------------------+----------------------------------------------------------+--------------------------------------------------------------
- an                  | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
- backup_user         |                                                            | {ble_group_readonly}                                     |  Used for daily automated backups (see below).
- ble_group_owner     | Cannot login                                               | {}                                                       |  Owns the database and all its objects.
- ble_group_readonly  | Cannot login                                               | {}                                                       |
- ble_group_readwrite | Cannot login                                               | {}                                                       |
- postgres            | Superuser, Create role, Create DB, Replication, Bypass RLS | {}                                                       |
- read_only_user      |                                                            | {ble_group_readonly}                                     |
- read_write_user     |                                                            | {ble_group_readonly,ble_group_readwrite}                 |
- tim                 | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
+ |an                  | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
+ |backup_user         |                                                            | {ble_group_readonly}                                     |  Used for daily automated backups (see below).
+ |ble_group_owner     | Cannot login                                               | {}                                                       |  Owns the database and all its objects.
+ |ble_group_readonly  | Cannot login                                               | {}                                                       |
+ |ble_group_readwrite | Cannot login                                               | {}                                                       |
+ |postgres            | Superuser, Create role, Create DB, Replication, Bypass RLS | {}                                                       |
+ |read_only_user      |                                                            | {ble_group_readonly}                                     |
+ |read_write_user     |                                                            | {ble_group_readonly,ble_group_readwrite}                 |
+ |tim                 | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
 
 We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
 
@@ -357,7 +357,12 @@ After deciding to eschew listing people as creators in core program datasets, we
 
 ### Data sets
 
+ok
+
 ### Backups
+
+ok
+
 #### Backups
 
 A scheduled task on An's computer backs up the database to the **daily_backups**
