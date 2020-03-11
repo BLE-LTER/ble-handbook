@@ -529,15 +529,36 @@ netCDF cannot be checked for data-metadata congruency by PASTA's ECC.
 
 This of course depends on the source format. We have done and attempted to do this twice as of March 2020 for datasets 5 (hydrology model by Mike Rawlins) and 7 (moorings by Jeremy Kasper) and have some insights.
 
-- R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. 
+- R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. In our folder for dataset 7, see merge_nc.py for an example python routine and 
+netcdf.R for an example R routine. 
 
 - Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes, well, I never stuck around long enough to see if it can even execute to completion, but at least 2 hours. Yes, R is quite a bit slower than python. I still use it.
 
-### Metadata in netCDF
+- Mike's dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
+
+### Metadata 
+
+#### in netCDF
 
 We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML. 
 
-Our goal for netCDFs need to comply
+Our goal for netCDFs:
+
+- Compliance with CF conventions
+
+- Compliance with the applicable NCEI netCDF template. See list of templates [here](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/). 
+
+- Opens in ArcGIS with correct projection and correct location (i.e. ArcGIS recognizes the CRS plus the lat/lon values).
+
+Possible metadata duplication between EML and netCDF global attributes:
+
+- title: use overall dataset title
+- summary: use overall dataset abstract
+- keywords: use keywords applicable to data in netCDF form (assuming there are other data entities packaged alongside netCDF)
+
+#### in EML
+
+Document the netCDF as otherEntity. Metabase already has netCDF as a file type that would fill in the correct metadata.
 
 <a href="#header">Back to top</a>
 <a id="eml"></a>
