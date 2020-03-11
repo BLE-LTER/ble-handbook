@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2019-12-04
+date: 2020-03-20
 ---
 
 <a id="header"></a>
@@ -19,7 +19,8 @@ date: 2019-12-04
 	- [Getting access to things](#getting-access-to-things)
 - [Metadata database](#metadata-database)
 	- [Installation and admin](#installation-and-admin)
-	- [Add-ons to vanilla metabase that are specific to BLE](#add-ons-to-vanilla-metabase-that-are-specific-to-ble)
+	- [Our metabase implementation](#our-metabase-implementation)
+	- [Regular tasks](#regular-tasks)
 - [Metadata template](#metadata-template)
 	- [How to update template](#how-to-update-template)
 - [Data processing](#data-processing)
@@ -65,7 +66,7 @@ Tim Whiteaker (Tim after) was first recruited as project data/information manage
 <a id="our-philosophies"></a>
 ## Our philosophies
 
-We use modular components in our IM system and workflow -- as opposed to a comprehensive solution like DEIMS. We try to use existing solutions whenever possible and not modify them willy nilly; we've found that there's almost always a tool somewhere suited to our purposes even in its vanilla form.
+We use modular components in our IM system and workflow -- as opposed to a comprehensive solution like [DEIMS](https://deims.org/). We try to use existing solutions whenever possible and not modify them willy nilly; we've found that there's almost always a tool somewhere suited to our purposes even in its vanilla form.
 
 See our website summary on our information management system here at https://ble.lternet.edu/ims.
 
@@ -128,7 +129,7 @@ https://github.com/BLE-LTER/BLE-LTER-utils
 <a id="getting-access-to-things"></a>
 ## Getting access to things
 
-aka primitive personnel handover action plan
+a.k.a. primitive personnel handover action plan
 
 We use many, many tools that will need logins, some needing certain privilege levels. A new person on BLE's IM team will need to make sure they have access to:
 
@@ -257,13 +258,138 @@ Database: <your database name>
 User: <your username>
 Password: <your password>
 
-<a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
-## Add-ons to vanilla metabase that are specific to BLE
+<a id="our-metabase-implementation"></a>
+## Our metabase implementation
 
-<a id="addition-of-two-year-columns-to-datasetpersonnel"></a>
-### Addition of two year columns to DataSetPersonnel
+We're using a Postgres instance on An's machine (IP address 10.157.18.129, computer number for UT-IT purposes CRWR-D08182).
+
+To connect:
+Host: 10.157.18.129
+Port: 5432
+Database: ble_metabase
+User:
+Password:
+
+To enable Tim to connect, we had to work with ITG. They set up a firewall policy
+for An's computer which opens TCP port 5432 for just the CWE general network
+(10.157.18.0/24). They then ran a gpupdate on An's computer.
+
+### Roles: Users/Groups || Permissions
+
+Postgres has a somewhat confusing (to me) permission management scheme. To minimize confusion and make it easy, I am making a hard-and-fast distinction:
+
+1. LOGIN ROLES (i.e. users):
+
+- can login: you have to use a login role's credentials to initially connect to a database. Login roles need to be created with passwords.
+- are associated conceptually with ACTUAL PEOPLE or TASKS to be performed on the database.
+- to be able to perform said tasks, login roles _inherit_ permissions from the groups they are a member of.
+- if other people joins the team, or webapps that use the database are developed, a new login role should be created for their use, with membership to the appropriate groups.
+
+2. GROUP ROLES:
+
+- cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole. 
+- are associated conceptually with PERMISSIONS on the database. Permissions to the database are granted on a group basis for easy management.
+- there are three groups corresponding with three broad levels of permissions. I do not foresee needing another group role.
+  - `ble_group_readonly` has CONNECT, USAGE, and SELECT
+  - `ble_group_readwrite` has all of the above, plus INSERT and UPDATE
+  - `ble_group_owner` has all of the above, plus (1) ability to GRANT membership in group roles
+
+#### Existing structures
+
+      Role name      |                         Attributes                         |                        Member of                         |                   Notes
+---------------------+------------------------------------------------------------+----------------------------------------------------------+--------------------------------------------------------------
+ an                  | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
+ backup_user         |                                                            | {ble_group_readonly}                                     |  Used for daily automated backups (see below).
+ ble_group_owner     | Cannot login                                               | {}                                                       |  Owns the database and all its objects.
+ ble_group_readonly  | Cannot login                                               | {}                                                       |
+ ble_group_readwrite | Cannot login                                               | {}                                                       |
+ postgres            | Superuser, Create role, Create DB, Replication, Bypass RLS | {}                                                       |
+ read_only_user      |                                                            | {ble_group_readonly}                                     |
+ read_write_user     |                                                            | {ble_group_readonly,ble_group_readwrite}                 |
+ tim                 | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
+
+We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
+
+**NOTE**: postgres is the superuser on the entire cluster on An's machine. Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches.
+
+### User privileges needed to connect to and edit the database
+
+When creating a new user, you need to do the following. Or re-use the read_only_user and read_write_user roles created in install scripts.
+
+At minimum:
+
+* CONNECT ON DATABASE
+* USAGE ON SCHEMA (repeat for all schemas. execute in the SQL editor tool in DBeaver or command-line psql)
+* A read and query-only user: above, plus SELECT ON TABLE (repeat for all tables+views in all schemas)
+* A user with write privileges: above, plus UPDATE, INSERT ON TABLE (repeat for all tables+views in all schemas)
+* An all-powerful user: CONNECT and USAGE, plus GRANT ALL ON ALL TABLES
+
+Consider granting DEFAULT privileges as well to grant access to future tables.
+
+Granting permissions such as SELECT, UPDATE, or ALL is perhaps most easily
+performed in DBeaver.
+
+1. In DBeaver, under the database, expand Roles.
+2. Double-click a user.
+3. Click Permissions in the accordion.
+4. Expand the schema, and then expand Tables.
+5. Select all tables.
+6. Check all desired boxes, or click Grant All to grant everything even if the
+   box isn't already checked.
+7. Click Save.
+
+Example SQL statement:
+
+```sql
+GRANT USAGE ON SCHEMA lter_metabase TO backup_user;
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pkg_mgmt GRANT ALL ON TABLES TO ble_group_owner;
+```
+
+<a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
+### Add-ons to vanilla metabase that are specific to BLE
+
+1. Addition of two year columns to DataSetPersonnel
 
 After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL. 
+
+<a id="regular-tasks"></a>
+## Regular tasks
+
+### Data sets
+
+### Backups
+#### Backups
+
+A scheduled task on An's computer backs up the database to the **daily_backups**
+folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
+
+Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it.
+
+#### Restore
+
+Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore. To restore from plain-text format, either right-click on a newly created database in DBeaver/Tools/Execute script, or run the file on a newly created and connected to database in command-line psql.
+
+Existing users must be created prior to running the SQL to restore into another
+server that's not the original host. It is less work to create new users than make a backup
+without user privileges then assign them.
+
+``` sql
+CREATE USER ble_group_owner;
+CREATE USER read_write_user;
+CREATE USER read_only_user;
+CREATE USER backup_user;
+CREATE USER tim;
+CREATE USER an;
+```
+
+
+### Applying new features or patches
+
+#### Schema changes
+
+Log in with a user in ble_group_owner when changing the schema. This simplifies
+permission issues downstream, such as when granting default privileges for new
+tables to other users.
 
 <a href="#header">Back to top</a>
 <a id="metadata-template"></a>
@@ -664,6 +790,10 @@ This pertains to the upcoming website redesign:
 Ocean dark blue (#015cab) as primary "dark" background color. Use white text against it. Might also use as text color, preferably in bolded big heading text (font-weight 700 or above). 
 
 Land dark green (#51612b) as accent "dark" background color. Use white text against it. Might also use as text color but prolly only in very big bolded heading text.
+
+### North Slope coastline motif
+
+
 
 <a id="miscellaneous-website-notes"></a>
 ## Miscellaneous website notes
