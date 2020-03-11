@@ -299,15 +299,15 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 | Role name | Attribute | Members of | Notes |
 |---|---|---|---|
-| an | Create role, create DB, can login | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |  |
+| an | Create role, create DB, can login | {ble_group_owner, ble_group_readonly, ble_group_readwrite} |  |
 | backup_user |  | {ble_group_readonly} | Used for daily automated backups (see below). |
 | ble_group_owner | Group, cannot login | {} | Owns the database and all its objects. |
 | ble_group_readonly | Group, cannot login | {} |  |
 | ble_group_readwrite | Group, cannot login | {} |  |
 | postgres | Superuser, can login, Create role, Create DB, Replication, Bypass RLS | {} |  |
 | read_only_user |  | {ble_group_readonly} |  |
-| read_write_user |  | {ble_group_readonly,ble_group_readwrite}  |  |
-| tim | Create role, Create DB, can login | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |  |
+| read_write_user |  | {ble_group_readonly, ble_group_readwrite}  |  |
+| tim | Create role, Create DB, can login | {ble_group_owner, ble_group_readonly, ble_group_readwrite} |  |
 
 We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
 
@@ -404,11 +404,7 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 
 ### Data sets
 
-ok
-
 ### Backups
-
-ok
 
 #### Backups
 
@@ -437,12 +433,17 @@ CREATE USER an;
 
 ### Applying new features or patches
 
-#### Schema changes
+Remember to log in with a user in group ble_group_owner when changing the schema. This simplifies permission issues downstream, such as when granting default privileges for new tables to other users.
 
-Log in with a user in ble_group_owner when changing the schema. This simplifies
-permission issues downstream, such as when granting default privileges for new
-tables to other users.
+Keep an eye on the LTER-core-metabase Github repository. "watching" the repo will trigger email updates. An currently develops for this project, so by default keeps up with new patches and in fact wrote a lot of them. The "migration" branch will contain the latest sequentially numbered patches, see documentation on that repo for information on this system. Check the table `pkg_mgmt.version_tracker_metabase` for information on past applied patches. Note that occasionally new "one big file/OBF" or essentially a schema dump with all patches incorporated. If BLE instance of metabase has fallen too far behind, instead of applying a whole lot of patches, you might want to consider setting up a new instance from the latest OBF, dump out data from the old metabase, and insert into the new. 
 
+Once you've determined that a patch needs to be applied:
+
+- inspect it. If there are new GRANT statements involved, these changes are necessary: `%db_owner%` to `ble_group_owner`, `read_write_user` to `ble_group_readwrite`, and `read_only_user` to `ble_group_owner`. 
+- either:
+	- download the .sql patch, make changes, make sure the BLE metabase is the active DB in DBeaver (right click > make active), then right click > execute script.
+	- copy the raw SQL code into a new SQL editor window in DBeaver, make changes, then execute line by line or Ctrl+A > Ctrl+Enter to execute the whole thing.
+ 
 <a href="#header">Back to top</a>
 <a id="metadata-template"></a>
 # Metadata template
