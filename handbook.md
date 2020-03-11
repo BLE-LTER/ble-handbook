@@ -170,7 +170,8 @@ See https://github.com/LTER/lter-core-metabase for a first stop documentation on
 
 <a id="installation-and-admin"></a>
 ## Installation and admin
-Postgres woes and how to overcome them
+
+### Postgres woes and how to overcome them
 
 Very verbose -- for complete newbs to the DB admin world. Windows specific, but I think once you get an idea of how the pieces get together, operating system doesn't matter as much.
 
@@ -296,17 +297,17 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 #### Existing structures
 
-    |  Role name      |                         Attributes                         |                        Member of                         |                   Notes    |
----------------------+------------------------------------------------------------+----------------------------------------------------------+--------------------------------------------------------------
- |an                  | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
- |backup_user         |                                                            | {ble_group_readonly}                                     |  Used for daily automated backups (see below).
- |ble_group_owner     | Cannot login                                               | {}                                                       |  Owns the database and all its objects.
- |ble_group_readonly  | Cannot login                                               | {}                                                       |
- |ble_group_readwrite | Cannot login                                               | {}                                                       |
- |postgres            | Superuser, Create role, Create DB, Replication, Bypass RLS | {}                                                       |
- |read_only_user      |                                                            | {ble_group_readonly}                                     |
- |read_write_user     |                                                            | {ble_group_readonly,ble_group_readwrite}                 |
- |tim                 | Create role, Create DB                                     | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |
+| Role name | Attribute | Members of | Notes |
+|---|---|---|---|
+| an | Create role, create DB, can login | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |  |
+| backup_user |  | {ble_group_readonly} | Used for daily automated backups (see below). |
+| ble_group_owner | Group, cannot login | {} | Owns the database and all its objects. |
+| ble_group_readonly | Group, cannot login | {} |  |
+| ble_group_readwrite | Group, cannot login | {} |  |
+| postgres | Superuser, can login, Create role, Create DB, Replication, Bypass RLS | {} |  |
+| read_only_user |  | {ble_group_readonly} |  |
+| read_write_user |  | {ble_group_readonly,ble_group_readwrite}  |  |
+| tim | Create role, Create DB, can login | {ble_group_owner,ble_group_readonly,ble_group_readwrite} |  |
 
 We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
 
@@ -350,7 +351,53 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pkg_mgmt GRANT ALL ON TABLE
 
 1. Addition of two year columns to DataSetPersonnel
 
-After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL. 
+After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL and also reproduced below.
+
+```sql
+-- add two columns to DS personnel
+
+ALTER TABLE lter_metabase."DataSetPersonnel" 
+	ADD COLUMN "BeginYear" int DEFAULT 2018,
+	ADD COLUMN "EndYear" int DEFAULT 2018;
+
+-- alter primary key 
+-- so that it's possible to have people with two different roles, 
+-- or people that hop on and off the project
+
+ALTER TABLE lter_metabase."DataSetPersonnel" 
+	DROP CONSTRAINT "PK_DataSetPersonnel";
+
+ALTER TABLE lter_metabase."DataSetPersonnel"
+	ADD CONSTRAINT "PK_DataSetPersonnel"
+	PRIMARY KEY("DataSetID", "NameID", "AuthorshipRole", "BeginYear");
+
+-- create VIEW
+
+CREATE OR REPLACE VIEW pkg_mgmt.personnel_years_associated AS 
+	SELECT d."DataSetID" as datasetid,
+	p."GivenName" as givenname,
+	p."MiddleName" as middlename,
+	p."SurName" as surname,
+	d."AuthorshipRole" as role,
+	d."BeginYear" as beginyear,
+	d."EndYear" as endyear,
+    i."IdentificationURL" AS orcid
+    FROM lter_metabase."DataSetPersonnel" d
+     LEFT JOIN lter_metabase."ListPeople" p ON d."NameID"::text = p."NameID"::text
+     LEFT JOIN lter_metabase."ListPeopleID" i ON d."NameID"::text = i."NameID"::text
+    WHERE i."IdentificationSystem"::text = 'ORCID'::text AND d."AuthorshipRole"::text != 'creator'
+  ORDER BY d."DataSetID", d."AuthorshipOrder";
+
+-- grants for above VIEW
+
+  ALTER TABLE pkg_mgmt.personnel_years_associated OWNER TO ble_group_owner;
+
+REVOKE ALL ON TABLE pkg_mgmt.personnel_years_associated FROM PUBLIC;
+REVOKE ALL ON TABLE pkg_mgmt.personnel_years_associated FROM ble_group_owner;
+GRANT SELECT,INSERT,UPDATE ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_readwrite;
+GRANT SELECT ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_readonly;
+GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
+```
 
 <a id="regular-tasks"></a>
 ## Regular tasks
