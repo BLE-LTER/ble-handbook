@@ -44,7 +44,7 @@ date: 2020-03-20
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
-	- [Misc. Zotero notes](#misc-zotero-notes)
+	- [Misc. biblio notes](#misc-biblio-notes)
 - [Personnel management](#personnel-management)
 	- [Mailing list admin](#mailing-list-admin)
 - [Resources](#resources)
@@ -144,7 +144,7 @@ We use many, many tools that will need logins, some needing certain privilege le
 - Editor on Zotero group library
 - EDI's three portals: production, staging, and development
 - UTLists (Sympa mailing list management software) `+`
-- Slack groups for LTER IMs. Optional: EDI/NCEAS groups
+- Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups. 
 - Subscribe to the im@lternet.edu mailing list, plus imc@lternet.edu if main IM
 - Taskade (project management app, we're trying it out as of Feb 2020)
 
@@ -162,6 +162,12 @@ Tim and An have their own individual accounts to metabase. However there are acc
 
 Stache (UT service) contains the passwords to these shared accounts. 
 For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights. 
+
+#### Getting remote access
+
+March 18th, 2020. UT has shut down for five days. Austin is on the verge of an imminent lockdown. BLE IM team has been stuck at home for five days. We set down these words to commemorate these times.
+
+How to remote access into your desktop from 
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
@@ -939,8 +945,16 @@ Make sure to:
 - edit metadata fields as needed if Zotero wasnt able to fill them out
 
 
-<a id="misc-zotero-notes"></a>
-## Misc. Zotero notes
+<a id="misc-biblio-notes"></a>
+## Misc. biblio notes
+
+### Linking data and pubs
+
+On the journal site: PIs would normally cite data pkgs. Not our job.
+
+On our site biblio: make sure to add data URL if applicable to "Extra" metadata field.
+
+On EDI: use the portal "Journal citations" tool to manually add journal pubs to 
 
 <a href="#header">Back to top</a>
 <a id="personnel-management"></a>
