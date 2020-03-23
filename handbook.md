@@ -926,35 +926,44 @@ We use Zotero to manage our non-data publications.
 
 <a id="zotero-best-practices"></a>
 ## Zotero best practices
-See Zotero best practices here https://environmentaldatainitiative.files.wordpress.com/2019/04/zotero_best_practices.pdf.
+
+See Zotero best practices here https://environmentaldatainitiative.files.wordpress.com/2019/04/zotero_best_practices.pdf. 
 
 <a id="how-to-add-a-new-item"></a>
 ### How to add a new item
 
-Easiest way is to use the Zotero connector, browser add-on for Chrome/Firefox/etc. Navigate to the web page for the journal article (or book chapter, or what have you) with the Zotero desktop app open and the LTER-BLE group library open. (Zotero Connector will always save items to whatever library/collections you have open and have write access to.) Click on the Zotero Connector button on the browser toolbar. Zotero will pick up existing metadata from the publisher, and save you a lot of trouble. For journal articles in most cases there won't be any need to go in and edit anything. 
+Easiest way is to use the Zotero connector, a browser add-on for Chrome/Firefox/etc, which can harvest metadata about a publication directly into the Zotero desktop application, saving you a lot of trouble.
 
-Make sure to: 
-- add item to appropriate sub-collection under the LTER-BLE group library:
-	- "For Website" if item is to appear on publication page
-	- "For Network" if item is to appear in the broad LTER network group library
+1. If you have not already done so, install the Zotero desktop application, and also Zotero Connector. In the Zotero desktop application, sync to the [BLE library](https://www.zotero.org/groups/2211939/lter-ble/library).  Make sure you have write access to the library. Configure Zotero to not sync attachments.
+2. Open the Zotero desktop application and click the LTER-BLE group to make it active. Zotero Connector will always save items to whatever library/collections you have open and have write access to.
+3. In your Web browser, navigate to the Web page for the journal article (or book chapter, or what have you). 
+4. Click the Zotero Connector button on the browser toolbar.
+
+Once the metadata is harvested, make sure to:
+
+- add the item to appropriate sub-collection under the LTER-BLE group library:
+	- "For-Website" if item is to appear on publication page
+	- "For-Network" if item is to appear in the broad LTER network group library
 - add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
 	- LTER-Funded for work funded by BLE
 	- Foundational for work we are building our work on
-	- LTER-BLE for everything
-- add data URL if applicable to "Extra" field. URL needs to have "https://doi.org" format
+	- LTER-BLE for work added to the For-Network collection
+- add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
 - edit metadata fields as needed if Zotero wasnt able to fill them out
-
+- skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
+- if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
+- Update the BLE website (a cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography)
 
 <a id="misc-biblio-notes"></a>
 ## Misc. biblio notes
 
 ### Linking data and pubs
 
-On the journal site: PIs would normally cite data pkgs. Not our job.
+On the journal site: PIs would normally cite data packages. Not IM's job.
 
-On our site biblio: make sure to add data URL if applicable to "Extra" metadata field.
+On our site bibliography: make sure to add data URL if applicable to "Extra" metadata field.
 
-On EDI: use the portal "Journal citations" tool to manually add journal pubs to 
+On EDI: use the portal "Journal citations" tool to manually add journal pubs to dataset landing page. Currently (2020-03-23) you must do this for each dataset revision on which you want the journal link to appear.
 
 <a href="#header">Back to top</a>
 <a id="personnel-management"></a>
