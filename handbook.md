@@ -827,7 +827,7 @@ Somewhat exhaustive list of website technologies we use:
 - Twitter embedded timeline
 - Custom apps (see Tools we develop section): 
 	- Data Catalog built on PASTA API
-	- Zotero search interface
+	- Bibliography search interface
 	- Search tool
 
 <a id="how-to-update-website"></a>
@@ -922,7 +922,7 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 <a id="bibliographic-management"></a>
 # Bibliographic management
 
-We use Zotero to manage our non-data publications. 
+We use Zotero to manage our non-data publications.  BLE has a BLE-IM login for Zotero, and that login owns the LTER-BLE Zotero group.
 
 <a id="zotero-best-practices"></a>
 ## Zotero best practices
@@ -942,10 +942,11 @@ Easiest way is to use the Zotero connector, a browser add-on for Chrome/Firefox/
 Once the metadata is harvested, make sure to:
 
 - add the item to appropriate sub-collection under the LTER-BLE group library:
-	- "For-Website" if item is to appear on publication page
-	- "For-Network" if item is to appear in the broad LTER network group library
+	- "For-Website" if item is to appear on publication page. These are primarily peer-reviewed journal articles but can include papers in conference proceeding as long as they are published in an edited volume.  What we are trying to avoid is listing a bunch of conference abstracts.
+	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
 - add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
 	- LTER-Funded for work funded by BLE
+	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
 	- Foundational for work we are building our work on
 	- LTER-BLE for work added to the For-Network collection
 - add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
@@ -961,7 +962,7 @@ Once the metadata is harvested, make sure to:
 
 On the journal site: PIs would normally cite data packages. Not IM's job.
 
-On our site bibliography: make sure to add data URL if applicable to "Extra" metadata field.
+On our site bibliography: put each data DOI on its own line in the Extra field in Zotero. You must include the `https://doi.org/` part in order for the DOI to show up at as a data link on the website.
 
 On EDI: use the portal "Journal citations" tool to manually add journal pubs to dataset landing page. Currently (2020-03-23) you must do this for each dataset revision on which you want the journal link to appear.
 
