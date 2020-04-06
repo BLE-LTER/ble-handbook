@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2020-03-20
+date: 2020-04-06
 ---
 
 <a id="header"></a>
@@ -747,7 +747,7 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 <a id="stations"></a>
 ## Stations
 
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon).
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
 Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
 
@@ -767,24 +767,28 @@ Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid us
 <a id="core-program"></a>
 ## Core Program
 
-- Column names
+Column names:
+
 	- lowercase (station not Station)
 	- capitalized only when denoting standard acronyms (PAR for photosynthetically active radiation) or when it's part of the variable name (pH)
 	- underscores between words (date_time not date.time)
 
-Some standard columns
+Some standard columns:
+
 	- station: station codes or IDs (KALD2)
 	- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok.
 	- date: date in YYYY-MM-DD format. Normally applies for sampling trips. 
 	- water_column_position: surface/mid-column/bottom/not_applicable where not_applicable is a missing value code and used in river or other non-stratified stations.
 
-Entity names
+Entity names:
+
 	- Include variables in data
 	- Include timeframe to year resolution
 	- Do not include "BLE LTER"
 	- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
 
-Data table entity descriptions
+Data table entity descriptions:
+
 	- Include variables in data
 	- Include timeframe to year or month resolution
 	- End with some variation to the effect of "from BLE LTER Core Program, [month and year this dataset starts]-ongoing"
@@ -792,10 +796,12 @@ Data table entity descriptions
 	- If raw data or some other variation of data, prepend designation to description of finished data. E.g. Raw data: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
 
 Other entity descriptions:
+
 	- State clearly what the other entity is and how it relates in the context of the package. No need for month and year, I think.
 	- Example: Annotated RMarkdown script to process, calibrate, and flag raw TCM data.
 
 File names:
+
 	- underscored
 	- Prepend with "BLE_LTER"
 	- Then one or two word descriptive moniker for data
