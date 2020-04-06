@@ -769,44 +769,43 @@ Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid us
 
 Column names:
 
-	- lowercase (station not Station)
-	- capitalized only when denoting standard acronyms (PAR for photosynthetically active radiation) or when it's part of the variable name (pH)
-	- underscores between words (date_time not date.time)
+- lowercase (station not Station)
+- capitalized only when denoting standard acronyms (PAR for photosynthetically active radiation) or when it's part of the variable name (pH)
+- underscores between words (date_time not date.time)
 
 Some standard columns:
 
-	- station: station codes or IDs (KALD2)
-	- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok.
-	- date: date in YYYY-MM-DD format. Normally applies for sampling trips. 
-	- water_column_position: surface/mid-column/bottom/not_applicable where not_applicable is a missing value code and used in river or other non-stratified stations.
+- station: station codes or IDs (KALD2)
+- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok.
+- date: date in YYYY-MM-DD format. Normally applies for sampling trips. 
+- water_column_position: surface/mid-column/bottom/not_applicable where not_applicable is a missing value code and used in river or other non-stratified stations.
 
 Entity names:
 
-	- Include variables in data
-	- Include timeframe to year resolution
-	- Do not include "BLE LTER"
-	- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
+- Include variables in data
+- Include timeframe to year resolution
+- Do not include "BLE LTER"
+- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
 
 Data table entity descriptions:
 
-	- Include variables in data
-	- Include timeframe to year or month resolution
-	- End with some variation to the effect of "from BLE LTER Core Program, [month and year this dataset starts]-ongoing"
-	- Example: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
-	- If raw data or some other variation of data, prepend designation to description of finished data. E.g. Raw data: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
+- Include variables in data
+- Include timeframe to year or month resolution
+- End with some variation to the effect of "from BLE LTER Core Program, [month and year this dataset starts]-ongoing"
+- Example: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
+- If raw data or some other variation of data, prepend designation to description of finished data. E.g. Raw data: Dissolved organic carbon and total dissolved nitrogen from BLE LTER Core Program sampling, Aug 2018-ongoing
 
 Other entity descriptions:
 
-	- State clearly what the other entity is and how it relates in the context of the package. No need for month and year, I think.
-	- Example: Annotated RMarkdown script to process, calibrate, and flag raw TCM data.
+- State clearly what the other entity is and how it relates in the context of the package. No need for month and year, I think.
+- Example: Annotated RMarkdown script to process, calibrate, and flag raw TCM data.
 
 File names:
 
-	- underscored
-	- Prepend with "BLE_LTER"
-	- Then one or two word descriptive moniker for data
-	- Example: "BLE_LTER_CTD.csv"
-	- I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+- underscored
+- Prepend with "BLE_LTER"
+- Then one or two word descriptive moniker for data
+- Example: "BLE_LTER_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ## Other datasets (PI-driven datasets in BLE terminology)
