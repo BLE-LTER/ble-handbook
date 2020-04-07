@@ -775,7 +775,7 @@ Per Yvette's request and concern over easily accessing attribute unit informatio
 - publish a short user's guide to accessing metadata, under our data catalog
 - adopt a practice of appending units to column names, e.g. "temp_C". 
 
-Here's how this is implemented during our normal workflow:
+#### Here's how this is implemented during our normal workflow:
 
 - attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp"
 - if applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
@@ -786,12 +786,15 @@ Here's how this is implemented during our normal workflow:
 - after, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
 - proceed as usual with EML generation.
 
-Reasoning to do it this way:
+#### Reasoning to do it this way:
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
 - No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop. 
-- Very easy to leave it off a dataset, although finer grained control is not possible atm.
+- Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control is not possible atm.
 
+#### Updating the EMLUnitDictionary
+
+Updates to the EMLUnitDictionary might be necessary with new versions of EML. Our plan is to perform a full/outer join on the existing EMLUniDictionary keeping all rows, so that (1) our custom edited abbreviations survive the mode, (2) metabase continues to support older and custom units.
 
 <a id="core-program"></a>
 ## Core Program
@@ -833,6 +836,7 @@ File names:
 
 - underscored
 - Prepend with "BLE_LTER"
+- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI
 - Then one or two word descriptive moniker for data
 - Example: "BLE_LTER_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
 
