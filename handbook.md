@@ -880,22 +880,36 @@ Open corresponding HTML file from the master branch and edit away. Each page mig
 i.e. changing layout, styles or add new pages.
 
 To change styling of existing layout elements:
+
 - Experiment with devtools in whatever browser you're using. Or use inline style first. 
-- When it looks good, migrate the styling to Bootstrap class, existing custom class, or add new class/id styling in `public/css/app.css`. 
-- Check out this Bootstrap4 all classes reference from W3schools too: https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp. I used it a lot when trying to figure out if there's an already existing class that fits what I'm trying to do, or what a class Tim put in there does. 
+- When it looks good, migrate the styling to Bootstrap class, existing custom class, or add new class/id styling in `public/css/app.css`.
+- Check out this Bootstrap4 all classes reference from W3schools too: https://www.w3schools.com/bootstrap4/bootstrap_ref_all_classes.asp. I used it a lot when trying to figure out if there's an already existing class that fits what I'm trying to do, or what a class Tim put in there does.
 
 To add a new layout element:
-- Hard to say anything generally applicable here. 
+
+- Hard to say anything generally applicable here.
+
+To build search index:
+
+- Start a node command prompt (or a regular command prompt if node is in your path).
+- Browse to root `LTER-website` folder.
+- Enter this command: `node build_index.js`.
+- Cut and paste the resulting `lunr_index.js` file into the `public/js` folder.
 
 To add a new page:
 
-To change footer/header/common HTML `<header>` element: 
-- Edit `template.html`. Run `public/js/apply_template.js` with NodeJS to apply the change to all HTML files in the `public` folder. I do this in Windows' Command Prompt:
+- Copy an existing page.
+- Update header for new page.
+- Edit page content.
+- Add page to sitemap.xml.
+- Update search index.
 
-Assuming NodeJS is installed and in the system PATH. First we navigate to the `public/js` folder then simply
-```
-node apply_template.js
-```
+To change footer/header/common HTML `<header>` element:
+
+- Edit `template.html` to include desired header, navigation, footer, etc.
+- Start a node command prompt (or a regular command prompt if node is in your path).
+- Browse to root `LTER-website` folder.
+- Enter this command: `node apply_template.js`.
 
 <a id="branding"></a>
 ## Branding
@@ -939,18 +953,16 @@ land:
 
 This pertains to the upcoming website redesign:
 
-Ocean dark blue (#015cab) as primary "dark" background color. Use white text against it. Might also use as text color, preferably in bolded big heading text (font-weight 700 or above). 
+Ocean dark blue (#015cab) as primary "dark" background color. Use white text against it. Might also use as text color, preferably in bolded big heading text (font-weight 700 or above).
 
 Land dark green (#51612b) as accent "dark" background color. Use white text against it. Might also use as text color but prolly only in very big bolded heading text.
 
 ### North Slope coastline motif
 
-
-
 <a id="miscellaneous-website-notes"></a>
 ## Miscellaneous website notes
 
-- Job postings need to be include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
+- Job postings need to include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
 
 <a href="#header">Back to top</a>
 <a id="bibliographic-management"></a>
