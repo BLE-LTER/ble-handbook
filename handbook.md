@@ -47,6 +47,7 @@ date: 2020-04-06
 	- [Zotero best practices](#zotero-best-practices)
 	- [Misc. biblio notes](#misc-biblio-notes)
 - [Personnel management](#personnel-management)
+	- [Update personnel contact information](#update-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
 - [Resources](#resources)
 
@@ -779,7 +780,7 @@ Per Yvette's request and concern over easily accessing attribute unit informatio
 
 - attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp"
 - if applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
-- the data entry person makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); once we use new units they need to be adjusted as we go. Use query `SSELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
+- the data entry person makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); once we use new units they need to be adjusted as we go. Use query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
 - how to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviation, use them, e.g. "partPerMillion" is ppm. 
 - during processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` append the abbreviation to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
 - if `append_units` is not called, metadata produced will not have units in column names
@@ -1027,6 +1028,16 @@ We do not yet have a dedicated tool for centrally personnel management beyond
 2. What's under "People" or "Team" on our website. This is edited manually when called for.
 
 3. A Box spreadsheet for purposes of (I surmise) LTER/NSF reporting requirements. 
+
+<a id="update-personnel-contact-information"></a>
+## Update personnel contact information
+
+Make sure to do the following:
+
+- Update the Box spreadsheet under Beaufort LTER/Personnel
+- Update our website display.
+- Update metabase in two places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project). They might not have an entry in metabase yet.
+- Update appropriate mailing lists
 
 <a id="mailing-list-admin"></a>
 ## Mailing list admin
