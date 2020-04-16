@@ -774,9 +774,9 @@ Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid us
 Per Yvette's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
 
 - publish a short user's guide to accessing metadata, under our data catalog
-- adopt a practice of appending units to column names, e.g. "temp_C". 
+- adopt a practice of appending units to column names, e.g. "temp_C".
 
-#### Here's how this is implemented during our normal workflow:
+#### Here's how this is implemented during our normal workflow
 
 1. Attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp."
 2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
