@@ -778,16 +778,16 @@ Per Yvette's request and concern over easily accessing attribute unit informatio
 
 #### Here's how this is implemented during our normal workflow:
 
-- attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp"
-- if applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
-- the data entry person makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); once we use new units they need to be adjusted as we go. Use query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
-- how to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviation, use them, e.g. "partPerMillion" is ppm. 
-- during processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` append the abbreviation to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
-- if `append_units` is not called, metadata produced will not have units in column names
-- after, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
-- proceed as usual with EML generation.
+1. Attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp."
+2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
+3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); once we use new units they need to be adjusted as we go. Use query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
+4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviation, use them, e.g. "partPerMillion" is ppm. 
+5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` append the abbreviation to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
+	- If `append_units` is not called, metadata produced will not have units in column names
+	- After, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
+6. proceed as usual with EML generation.
 
-#### Reasoning to do it this way:
+#### Why we do it this way:
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
 - No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop. 
@@ -840,6 +840,13 @@ File names:
 - Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI
 - Then one or two word descriptive moniker for data
 - Example: "BLE_LTER_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+
+Data sort, sort all discrete CP datasets in the following order before submission. Use the R function `bleutils::sort_CP_columns` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below.
+- node
+- lagoon
+- station
+- date_collected
+- water_column_position
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ## Other datasets (PI-driven datasets in BLE terminology)
@@ -1021,13 +1028,13 @@ On EDI: use the portal "Journal citations" tool to manually add journal pubs to 
 <a id="personnel-management"></a>
 # Personnel management
 
-We do not yet have a dedicated tool for centrally personnel management beyond 
+We do not yet have a dedicated tool for central personnel management beyond 
 
 1. Tracking who's involved with which datasets in what role (so far for all datasets) during what years (Core Program only). This takes place mostly in our metadata database (metabase). See section on Core Program personnel.
 
 2. What's under "People" or "Team" on our website. This is edited manually when called for.
 
-3. A Box spreadsheet for purposes of (I surmise) LTER/NSF reporting requirements. 
+3. A Box spreadsheet for purposes of LTER/NSF reporting requirements and viewing by team members, stored under Beaufort LTER/Personnel. 
 
 <a id="update-personnel-contact-information"></a>
 ## Update personnel contact information
