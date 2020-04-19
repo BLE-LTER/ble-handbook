@@ -800,18 +800,39 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 <a id="core-program"></a>
 ## Core Program
 
+Misc:
+- Data is "2018-ongoing" not "2018-2019" although we might only have 2018-2019 data as of publication. Except in EML's temporalCoverage where we actually specify begin and end dates.
+- updateFrequency is annual
+- pubDate is the latest year of publication/revision. E.g if data was originally published to EDI production in 2019, but revised 2020, pubDate is 2020. Note that EDI's auto-generated citation actually always reflect this, although EML might say otherwise.
+
+Titles: 
+- Mention time series if data is continuous from mooring
+- Mention water/sediment if sample type is such
+- end with "from (insert types of sites) along the Alaska Beaufort Sea coast, (year data begins)-ongoing".
+- E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
+
 Column names:
 
 - lowercase (station not Station)
 - capitalized only when denoting standard acronyms (PAR for photosynthetically active radiation) or when it's part of the variable name (pH)
 - underscores between words (date_time not date.time)
+- units appended to the end
+- date_time for mooring datasets and date_collected for discrete datasets
 
-Some standard columns:
-
-- station: station codes or IDs (KALD2)
-- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok.
-- date: date in YYYY-MM-DD format. Normally applies for sampling trips. 
-- water_column_position: surface/mid-column/bottom/not_applicable where not_applicable is a missing value code and used in river or other non-stratified stations.
+Standard columns:
+- node: Central/East/West
+- lagoon: Elson East/Elson West/Simpson/Stefansson/Jago/Kaktokvik/not applicable. River stations are assigned the lagoon they discharge into. Ocean stations are assigned "not applicable."
+- station: station codes or IDs (e.g. KALD2).
+- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok. Continuous/mooring data.
+- date_collected: date in YYYY-MM-DD format. Discrete data.
+- water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." Discrete water samples only.
+- [data columns, including notes]
+- collection_method: grab/pump. Discrete water samples only.
+- station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
+- latitude
+- longitude
+- habitat_type: lagoon/river/ocean
+- station_sampling_priority: primary/secondary/river/ocean (discrete only)
 
 Entity names:
 
@@ -838,15 +859,19 @@ File names:
 - underscored
 - Prepend with "BLE_LTER"
 - Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI
-- Then one or two word descriptive moniker for data
-- Example: "BLE_LTER_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+- Then one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
+- Examples: 
+	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
+- Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv" 
 
-Data sort, sort all discrete CP datasets in the following order before submission. Use the R function `bleutils::sort_CP_columns` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below.
-- node
-- lagoon
+Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_data` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_data` to be one of three "water", "sediment", or "mooring".
+
+- node (discrete only)
+- lagoon (discrete only)
 - station
-- date_collected
-- water_column_position
+- date_collected (discrete only) / date_time (mooring)
+- water_column_position (discrete water samples only)
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ## Other datasets (PI-driven datasets in BLE terminology)
