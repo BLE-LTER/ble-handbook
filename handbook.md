@@ -801,11 +801,14 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 ## Core Program
 
 Misc:
+
+- Three types of CP data according to the source: data from water samples, or sediment samples, or mooring samples. The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data.
 - Data is "2018-ongoing" not "2018-2019" although we might only have 2018-2019 data as of publication. Except in EML's temporalCoverage where we actually specify begin and end dates.
 - updateFrequency is annual
 - pubDate is the latest year of publication/revision. E.g if data was originally published to EDI production in 2019, but revised 2020, pubDate is 2020. Note that EDI's auto-generated citation actually always reflect this, although EML might say otherwise.
 
 Titles: 
+
 - Mention time series if data is continuous from mooring
 - Mention water/sediment if sample type is such
 - end with "from (insert types of sites) along the Alaska Beaufort Sea coast, (year data begins)-ongoing".
@@ -819,7 +822,8 @@ Column names:
 - units appended to the end
 - date_time for mooring datasets and date_collected for discrete datasets
 
-Standard columns:
+Standard columns, also in this order:
+
 - node: Central/East/West
 - lagoon: Elson East/Elson West/Simpson/Stefansson/Jago/Kaktokvik/not applicable. River stations are assigned the lagoon they discharge into. Ocean stations are assigned "not applicable."
 - station: station codes or IDs (e.g. KALD2).
