@@ -28,6 +28,9 @@ date: 2020-04-06
 	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
 	- [Data processing](#data-processing-1)
 - [Metadata processing and EML](#metadata-processing-and-eml)
+	- [Enter metadata into metabase](#enter-metadata-into-metabase)
+	- [Exporting EML](#exporting-eml)
+	- [Revisions](#revisions)
 - [Data archiving](#data-archiving)
 	- [Where we archive](#where-we-archive)
 	- [Who does the archiving](#who-does-the-archiving)
@@ -412,9 +415,7 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 <a id="regular-tasks"></a>
 ## Regular tasks
 
-### Data sets
-
-### Backups
+### Backups and restores
 
 #### Backups
 
@@ -589,6 +590,51 @@ Document the netCDF as otherEntity. Metabase already has netCDF as a file type t
 <a href="#header">Back to top</a>
 <a id="metadata-processing-and-eml"></a>
 # Metadata processing and EML
+
+<a id="enter-metadata-into-metabase"></a>
+## Enter metadata into metabase
+
+Once a metadata template is received from the data correspondent (can be PIs, can be Christina/Nathan, can be someone else) and is reasonably filled out, I start the process of transfering the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
+
+I populate metabase for a new dataset in this order:
+
+1. Tables that do not reference other tables via FKs 
+- DataSet. Edit title and abstract as needed during.
+- DataSetMethod. Enter methods in docbook format, edit for tense and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
+- DataSetTemporal
+
+2. Tables that do reference other tables via FKs but still are relatively simple
+- DataSetEntities
+- DataSetSites
+- DataSetKeywords
+- DataSetPersonnel
+- DataSetAnnotation
+- DataSetAttributeAnnotation
+
+Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
+
+3. Tables that are more involved
+- DataSetAttributes (remember: check units (1) if they're in EMLUnitDictionary yet, and (2) if they have abbreviations in our style yet)
+- DataSetAttributeEnumeration
+- DataSetAttributeMissingCodes
+
+Sometimes it is easier and quicker to copy attributes and enumeration/missing codes from similar existing datasets. This is especially true for Core Program datasets. 
+
+Common pitfalls: 
+- not having a TextPatternDefinition when attribute is nominalText or ordinalText. I normally just say "any text".
+- not having an Unit or a NumberType when attribute is interval or ratio 
+- enumerated (categorized/coded) attributes MUST be specified as nominalEnum or ordinalEnum. Otherwise even if they have corresponding entries in DataSetAttributeEnumeration, resulting EML will not have code/definition pairs
+
+### Misc quirks
+
+- If somebody doesn't have an ORCID, theree still MUST be an entry for them in ListPeopleID. Just leave IdentificationURL as NULL (allowable by metabase schema). If there's no entry for them, the resulting personnel table exported from metabase will not have that person (the associatedParty tree still includes them).
+-  
+
+<a id="exporting-eml"></a>
+## Exporting EML
+
+<a id="revisions"></a>
+## Revisions
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
