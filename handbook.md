@@ -533,7 +533,7 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 - I do this fairly early on in the process: normally, as soon as PI have sent us a file somewhere, even if it's a sample with no metadata, since we know there's data coming at some point. I do not enter any information into metabase until we receive complete good quality metadata.
 
-- Create a new R project under EML_generation for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far.
+- Create a new R project under EML_generation/EML_RRproject_(datasetID) for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far. Instead, one has to open RStudio, select File/New Project/Associate project with existing directory, then navigate to the correct folder to initiate a new project.
 
 <a id="data-processing-1"></a>
 ## Data processing
