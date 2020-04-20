@@ -24,9 +24,10 @@ date: 2020-04-06
 - [Metadata template](#metadata-template)
 	- [How to update template](#how-to-update-template)
 - [Data processing](#data-processing)
+	- [Data directory structure](#data-directory-structure)
 	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
-	- [Processing](#processing)
-- [EML](#eml)
+	- [Data processing](#data-processing-1)
+- [Metadata processing and EML](#metadata-processing-and-eml)
 - [Data archiving](#data-archiving)
 	- [Where we archive](#where-we-archive)
 	- [Who does the archiving](#who-does-the-archiving)
@@ -507,6 +508,21 @@ After any updates, be sure to:
 <a id="data-processing"></a>
 # Data processing
 
+<a id="data-directory-structure"></a>
+## Data directory structure
+
+We use a certain directory structure for working with data packages.
+
+Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Projects\BLE-LTER` we have a Data directory. Each data package constitutes a child directory under Data. All operations with this data package are performed within this folder. Naming convention is `(dataset ID)_(dataset nickname)`, e.g. "12_sediment_pigment".
+
+Within each data package directory:
+-  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions recived from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
+- "Clean" contains 
+	- data files after processing and ready to submit. When I go to upload to EDI, this is where I'd browse to.
+	- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live.
+	- In some earlier datasets, "EML_generation" can be level with "Clean" and/or can contain final data files. 
+
+
 <a id="how-to-initiate-a-new-data-package"></a>
 ## How to initiate a new data package
 
@@ -518,12 +534,14 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 - Create a new R project under EML_generation for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far.
 
-<a id="processing"></a>
-## Processing
+<a id="data-processing-1"></a>
+## Data processing
 
 All data processing should be performed in scripts for transparency and reproducibility, and also for our convenience: PIs often re-send data, and all changes by us made manually in Excel will be lost. I use R and therefore a lot of our workflows and helper functions are centered around R, but there's no reason another scripting language would not work. 
 
 The R script created by `init_datapkg()` has pre laid-out sections (but no code, can't template processing code) for light data processing. For tasks beyond renaming columns or fixing small typos, I would create a new script.
+
+Data are read in from the FromPI directory, and written out to Clean (which ideally is parent to the R script). This ensures reproducibility and transparency of processing steps taken.
 
 ### netCDF
 
@@ -569,8 +587,8 @@ Possible metadata duplication between EML and netCDF global attributes:
 Document the netCDF as otherEntity. Metabase already has netCDF as a file type that would fill in the correct metadata.
 
 <a href="#header">Back to top</a>
-<a id="eml"></a>
-# EML
+<a id="metadata-processing-and-eml"></a>
+# Metadata processing and EML
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
