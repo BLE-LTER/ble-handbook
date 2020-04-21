@@ -844,6 +844,12 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 <a id="core-program"></a>
 ## Core Program
 
+Core Program datasets refer to those datasets produced by the Core Program, a common thread in our research and field sampling to obtain foundational data about the lagoons. These datasets fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
+
+There are two documents on Box with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands. 
+
+This handbook version is a much more exhaustive version. 
+
 Misc:
 
 - Three types of CP data according to the source: data from water samples, or sediment samples, or mooring samples. The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data.
