@@ -35,13 +35,9 @@ date: 2020-04-06
 	- [Where we archive](#where-we-archive)
 	- [Who does the archiving](#who-does-the-archiving)
 	- [How we archive at EDI](#how-we-archive-at-edi)
-- [Core Program quirks](#core-program-quirks)
-	- [Personnel / Responsible Parties](#personnel--responsible-parties)
-	- [Stations](#stations)
 - [Data and metadata styling guide or style rules](#data-and-metadata-styling-guide-or-style-rules)
 	- [All datasets](#all-datasets)
 	- [Core Program](#core-program)
-	- [Other datasets \(PI-driven datasets in BLE terminology\)](#other-datasets-pi-driven-datasets-in-ble-terminology)
 - [Website](#website)
 	- [Our website technologies](#our-website-technologies)
 	- [How to update website](#how-to-update-website)
@@ -809,55 +805,6 @@ curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/ke
 ```
 
 <a href="#header">Back to top</a>
-<a id="core-program-quirks"></a>
-# Core Program quirks
-
-<a id="personnel--responsible-parties"></a>
-## Personnel / Responsible Parties
-
-<a id="creator"></a>
-### Creator
-
-Core Program packages only have one creator with only a surname "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
-
-> Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
-
-So that they are analogous to this citation from a PI-driven dataset (see comm. with Ken/Jim October/November 2019):
-
-> Beaufort Lagoon Ecosystems LTER, V. Lougheed. 2019. Carbon flux from aquatic ecosystems of the Arctic Coastal Plain along the Beaufort Sea, Alaska, 2010-2018. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
-
-<a id="other-people"></a>
-### Other people
-
-Other people involved in the dataset will be credited as an associated party in the EML record. The order might still matter, so order as the PI have written them down in the template. To be listed as an associated party, a person has to have handled/been responsible for the data at some point, so as to be able to answer questions if necessary. The PI supplies this list normally, so not an action item for us, just FYI. 
-
-In addition to listing people as associated parties in EML, we will include a personnel table as a data entity. This table will essentially have the same information as the EML entries, but also include years of involvement in this role with the dataset so that data users can track down appropriate people to ask about specific periods in the dataset. We use an add-on to vanilla metabase to keep track of people and years (see section BLE add-ons to vanilla metabase). 
-
-To generate a CSV table once metabase is populated, use the R function 
-
-`bleutils::export_personnel` 
-
-This function takes care of querying metabase for the specified dataset ID, and spits out a ready made personnel CSV. Rough naming convention is `BLE_LTER_[dataset nickname]_personnel.csv`. 
-
-I call this function from inside the directory with other data files. I list the personnel entity last in metabase: e.g. if there are five actual data entities, the EntitySortOrder for the personnel table is 6. Note that due to a MetaEgress quirk, all dataTables will be listed before all otherEntities. 
-
-Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way to duplicating the same set of attributes from a previous Core Program dataset. 
-
-<a id="stations"></a>
-## Stations
-
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
-
-Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
-
-Example usage: 
-
-```r
-# df is a R data.frame with "station" column containing station codes
-df <- bleutils::add_cp_cols(df, "station")
-```
-
-<a href="#header">Back to top</a>
 <a id="data-and-metadata-styling-guide-or-style-rules"></a>
 # Data and metadata styling guide or style rules
 
@@ -904,12 +851,15 @@ Misc:
 - updateFrequency is annual
 - pubDate is the latest year of publication/revision. E.g if data was originally published to EDI production in 2019, but revised 2020, pubDate is 2020. Note that EDI's auto-generated citation actually always reflect this, although EML might say otherwise.
 
-Titles: 
+### Dataset titles 
 
 - Mention time series if data is continuous from mooring
 - Mention water/sediment if sample type is such
 - end with "from (insert types of sites) along the Alaska Beaufort Sea coast, (year data begins)-ongoing".
 - E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
+
+<a id="data-columns"></a>
+### Data columns 
 
 Column names:
 
@@ -934,6 +884,16 @@ Standard columns, also in this order:
 - longitude
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete only)
+
+Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_data` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_data` to be one of three "water", "sediment", or "mooring".
+
+- node (discrete only)
+- lagoon (discrete only)
+- station
+- date_collected (discrete only) / date_time (mooring)
+- water_column_position (discrete water samples only)
+
+### Entities 
 
 Entity names:
 
@@ -966,16 +926,54 @@ File names:
 	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
 - Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv" 
 
-Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_data` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_data` to be one of three "water", "sediment", or "mooring".
 
-- node (discrete only)
-- lagoon (discrete only)
-- station
-- date_collected (discrete only) / date_time (mooring)
-- water_column_position (discrete water samples only)
+<a id="personnel--responsible-parties"></a>
+### Personnel / Responsible Parties
+
+<a id="creator"></a>
+#### Creator
+
+Core Program packages only have one creator with only a surname "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
+
+> Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
+
+So that they are analogous to this citation from a PI-driven dataset (see comm. with Ken/Jim October/November 2019):
+
+> Beaufort Lagoon Ecosystems LTER, V. Lougheed. 2019. Carbon flux from aquatic ecosystems of the Arctic Coastal Plain along the Beaufort Sea, Alaska, 2010-2018. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
+
+<a id="other-people"></a>
+#### Other people
+
+Other people involved in the dataset will be credited as an associated party in the EML record. The order might still matter, so order as the PI have written them down in the template. To be listed as an associated party, a person has to have handled/been responsible for the data at some point, so as to be able to answer questions if necessary. The PI supplies this list normally, so not an action item for us, just FYI. 
+
+In addition to listing people as associated parties in EML, we will include a personnel table as a data entity. This table will essentially have the same information as the EML entries, but also include years of involvement in this role with the dataset so that data users can track down appropriate people to ask about specific periods in the dataset. We use an add-on to vanilla metabase to keep track of people and years (see section BLE add-ons to vanilla metabase). 
+
+To generate a CSV table once metabase is populated, use the R function 
+
+`bleutils::export_personnel` 
+
+This function takes care of querying metabase for the specified dataset ID, and spits out a ready made personnel CSV. Rough naming convention is `BLE_LTER_[dataset nickname]_personnel.csv`. 
+
+I call this function from inside the directory with other data files. I list the personnel entity last in metabase: e.g. if there are five actual data entities, the EntitySortOrder for the personnel table is 6. Note that due to a MetaEgress quirk, all dataTables will be listed before all otherEntities. 
+
+Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way to duplicating the same set of attributes from a previous Core Program dataset. 
+
+<a id="stations"></a>
+### Stations
+
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
+
+Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
+
+Example usage: 
+
+```r
+# df is a R data.frame with "station" column containing station codes
+df <- bleutils::add_cp_cols(df, "station")
+```
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
-## Other datasets (PI-driven datasets in BLE terminology)
+### Other datasets (PI-driven datasets in BLE terminology)
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible.
 
