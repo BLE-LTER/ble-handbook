@@ -603,6 +603,11 @@ I populate metabase for a new dataset in this order:
 - DataSetMethod. Enter methods in docbook format, edit for tense and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
 - DataSetTemporal
 
+Common pitfalls:
+- Forgetting closing tags in docbook formatted abstract/methods
+- Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Use "&amp;"
+- Having less than/greater than signs "</>" in docbook formatted things.
+
 2. Tables that do reference other tables via FKs but still are relatively simple
 - DataSetEntities
 - DataSetSites
@@ -610,6 +615,7 @@ I populate metabase for a new dataset in this order:
 - DataSetPersonnel
 - DataSetAnnotation
 - DataSetAttributeAnnotation
+- DataSetMethod* (Software/Protocols/Instruments/Provenance). With the exception of Provenance, the other tables haven't seen play so far.
 
 Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
 
@@ -628,10 +634,22 @@ Common pitfalls:
 ### Misc quirks
 
 - If somebody doesn't have an ORCID, theree still MUST be an entry for them in ListPeopleID. Just leave IdentificationURL as NULL (allowable by metabase schema). If there's no entry for them, the resulting personnel table exported from metabase will not have that person (the associatedParty tree still includes them).
--  
 
 <a id="exporting-eml"></a>
 ## Exporting EML
+Once metadata in metabase is complete, it's time to start data processing and exporting EML. One does this in R.
+
+- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RRroject has to be created manually; I haven't found a way around that. 
+- The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments. 
+
+In short, there are these function calls to execute each time you generate a new EML:
+- `MetaEgress::get_meta()`. This queries metabase for that dataset ID. Most of the time this call will be wrapped in a call to `bleutils::append_units()`. The R console will ask you for your metabase username & password after this is called. Any user with READ privileges would suffice.
+- `MetaEgress::create_entity_all()`. This assembles the data entity components of EML.
+- `MetaEgress::create_EML()`. This takes the assembled entities and assembles the other stuff and outputs a complete emld list structure ready to be validated and written to file.
+- `EML::eml_validates()` tests the resulting emld structure for schema validity.
+- `EML::write_eml()` writes the emld list structure to file.
+
+The resulting EML would be deposited into the same directory as the script.
 
 <a id="revisions"></a>
 ## Revisions
