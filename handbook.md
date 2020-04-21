@@ -850,12 +850,7 @@ There are two documents on Box with some of these rules oriented towards our Pro
 
 This handbook version is a much more exhaustive version. 
 
-Misc:
-
-- Three types of CP data according to the source: data from water samples, or sediment samples, or mooring samples. The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data.
-- Data is "2018-ongoing" not "2018-2019" although we might only have 2018-2019 data as of publication. Except in EML's temporalCoverage where we actually specify begin and end dates.
-- updateFrequency is annual
-- pubDate is the latest year of publication/revision. E.g if data was originally published to EDI production in 2019, but revised 2020, pubDate is 2020. Note that EDI's auto-generated citation actually always reflect this, although EML might say otherwise.
+There are three types of CP data according to the source: data from water samples, or sediment samples, or mooring samples. The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which one the dataset you're working with falls under. 
 
 ### Dataset titles 
 
@@ -977,6 +972,23 @@ Example usage:
 # df is a R data.frame with "station" column containing station codes
 df <- bleutils::add_cp_cols(df, "station")
 ```
+
+### Misc
+
+- Data is "2018-ongoing" not "2018-2019" although we might only have 2018-2019 data as of publication. Except in EML's temporalCoverage where we actually specify begin and end dates.
+- updateFrequency is annual
+- pubDate is the latest year of publication/revision. E.g if data was originally published to EDI production in 2019, but revised 2020, pubDate is 2020. Note that EDI's auto-generated citation actually always reflect this, although EML might say otherwise.
+
+*Why salinity is included in the pH package even though it is part of the CTD dataset*
+
+Even though salinity isn't necessary to derive the final pH value from the raw data, and it was measured by an entirely separate sensor, it is probably the first thing an end-user will want to compare the pH data against so it would be very helpful to simply include this column to save someone having to find and merge the CTD data to the pH data.
+
+*Why pH is packaged separately from hydrography*
+
+- They require very different methods for calibration and QA/QC.
+- pH data is novel and deserves its own package.
+- Our pH measurements are not as geographically widespread as our hydrographic measurements.
+- They are collected for different LTER sub-goals (hydrography main goal = understand hydrographic exchange. pH main goal = understand carbon dynamics).
 
 <a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
 ### Other datasets (PI-driven datasets in BLE terminology)
