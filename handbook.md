@@ -983,6 +983,8 @@ df <- bleutils::add_cp_cols(df, "station")
 
 Even though salinity isn't necessary to derive the final pH value from the raw data, and it was measured by an entirely separate sensor, it is probably the first thing an end-user will want to compare the pH data against so it would be very helpful to simply include this column to save someone having to find and merge the CTD data to the pH data.
 
+We add a dataSource element in EML via metabase's DataSetMethodProvenance table to document this relationship. We also make explicit in the attributeDescription of the salinity column that these values are taken from the hydrography dataset.
+
 *Why pH is packaged separately from hydrography*
 
 - They require very different methods for calibration and QA/QC.
