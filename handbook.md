@@ -355,6 +355,53 @@ GRANT USAGE ON SCHEMA lter_metabase TO backup_user;
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pkg_mgmt GRANT ALL ON TABLES TO ble_group_owner;
 ```
 
+Also, executing this SQL snippet would perform all necessary tasks from scratch on a new PG cluster empty of roles. This creates both login-enabled users and groups, and assigns users to appropriate groups. 
+
+Remember to (1) change passwords, and (2) swap out roles "an" and "tim" with appropriate usernames for real users if applicable. 
+
+```sql
+--
+-- Sample SQL to set up roles on a brand new server in preparation for a database restore
+-- Replace password strings
+--
+
+CREATE ROLE an;
+ALTER ROLE an WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE backup_user;
+ALTER ROLE backup_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE ble_group_owner;
+ALTER ROLE ble_group_owner WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readonly IS 'This group owns everything in the database, thus has all rights current and future.';
+CREATE ROLE ble_group_readonly;
+ALTER ROLE ble_group_readonly WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readonly IS 'This group has GRANT SELECT ON TABLES plus default future permissions for the same.';
+CREATE ROLE ble_group_readwrite;
+ALTER ROLE ble_group_readwrite WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readwrite IS 'This group has SELECT INSERT and UPDATE rights to all tables plus default permissions for future tables.';
+CREATE ROLE read_only_user;
+ALTER ROLE read_only_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE read_write_user;
+ALTER ROLE read_write_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE tim;
+ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+
+
+--
+-- Role memberships
+--
+
+GRANT ble_group_owner TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_owner TO tim WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readonly TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readonly TO backup_user GRANTED BY postgres;
+GRANT ble_group_readonly TO read_only_user GRANTED BY postgres;
+GRANT ble_group_readonly TO read_write_user GRANTED BY postgres;
+GRANT ble_group_readonly TO tim WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readwrite TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readwrite TO read_write_user GRANTED BY postgres;
+GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
+```
+
 <a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
 ### Add-ons to vanilla metabase that are specific to BLE
 
