@@ -1251,22 +1251,25 @@ Only list members can send messages. Messages are not moderated. Replies to mess
 List members can invite others to join, but a list owner must approve once a
 person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed, will not be included on conversations they didn't initiate. 
 
-There are three lists as of Feb 2020:
+There are three lists as of June 2020:
 
 1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
 
-Includes everybody: PIs, PMs, IMs, students, postdocs. Excludes affiliates on a
+Includes everybody: PIs, PMs, IMs, students, postdocs, affiliates (e.g. Amanda Kelley) and other project personnel (e.g. Stephanie Jump, Brandy Cervantes). Might exclude affiliates on a
 case by case basis. 2020 PI meeting in Anchorage agreed on using a listserv like
-this for potential paper and project discussions. Since potential works could be
-discussed, this list is limited to BLE people only.
+this for potential paper and project discussions. 
 
 2. [ble-lter-pi@utlists.utexas.edu](ble-lter-pi@utlists.utexas.edu)
 
-Includes all PIs, IMs, and project managers.
+Includes all PIs and Tim, who admins the list. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is at the request of Ken and Jim so that potentially confidential messages do not circulate outside of PIs.
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
-Includes all officially affiliated students. PIs/PMs/IMs can post messages to the list but would not see regular conversations. This is so that PIs can post e.g. papers reading group or forwarded job ads, etc.
+Includes all (and, per Ken and Jim, only) officially affiliated students. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is so that people can post e.g. papers reading group or forwarded job ads, etc.
+
+4. [ble-lter-staff@utlists.utexas.edu](ble-lter-staff@utlists.utexas.edu)
+
+Includes staff (IMs, PMs, postdocs, and other project personnel, but generally not affiliates).
 
 <a id="list-maintenance"></a>
 ### List maintenance
