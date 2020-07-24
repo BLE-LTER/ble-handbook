@@ -1252,7 +1252,7 @@ Only list members can send messages. Messages are not moderated. Replies to mess
 List members can invite others to join, but a list owner must approve once a
 person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed, will not be included on conversations they didn't initiate. 
 
-There are three lists as of June 2020:
+These are the lists as of June 2020:
 
 1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
 
