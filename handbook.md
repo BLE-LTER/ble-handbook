@@ -919,19 +919,20 @@ Column names:
 
 Standard columns, also in this order:
 
-- node: Central/East/West
-- lagoon: Elson East/Elson West/Simpson/Stefansson/Jago/Kaktokvik/not applicable. River stations are assigned the lagoon they discharge into. Ocean stations are assigned "not applicable."
+- node: Central/East/West (discrete samples only)
+- lagoon: Elson East/Elson West/Simpson/Stefansson/Jago/Kaktokvik/not applicable. River stations are assigned the lagoon they discharge into. Ocean stations are assigned "not applicable." (discrete samples only)
 - station: station codes or IDs (e.g. KALD2).
+- season: under ice/break up/open water (discrete samples only)
 - date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok. Continuous/mooring data.
 - date_collected: date in YYYY-MM-DD format. Discrete data.
-- water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." Discrete water samples only.
+- water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." (discrete water samples only)
 - [data columns, including notes]
-- collection_method: grab/pump. Discrete water samples only.
+- collection_method: grab/pump (discrete water samples only)
 - station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
 - latitude
 - longitude
 - habitat_type: lagoon/river/ocean
-- station_sampling_priority: primary/secondary/river/ocean (discrete only)
+- station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
 Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_data` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_data` to be one of three "water", "sediment", or "mooring".
 
