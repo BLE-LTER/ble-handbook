@@ -934,7 +934,7 @@ Standard columns, also in this order:
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
-Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_data` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_data` to be one of three "water", "sediment", or "mooring".
+Data sort, sort all CP datasets by these columns in this order before submission. Use the R function `bleutils::sort_cp_rows` to do this quickly, only after `bleutils::rename_attributes` has been called to ensure that column names are exactly as below. Be sure to specify the `type` argument to `sort_cp_rows` to be one of three "water", "sediment", or "mooring".
 
 - node (discrete only)
 - lagoon (discrete only)
