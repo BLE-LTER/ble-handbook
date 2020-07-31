@@ -1281,7 +1281,9 @@ These tasks need to be done periodically:
 
 - Review for bouncing (invalid) addresses. 
 
-- Check if messages are getting past spam filters. We'll assume the best and look  into this as issues come up. 
+- Check if messages are getting past spam filters. We'll assume the best and look into it if issues come up. 
+
+- From August 2020 on, UTLists will delete mailing list archives that are more than 4 years old. Our mailing lists were created in September 2019. So, before September 1st 2023, old archives need to be downloaded. Unfortunately I don't know of any options to download them in a nice format besides UTLists' clunky way. 
 
 <a id="list-config"></a>
 ### List config
