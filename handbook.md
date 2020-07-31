@@ -35,7 +35,7 @@ date: 2020-04-06
 	- [Where we archive](#where-we-archive)
 	- [Who does the archiving](#who-does-the-archiving)
 	- [How we archive at EDI](#how-we-archive-at-edi)
-- [Data and metadata styling guide or style rules](#data-and-metadata-styling-guide-or-style-rules)
+- [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
 	- [All datasets](#all-datasets)
 	- [Core Program](#core-program)
 - [Website](#website)
@@ -165,11 +165,15 @@ Tim and An have their own individual accounts to metabase. However there are acc
 Stache (UT service) contains the passwords to these shared accounts. 
 For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights. 
 
-#### Getting remote access
+#### Getting remote access 
 
-March 18th, 2020. UT has shut down for five days. Austin is on the verge of an imminent lockdown. BLE IM team has been stuck at home for five days. We set down these words to commemorate these times.
+How to remote access into your UT desktop, if working remotely: 
 
-How to remote access into your desktop from 
+1. Step 1, connect to the UT VPN server
+
+UT uses the Cisco AnyConnect software. This is available for all major operating systems. Simply download and follow instructions on UT's IT wiki. You will need to have set up two-factor authorization with your UT EID. 
+
+2. Step 2, use a remote desktop protocol. This is built into Windows systems, and require more software in other OS. The most success I've had on Linux is with the FreeRDP2 library. 
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
@@ -697,6 +701,11 @@ The resulting EML would be deposited into the same directory as the script.
 <a id="revisions"></a>
 ## Revisions
 
+Make sure to do these tasks if a dataset needs to be revised:
+
+- Increment the Revision number in metabase's DataSet table. Note that this number is always the *production* revision number. The *staging* revision number can get much higher. I manually edit the XML files when uploading to the staging server.
+- Add a note in metabase's pkg_mgmt.maintenance_changehistory table. 
+
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
 # Data archiving
@@ -852,8 +861,8 @@ curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/ke
 ```
 
 <a href="#header">Back to top</a>
-<a id="data-and-metadata-styling-guide-or-style-rules"></a>
-# Data and metadata styling guide or style rules
+<a id="ble-specific-datametadata-style-rules"></a>
+# BLE specific data/metadata style rules
 
 Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
 
@@ -897,11 +906,18 @@ There are two documents on Box with some of these rules oriented towards our Pro
 
 This handbook version is a much more exhaustive version. 
 
-There are three types of CP data according to the source: data from water samples, or sediment samples, or mooring samples. The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which one the dataset you're working with falls under. 
+### Types of CP data 
+
+According to the source: 
+- data from water samples
+- data from sediment samples
+- data from moorings/instruments
+
+The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which one the dataset you're working with falls under. 
 
 ### Dataset titles 
 
-- Mention time series if data is continuous from mooring
+- Mention time series if data is continuous from moorings
 - Mention water/sediment if sample type is such
 - end with "from (insert types of sites) along the Alaska Beaufort Sea coast, (year data begins)-ongoing".
 - E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
@@ -968,12 +984,13 @@ File names:
 
 - underscored
 - Prepend with "BLE_LTER"
-- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI
-- Then one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
+- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g. dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel". 
+- For data files: add one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
 - Examples: 
 	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
 	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
-- Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv" 
+- Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv".
+- Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv". 
 
 
 <a id="personnel--responsible-parties"></a>
@@ -982,7 +999,7 @@ File names:
 <a id="creator"></a>
 #### Creator
 
-Core Program packages only have one creator with only a surname "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
+Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
 
 > Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
@@ -1005,7 +1022,7 @@ This function takes care of querying metabase for the specified dataset ID, and 
 
 I call this function from inside the directory with other data files. I list the personnel entity last in metabase: e.g. if there are five actual data entities, the EntitySortOrder for the personnel table is 6. Note that due to a MetaEgress quirk, all dataTables will be listed before all otherEntities. 
 
-Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way to duplicating the same set of attributes from a previous Core Program dataset. 
+Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way is to duplicating the same set of attributes from a previous Core Program dataset. 
 
 <a id="stations"></a>
 ### Stations
@@ -1093,7 +1110,7 @@ To add a new layout element:
 
 - Hard to say anything generally applicable here.
 
-To build search index:
+To build/update search index:
 
 - Start a node command prompt (or a regular command prompt if node is in your path).
 - Browse to root `LTER-website` folder.
@@ -1102,9 +1119,9 @@ To build search index:
 
 To add a new page:
 
-- Copy an existing page.
-- Update header for new page.
-- Edit page content.
+- Copy an existing page. Remember, the <head> element of all pages has to have the HTML comments `<!-- begin common head -->` and `<!-- end common head -->` in order for `apply_template.js` to work. So, creating a brand new, empty .html file will not work.
+- Update header for new page (i.e. run `apply_template.js`).
+- Edit page content as desired. Remember to remove the template page's existing content. 
 - Add page to sitemap.xml.
 - Update search index.
 
