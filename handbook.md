@@ -47,7 +47,7 @@ date: 2020-04-06
 	- [Zotero best practices](#zotero-best-practices)
 	- [Misc. biblio notes](#misc-biblio-notes)
 - [Personnel management](#personnel-management)
-	- [Update personnel contact information](#update-personnel-contact-information)
+	- [Add/update personnel contact information](#addupdate-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
 - [Resources](#resources)
 
@@ -1220,22 +1220,23 @@ On EDI: use the portal "Journal citations" tool to manually add journal pubs to 
 <a id="personnel-management"></a>
 # Personnel management
 
-We do not yet have a dedicated tool for central personnel management beyond 
+We do not yet have a dedicated tool for central personnel management beyond:
 
-1. Tracking who's involved with which datasets in what role (so far for all datasets) during what years (Core Program only). This takes place mostly in our metadata database (metabase). See section on Core Program personnel.
+1. Tracking who's involved with which datasets in what role (so far for all datasets), during what years (this is done for Core Program datasets only). This takes place mostly in our metadata database (metabase). See section on Core Program personnel.
 
 2. What's under "People" or "Team" on our website. This is edited manually when called for.
 
 3. A Box spreadsheet for purposes of LTER/NSF reporting requirements and viewing by team members, stored under Beaufort LTER/Personnel. 
 
-<a id="update-personnel-contact-information"></a>
-## Update personnel contact information
+<a id="addupdate-personnel-contact-information"></a>
+## Add/update personnel contact information
 
 Make sure to do the following:
 
 - Update the Box spreadsheet under Beaufort LTER/Personnel
-- Update our website display.
-- Update metabase in two places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project). They might not have an entry in metabase yet.
+- Update Marty Downs if appropriate
+- Update our website display
+- Update metabase in several places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
 
 <a id="mailing-list-admin"></a>
@@ -1294,9 +1295,11 @@ For documentation, I've found that [this article collection from UChicago](https
 
 config options of note: 
 
-- Who can post? "Restricted to subscribers". We mostly want only members of any given list posting. Owners/admins/mods can always post. Exception for the student list: "Private, moderated for subscribers". Essentially means anyone who knows this address can post, but an admin needs to approve. Only other BLE people are really meant to post. 
+- Who can post? 
+	- @all: "Restricted to subscribers". We mostly want only members of any given list posting. Owners/admins/mods can always post. 
+	- @student, @pi, and @staff lists: "Private, moderated for subscribers". Essentially means anyone who knows this address can post, but an admin needs to approve. We really only mean other BLE people not in respective lists to post there if they want, e.g. a faculty or staff member can post to the student list, etc. 
 
-- Who can see the list? "No conceal". Essentially this means our lists show up on the UTLists website, and there are web interfaces for each one people can go to (even w/o an account) to subscribe. 
+- Who can see the list? "Concealed except for subscribers". This means our lists do not show up publicly on the UTLists website.
 
 - Who can (un)subscribe? "Owners approval". Admin needs to approve (un)sub requests.
 
