@@ -758,6 +758,8 @@ We wrote [a replication guide](https://docs.google.com/document/d/1QJyj3biai9k5K
 
 However, as of April 2020 this is not feasible to implement in an automated way via MetaEgress yet. This is because the EML R package currently does not support additional namespaces (e.g. "d1v1" in the code snippet above. See issue #289 on their github here https://github.com/ropensci/EML/issues/289).
 
+BLE has an affiliation agreement with AOOS. Rather than archive with AOOS as they typically require, we continue to archive at EDI with our relevant packages linked from AOOS's [ocean acidification data page](https://aoos.org/alaska-ocean-acidification-network/ocean-acidification-data/). Links are provided such that they always point to the latest revision of a dataset, e.g., [https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=9](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=9). In case AOOS needs a cached copy of the data, we instructed them to subscribe to dataset updates via [EDI's event subscription service](https://portal.edirepository.org/nis/eventSubscribe.jsp).
+
 <a id="why-we-archive-at-edi"></a>
 ### Why we archive at EDI
 
@@ -1070,9 +1072,9 @@ Follow conventions set out by PI and edit sparingly when needed and when feasibl
 <a id="our-website-technologies"></a>
 ## Our website technologies
 
-Our website is built from static HTML pages and hosted with Netlify. There is no content management system (e.g. Drupal, Wordpress). In fact, there is no static website generator (e.g. Hugo, Jekyll) involved either. 
+Our website is built from static HTML pages and hosted with Netlify. There is no content management system (e.g. Drupal, Wordpress). In fact, there is no static website generator (e.g. Hugo, Jekyll) involved either.
 
-Somewhat exhaustive list of website technologies we use: 
+Somewhat exhaustive list of website technologies we use:
 - Netlify for hosting and deployment
 - A Github repo as both production and development source code at https://github.com/BLE-LTER/LTER-website
 - Bootstrap 4 for pre cooked CSS and Javascript
@@ -1082,7 +1084,7 @@ Somewhat exhaustive list of website technologies we use:
 - Google Analytics for tracking usage
 - Twitter embedded timeline
 - YouTube for embedded videos
-- Custom apps (see Tools we develop section): 
+- Custom apps (see Tools we develop section):
 	- Data Catalog built on PASTA API
 	- Bibliography search interface
 	- Search tool
