@@ -146,9 +146,10 @@ We use many, many tools that will need logins, some needing certain privilege le
 - Editor on Zotero group library
 - EDI's three portals: production, staging, and development
 - UTLists (Sympa mailing list management software) `+`
-- Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups. 
+- Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups.
 - Subscribe to the im@lternet.edu mailing list, plus imc@lternet.edu if main IM
 - Taskade (project management app, we're trying it out as of Feb 2020)
+- Google Account for YouTube, etc. - beafortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with Ken Dunton, and Christina Bonsell.
 
 Legend:
 
@@ -160,18 +161,18 @@ Legend:
 
 Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials. EDI will eventually roll out 'identity mapping', i.e. allowing IM team members from sites to log on to EDI portal(s) with their own Google/Github/ORCID account. Until then, BLE has one account.
 
-Tim and An have their own individual accounts to metabase. However there are accounts set to do certain things (e.g. 'backup_user' has read-only access to be able to dump database contents everyday). 
+Tim and An have their own individual accounts to metabase. However there are accounts set to do certain things (e.g. 'backup_user' has read-only access to be able to dump database contents everyday).
 
-Stache (UT service) contains the passwords to these shared accounts. 
-For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights. 
+Stache (UT service) contains the passwords to these shared accounts.
+For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights.
 
 #### Getting remote access 
 
-How to remote access into your UT desktop, if working remotely: 
+How to remote access into your UT desktop, if working remotely:
 
 1. Step 1, connect to the UT VPN server
 
-UT uses the Cisco AnyConnect software. This is available for all major operating systems. Simply download and follow instructions on UT's IT wiki. You will need to have set up two-factor authorization with your UT EID. 
+UT uses the Cisco AnyConnect software. This is available for all major operating systems. Simply download and follow instructions on UT's IT wiki. You will need to have set up two-factor authorization with your UT EID.
 
 2. Step 2, use a remote desktop protocol. This is built into Windows systems, and require more software in other OS. The most success I've had on Linux is with the FreeRDP2 library. 
 
