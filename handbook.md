@@ -1081,6 +1081,7 @@ Somewhat exhaustive list of website technologies we use:
 - Google Fonts for webfonts (Libre Franklin)
 - Google Analytics for tracking usage
 - Twitter embedded timeline
+- YouTube for embedded videos
 - Custom apps (see Tools we develop section): 
 	- Data Catalog built on PASTA API
 	- Bibliography search interface
