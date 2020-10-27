@@ -36,8 +36,10 @@ date: 2020-04-06
 	- [Who does the archiving](#who-does-the-archiving)
 	- [How we archive at EDI](#how-we-archive-at-edi)
 - [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
+	- [Types of datasets by BLE involvement](#types-of-datasets-by-ble-involvement)
 	- [All datasets](#all-datasets)
 	- [Core Program](#core-program)
+	- [PI-driven datasets](#pi-driven-datasets)
 - [Website](#website)
 	- [Our website technologies](#our-website-technologies)
 	- [How to update website](#how-to-update-website)
@@ -869,6 +871,17 @@ curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/ke
 
 Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
 
+<a id="types-of-datasets-by-ble-involvement"></a>
+## Types of datasets by BLE involvement
+
+We roughly categorize three types of datasets, according to the degree and kind of BLE involvement:
+
+1. "Core Program" datasets. These are the ongoing research projects that collect core, baseline data about the lagoons, and inform all other projects within BLE. These are considered the brainchild of BLE itself as an organization, not any one PI.
+
+2. "PI-driven" datasets. These arise from the research interests of individual PIs, and are primarily funded by BLE.
+
+3. "PI-driven" datasets that are not primarily funded by BLE. 
+
 <a id="all-datasets"></a>
 ## All datasets
 
@@ -1060,10 +1073,22 @@ We add a dataSource element in EML via metabase's DataSetMethodProvenance table 
 - Our pH measurements are not as geographically widespread as our hydrographic measurements.
 - They are collected for different LTER sub-goals (hydrography main goal = understand hydrographic exchange. pH main goal = understand carbon dynamics).
 
-<a id="other-datasets-pi-driven-datasets-in-ble-terminology"></a>
-### Other datasets (PI-driven datasets in BLE terminology)
+<a id="pi-driven-datasets"></a>
+## PI-driven datasets
 
-Follow conventions set out by PI and edit sparingly when needed and when feasible.
+Follow conventions set out by PI and edit sparingly when needed and when feasible. Most metadata conventions from the Core Program should still be followed to the most feasible degree.
+
+The biggest difference between CP datasets/PI-driven/non-BLE funded datasets is the degree of attribution we give to BLE in the metadata. 
+
+Generally, we give credit to BLE in these following places:
+
+1. BLE is first creator, appears in citations (sole author in CP data)
+2. The position of BLE information manager is listed as contact points for the dataset
+3. BLE is listed as the parent project, along with our core personnel
+4. Our LTER award is listed as the funding source
+5. BLE is listed as the metadata provider
+
+For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this). 
 
 <a href="#header">Back to top</a>
 <a id="website"></a>
