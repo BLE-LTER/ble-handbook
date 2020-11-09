@@ -35,6 +35,7 @@ date: 2020-04-06
 	- [Where we archive](#where-we-archive)
 	- [Who does the archiving](#who-does-the-archiving)
 	- [How we archive at EDI](#how-we-archive-at-edi)
+	- [Our website's data catalog](#our-websites-data-catalog)
 - [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
 	- [Types of datasets by BLE involvement](#types-of-datasets-by-ble-involvement)
 	- [All datasets](#all-datasets)
@@ -864,6 +865,16 @@ redirects are OK. For example, try
 ```shell
 curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/kelp_microsatellite_markers_CARP_20090910_geospatial.csv
 ```
+
+<a id="our-websites-data-catalog"></a>
+## Our website's data catalog
+
+Our website uses the PASTA Javascript client to query the EDI repository for our datasets and display them on a webpage. This query looks for the identifier 'knb-lter-ble'. Our website also links to the same set of datasets at ADC via a canned query -- a general search for "Beaufort Lagoon Ecosystems".
+
+To ensure that both queries will return the entire BLE data corpus -- and nothing else:
+
+- Put "Beaufort Lagoon Ecosystems LTER" in the keywords section of every single dataset. 
+- Use the 'knb-lter-ble' scope while archiving at EDI.
 
 <a href="#header">Back to top</a>
 <a id="ble-specific-datametadata-style-rules"></a>
