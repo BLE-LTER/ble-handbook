@@ -168,8 +168,8 @@ We use many, many tools that will need logins, some needing certain privilege le
 - UTLists (Sympa mailing list management software) `+`
 - Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups.
 - Subscribe to the im@lternet.edu mailing list, plus imc@lternet.edu if main IM
-- Taskade (project management app, we're trying it out as of Feb 2020)
-- Google Account for YouTube, etc. - beafortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with Ken Dunton, and Christina Bonsell.
+- Taskade, project management app. Not a lot of usage, but something An's looked into. Notion might also be good.
+- Google Account for YouTube, etc. - beaufortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with Ken Dunton, and Christina Bonsell.
 
 Legend:
 
@@ -177,7 +177,7 @@ Legend:
 
 `+` UT Austin service, does not require affiliation to UT
 
-`$` Tim has it
+`$` Tim has the credentials
 
 Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials. EDI will eventually roll out 'identity mapping', i.e. allowing IM team members from sites to log on to EDI portal(s) with their own Google/Github/ORCID account. Until then, BLE has one account.
 
@@ -188,7 +188,7 @@ For other things that are individual-based, a nem IM team member will need to be
 
 #### Getting remote access 
 
-How to remote access into your UT desktop, if working remotely:
+How to remote access into your UT desktop, if based out of UT and working remotely:
 
 1. Step 1, connect to the UT VPN server
 
@@ -196,11 +196,13 @@ UT uses the Cisco AnyConnect software. This is available for all major operating
 
 2. Step 2, use a remote desktop protocol. This is built into Windows systems, and require more software in other OS. The most success I've had on Linux is with the FreeRDP2 library. 
 
+Sometimes the Remote Desktop won't connect. Restarting your own computer sometimes solves that. The work computer you're VPNing into might be off though, in which case contact the service desk for help. They might need to physically go turn the computer on. You can also do this yourself if you have access.
+
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
 # Metadata database
 
-See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarly concerns usage of metabase at BLE and certain issues I've encountered.
+See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarily concerns usage of metabase at BLE and certain issues I've encountered.
 
 <a id="installation-and-admin"></a>
 ## Installation and admin
