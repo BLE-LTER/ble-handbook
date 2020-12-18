@@ -234,7 +234,7 @@ Does it say permission denied anywhere in the cmd log? Is your data directory in
 
 Follow these directions since it is fairly comprehensive (while everything else here is bits and pieces from stackoverflow): [see here.](https://radumas.info/blog/tutorial/2016/08/08/Migrating-PostgreSQL-Data-Directory-Windows.html)
 
-Do all of the clusters fail to start? I have at least two clusters on my computer thatr 
+Do all of the clusters fail to start? 
 
 <a id="how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows"></a>
 ### How to set up remote connection to locally hosted Postgres database on Windows
@@ -347,7 +347,7 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
 
-**NOTE**: postgres is the superuser on the entire cluster on An's machine. Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches.
+**NOTE**: postgres is the superuser on the entire cluster on An's machine. Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since ownership for superusers are hard to take away.
 
 ### User privileges needed to connect to and edit the database
 
@@ -494,21 +494,59 @@ folder once per day and logs the standard output and error (stdout & stderr) in 
 
 Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it.
 
+Having these backups mean that we're not at all tethered to any particular instance of a database, or the PG server on my computer (despite devoting so many words to its setup). It can implode tomorrow and all I've lost is the time it takes to set up a new one, plus some random test databases.
+
 #### Restore
 
-Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore. To restore from plain-text format, either right-click on a newly created database in DBeaver/Tools/Execute script, or run the file on a newly created and connected to database in command-line psql.
+Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it for any irregularities. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore, which requires a special format. To restore from plain-text format, either right-click on a newly created database in DBeaver/Tools/Execute script, or run the file on a newly created and connected to database in command-line psql.
 
 Existing users must be created prior to running the SQL to restore into another
 server that's not the original host. It is less work to create new users than make a backup
-without user privileges then assign them.
+without user privileges, then assign them.
 
-``` sql
-CREATE USER ble_group_owner;
-CREATE USER read_write_user;
-CREATE USER read_only_user;
-CREATE USER backup_user;
-CREATE USER tim;
-CREATE USER an;
+Use this snippet, which is a copy from the one above.
+
+```sql
+--
+-- Sample SQL to set up roles on a brand new server in preparation for a database restore
+-- Replace password strings
+--
+
+CREATE ROLE an;
+ALTER ROLE an WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE backup_user;
+ALTER ROLE backup_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE ble_group_owner;
+ALTER ROLE ble_group_owner WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readonly IS 'This group owns everything in the database, thus has all rights current and future.';
+CREATE ROLE ble_group_readonly;
+ALTER ROLE ble_group_readonly WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readonly IS 'This group has GRANT SELECT ON TABLES plus default future permissions for the same.';
+CREATE ROLE ble_group_readwrite;
+ALTER ROLE ble_group_readwrite WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
+COMMENT ON ROLE ble_group_readwrite IS 'This group has SELECT INSERT and UPDATE rights to all tables plus default permissions for future tables.';
+CREATE ROLE read_only_user;
+ALTER ROLE read_only_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE read_write_user;
+ALTER ROLE read_write_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE tim;
+ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+
+
+--
+-- Role memberships
+--
+
+GRANT ble_group_owner TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_owner TO tim WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readonly TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readonly TO backup_user GRANTED BY postgres;
+GRANT ble_group_readonly TO read_only_user GRANTED BY postgres;
+GRANT ble_group_readonly TO read_write_user GRANTED BY postgres;
+GRANT ble_group_readonly TO tim WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readwrite TO an WITH ADMIN OPTION GRANTED BY postgres;
+GRANT ble_group_readwrite TO read_write_user GRANTED BY postgres;
+GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 ```
 
 
@@ -516,7 +554,7 @@ CREATE USER an;
 
 Remember to log in with a user in group ble_group_owner when changing the schema. This simplifies permission issues downstream, such as when granting default privileges for new tables to other users.
 
-Keep an eye on the LTER-core-metabase Github repository. "watching" the repo will trigger email updates. An currently develops for this project, so by default keeps up with new patches and in fact wrote a lot of them. The "migration" branch will contain the latest sequentially numbered patches, see documentation on that repo for information on this system. Check the table `pkg_mgmt.version_tracker_metabase` for information on past applied patches. Note that occasionally new "one big file/OBF" or essentially a schema dump with all patches incorporated. If BLE instance of metabase has fallen too far behind, instead of applying a whole lot of patches, you might want to consider setting up a new instance from the latest OBF, dump out data from the old metabase, and insert into the new. 
+Keep an eye on the LTER-core-metabase Github repository. "Watching" the repo will trigger email updates. An currently develops for this project, so by default keeps up with new patches and in fact wrote a lot of them. The "migration" branch will contain the latest sequentially numbered patches, see documentation on that repo for information on this system. Check the table `pkg_mgmt.version_tracker_metabase` for information on past applied patches. Note that occasionally new "one big file/OBF" or essentially a schema dump with all patches incorporated. If BLE instance of metabase has fallen too far behind, instead of applying a whole lot of patches, you might want to consider setting up a new instance from the latest OBF, dump out data from the old metabase, and insert into the new. 
 
 Once you've determined that a patch needs to be applied:
 
