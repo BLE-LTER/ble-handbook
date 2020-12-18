@@ -67,7 +67,7 @@ Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term 
 
 Information management was integral to the project from the start; our NSF proposal included a detailed section on the data types we will produce and how each of them will be treated. The information management team has been important project members ever since.
 
-Tim Whiteaker (Tim after) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An after) was recruited by team in November 2018 and officially started in March 2019.
+Tim Whiteaker (Tim) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An) was recruited by team in November 2018 and officially started in March 2019.
 
 <a id="our-philosophies"></a>
 ## Our philosophies
@@ -86,6 +86,23 @@ I speak in first person throughout this handbook. Writing in third person, passi
 
 <a id="tools-we-use"></a>
 ## Tools we use
+
+### Languages
+
+An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL. 
+
+Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, validating EML. Lots more on this later on.
+
+
+### Actual software and tools
+
+Note that while many of the below tools are enterprise products (or have a paying option), we strive to keep our IM system free and sustainable. With the increasing abundance of open-source and free tools, we hope to be able to do so for a long time.
+
+- We use GitKraken as our Git client, and GitHub to manage, publicize, and collaborate on Git repositories. GitKraken integrates with GitHub well (you can use GH credentials in GK), and has a really neat tree visualization of changes in a repository.
+
+- We use a variety of text editors to examine and edit plain text files. Tim uses VS Studio Code and An uses Sublime Text. Big note: other IMs we know heavily use the Oxygen XML Editor to edit and validate their EML documents. Oxygen is decidedly not free, although they do give out academic licenses if their logo is displayed on one's website. We decided not to go that route, and just use a text editor to look at EML. This works fine for our automated-everything, no-manual editing philosophy.
+
+I'm sure there are others.
 
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
