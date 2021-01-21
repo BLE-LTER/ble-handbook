@@ -1306,8 +1306,8 @@ These are steps we need to do.
 	- "pathPrefix". This should be the same as the Netlify "publish" directory, which in our case is "/public".
 	- "customDomain". This matters a lot if you are on a fork or a branch, which means the URL you're checking is not our canonical ble.lternet.edu referred to in the sitemap and in HTML header canonicals, and will lead to lots of indexing failures. In which case, set this to "ble.lternet.edu". No "https".
 	- "branches". Algolia can create different indices for different branches on the git repo, but it needs to be told specifically which ones. If you're experimenting on a different branch other than master, say "['master', 'yourbranchname']" and delete the latter once merged into master.
-	- "template". This determines how Algolia will break up the index records. There are two options as of Jan 21: "default" and "hierarchical". The former will index by page, the latter by headings within a page. We chose the latter, since our website has comparatively few pages but a lot of information within each page.
-- Check out and make sure the indexing of the website contents is to satisfaction. To do this, trigger a deployment of the Netlify site. Generally a new commit to the git repo will accomplish this, so consider doing this on a branch. Or alternatively trigger a deployment manually in the Netlify GUI, since you're most likely logged in for most of this anyway. Under the deployment log, if Algolia and Netlify have been linked up correctly, the log will give you a URL to the crawler records. Follow the link and check out the records. The "successful" count should roughly be equal to the number of distinct pages we have, plus one for the sitemap. Don't worry about the "ignored" category; my understanding is that Algolia does the indexing based on our sitemap, and it will look for common sitemap naming schemes, whatever doesn't work go into "ignored". 
+	- "template". This determines how Algolia will break up the index records. There are two options as of 2021-01-21: "default" and "hierarchical". The former will index by page, the latter by headings within a page. We chose the latter, since our website has comparatively few pages but a lot of information within each page.
+- Check out and make sure the indexing of the website contents is to satisfaction. To do this, trigger a deployment of the Netlify site. Generally a new commit to the git repo will accomplish this, so consider doing this on a branch. Or alternatively trigger a deployment manually in the Netlify GUI, since you're most likely logged in for most of this anyway. Under the deployment log, if Algolia and Netlify have been linked up correctly, the log will give you a URL to the crawler records. Follow the link and check out the records. The "successful" count should roughly be equal to the number of distinct pages we have, plus one for the sitemap. Don't worry about the "ignored" category; my understanding is that Algolia does the indexing based on our sitemap, and it will look for common sitemap naming schemes; whatever doesn't work go into "ignored". 
 
 (2) Incorporate Algolia into front end 
 
@@ -1339,7 +1339,7 @@ These are steps we need to do.
 </script>
 ```
 
-- Double check to make sure the IDs and API key is correct and refer to the appropriate Netlify page. There are two API keys Algolia will give you, the searchAPI is ok to put in public code, and the other is super not ok. Make sure it's not the latter in the snippet. If you copy from the site that risk is minimal. 
+- Double check to make sure the IDs and API key are correct and refer to the appropriate Netlify page. There are two API keys Algolia will give you, the searchAPI is ok to put in public code, and the other is super not ok. Make sure it's not the latter in the snippet. If you copy from the site that risk is minimal. 
 
 - Double check that the "branch" param in the snippet says the correct branch(es). Yes, the branches need to be specified in both the `netlify.toml` file and here.
 
@@ -1370,11 +1370,11 @@ Think about logical breaks in content so that headings (and therefore searchable
 3. Commitments and usage limits
 
 The free tier we get with Algolia and Netlify allows for 20 monthly "commitments". According to their website, a commitment equals to 1000 searches and 1000 records. We are probably not in any danger, but it is something to look out for. 
-Algolia will also send usage reports to the email address associated with the Netlify page. This report details keywords used and their frequencies, etc, and whether there were any keywords that resulted in no hits. This latter especially would be useful to think about new content or SEO.
+Algolia will also send usage reports to the email address associated with the Netlify page. This report details keywords used and their frequencies, etc., and whether there were any keywords that resulted in no hits. This latter especially would be useful to think about new content or SEO.
 
 4. CSS mods
 
-There are two minor modifications in CSS I made, otherwise we lifted their front-end wholesale. 
+There are two minor modifications in CSS I made; otherwise we lifted their front-end wholesale. 
 
 - min-width for the class ".aa-Form" was set to 250px, originally 150px. This is the search box.
 - position for the class ".aa-Panel" was set to fixed, so that the search results panel does not disappear once we scroll down the page. 
