@@ -46,6 +46,7 @@ date: 2020-04-06
 	- [How to update website](#how-to-update-website)
 	- [Branding](#branding)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
+	- [Algolia](#algolia)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
 	- [Misc. biblio notes](#misc-biblio-notes)
@@ -1285,7 +1286,8 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 
 - Job postings need to include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
 
-### Algolia
+<a id="algolia"></a>
+## Algolia
 
 Here we document the nitty gritties of Algolia search on our website. 
 
