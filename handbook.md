@@ -17,30 +17,13 @@ date: 2020-04-06
 	- [Tools we use](#tools-we-use)
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
 	- [Getting access to things](#getting-access-to-things)
-- [Metadata database](#metadata-database)
-	- [Installation and admin](#installation-and-admin)
-	- [Our metabase implementation](#our-metabase-implementation)
-	- [Regular tasks](#regular-tasks)
-- [Metadata template](#metadata-template)
-	- [How to update template](#how-to-update-template)
-- [Data processing](#data-processing)
-	- [Data directory structure](#data-directory-structure)
-	- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
-	- [Data processing](#data-processing-1)
-- [Metadata processing and EML](#metadata-processing-and-eml)
-	- [Enter metadata into metabase](#enter-metadata-into-metabase)
-	- [Exporting EML](#exporting-eml)
-	- [Revisions](#revisions)
-- [Data archiving](#data-archiving)
-	- [Where we archive](#where-we-archive)
-	- [Who does the archiving](#who-does-the-archiving)
-	- [How we archive at EDI](#how-we-archive-at-edi)
-	- [Our website's data catalog](#our-websites-data-catalog)
-- [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
-	- [Types of datasets by BLE involvement](#types-of-datasets-by-ble-involvement)
-	- [All datasets](#all-datasets)
-	- [Core Program](#core-program)
-	- [PI-driven datasets](#pi-driven-datasets)
+- [All about data and metadata](#all-about-data-and-metadata)
+	- [Metadata database](#metadata-database)
+	- [Metadata template](#metadata-template)
+	- [Data processing](#data-processing)
+	- [Metadata processing and EML](#metadata-processing-and-eml)
+	- [Data archiving](#data-archiving)
+	- [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
 - [Website](#website)
 	- [Our website technologies](#our-website-technologies)
 	- [How to update website](#how-to-update-website)
@@ -200,16 +183,19 @@ UT uses the Cisco AnyConnect software. This is available for all major operating
 
 Sometimes the Remote Desktop won't connect. Restarting your own computer sometimes solves that. The work computer you're VPNing into might be off though, in which case contact the service desk for help. They might need to physically go turn the computer on. You can also do this yourself if you have access.
 
+<a id="all-about-data-and-metadata"></a>
+# All about data and metadata
+
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
-# Metadata database
+## Metadata database
 
 See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarily concerns usage of metabase at BLE and certain issues I've encountered.
 
 <a id="installation-and-admin"></a>
-## Installation and admin
+### Installation and admin
 
-### Postgres woes and how to overcome them
+#### Postgres woes and how to overcome them
 
 Very verbose -- for complete newbs to the DB admin world. Windows specific, but I think once you get an idea of how the pieces get together, operating system doesn't matter as much.
 
@@ -218,10 +204,10 @@ Assuming a vanilla installation from executable (.exe) on Windows. Some assumpti
 **NOTE:** A good chunk of trouble might be avoided if PostgreSQL is _not_ installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
 
 <a id="issues-ive-run-into"></a>
-### Issues I've run into
+#### Issues I've run into
 
 <a id="serverservice-not-running"></a>
-#### Server/service not running
+##### Server/service not running
 One day as fine as any other, you log on to your computer and open up DBeaver ready to do some ecological data management. The database refuse to connect, citing "Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections." Boom. What's happening? 
 
 This normally means the server associated with the Postgres instance aka cluster (see below) that your database lives on is not running. In my experience, the default cluster is normally set to auto-start its server at system startup; this is not true for other clusters.
@@ -239,18 +225,18 @@ Follow these directions since it is fairly comprehensive (while everything else 
 Do all of the clusters fail to start? 
 
 <a id="how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows"></a>
-### How to set up remote connection to locally hosted Postgres database on Windows
+#### How to set up remote connection to locally hosted Postgres database on Windows
 
 <a id="1-general-things-you-need"></a>
-#### 1. General things you need
+##### 1. General things you need
 You need:
 - To know the IP addresses of both the server and client machines, aka the PCs hosting the database and the PC trying to access it. This might mean a public-facing address or an internal one. Consult whoever is the network admin, since you'll need to talk to them by the end of this guide anyway. 
 - To have set up a user and password with at minimum CONNECT rights to the database in question.
 
 <a id="2-on-the-server-pc"></a>
-#### 2. On the server PC
+##### 2. On the server PC
 
-##### Figure out where the data "cluster" is
+###### Figure out where the data "cluster" is
 
 A Postgres data cluster is a separate instance of Postgres. There can be multiple clusters on the same server/machine. Each cluster lives in its own data directory, can be configured differently, contain separate sets of databases, and uses a different "server" and port. Note that the Postgres "server" is different from the machine server, and I lack the understanding to elaborate further.  
 
@@ -263,7 +249,7 @@ You might want to either change the default cluster directory, or create a new c
 
 Proceed only once you know where the cluster in which your database resides is, and what is the port the cluster uses.
 
-##### Change the cluster configuration
+###### Change the cluster configuration
 In the directory where the Postgres cluster lives, there are a number of .conf files. These contain the very high level configuration settings to the entire cluster, so treat them with caution. 
 
 You need to change two files:
@@ -284,11 +270,11 @@ with md5 authentication.
 
 **NOTE:** the slash thing in an IP address is very important here. Example: if you say 10.157.28.0 without appending "/24", eventually downstream you will not be able to connect to the cluster at all with a generic message, e.g. "could not load pg_hba.conf".
 
-##### Change firewall rules to open port
+###### Change firewall rules to open port
 Now that we're done telling Postgres to expect and allow connection, we need to tell the operating system the same. Create a Windows Defender Firewall inbound rule to open up port TCP 5432, or whatever port your cluster uses. Enable this rule. Contact your network admin if you can't do this or don't have the right to do so. This is likely the case if you see anything that says "group policy".
 
 <a id="on-the-client-pc"></a>
-#### On the client PC
+##### On the client PC
 Use this connection information:
 
 Host: <server IP address>
@@ -298,7 +284,7 @@ User: <your username>
 Password: <your password>
 
 <a id="our-metabase-implementation"></a>
-## Our metabase implementation
+### Our metabase implementation
 
 We're using a Postgres instance on An's machine (IP address 10.157.18.129, computer number for UT-IT purposes CRWR-D08182).
 
@@ -313,7 +299,7 @@ To enable Tim to connect, we had to work with ITG. They set up a firewall policy
 for An's computer which opens TCP port 5432 for just the CWE general network
 (10.157.18.0/24). They then ran a gpupdate on An's computer.
 
-### Roles: Users/Groups || Permissions
+#### Roles: Users/Groups || Permissions
 
 Postgres has a somewhat confusing (to me) permission management scheme. To minimize confusion and make it easy, I am making a hard-and-fast distinction:
 
@@ -333,7 +319,7 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
   - `ble_group_readwrite` has all of the above, plus INSERT and UPDATE
   - `ble_group_owner` has all of the above, plus (1) ability to GRANT membership in group roles
 
-#### Existing structures
+##### Existing structures
 
 | Role name | Attribute | Members of | Notes |
 |---|---|---|---|
@@ -351,7 +337,7 @@ We use UT's Stache service to share passwords to the shared users. Tim and An ea
 
 **NOTE**: postgres is the superuser on the entire cluster on An's machine. Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since ownership for superusers are hard to take away.
 
-### User privileges needed to connect to and edit the database
+#### User privileges needed to connect to and edit the database
 
 When creating a new user, you need to do the following. Or re-use the read_only_user and read_write_user roles created in install scripts.
 
@@ -432,7 +418,7 @@ GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 ```
 
 <a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
-### Add-ons to vanilla metabase that are specific to BLE
+#### Add-ons to vanilla metabase that are specific to BLE
 
 1. Addition of two year columns to DataSetPersonnel
 
@@ -485,11 +471,11 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 ```
 
 <a id="regular-tasks"></a>
-## Regular tasks
+### Regular tasks
 
-### Backups and restores
+#### Backups and restores
 
-#### Backups
+##### Backups
 
 A scheduled task on An's computer backs up the database to the **daily_backups**
 folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
@@ -500,7 +486,7 @@ Having these backups mean that we're not at all tethered to any particular insta
 
 The backups folder can be a bit cluttered, since there are hundreds of backups, soon to be thousands. We also sometimes go weeks without change to the underlying metabase, so there will be many duplicates in content. I've contemplated writing a little script to delete these duplicates once in a while. However, the duplicates in content are not actually true duplicates from a computer's perspective, since the pg_dump utility includes the date and time in the text, so it's a little harder to tease this out.
 
-#### Restore
+##### Restore
 
 Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it for any irregularities. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore, which requires a special format. To restore from plain-text format, either right-click on a newly created database in DBeaver/Tools/Execute script, or run the file on a newly created and connected to database in command-line psql.
 
@@ -554,7 +540,7 @@ GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 ```
 
 
-### Applying new features or patches
+#### Applying new features or patches
 
 Remember to log in with a user in group ble_group_owner when changing the schema. This simplifies permission issues downstream, such as when granting default privileges for new tables to other users.
 
@@ -569,7 +555,7 @@ Once you've determined that a patch needs to be applied:
  
 <a href="#header">Back to top</a>
 <a id="metadata-template"></a>
-# Metadata template
+## Metadata template
 
 We use a metadata template to collect information about datasets from scientists. It resides at, well, several places. 
 
@@ -578,17 +564,17 @@ On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v
 Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
 <a id="how-to-update-template"></a>
-## How to update template
+### How to update template
 This is a copy of the README on the git repo with a tiny bit more.
 
-### Template Excel
+#### Template Excel
 
 1. Open file `metadata_template.xlsx`
 2. Make changes. Make changes to sample package if applicable. Make changes to instructions if applicable.
 3. Save file(s)
 4. See common steps.
 
-### PDF instructions
+#### PDF instructions
 
 1. Open file `data_submission_instructions.md`
 2. Make changes. Hit save on source Markdown.
@@ -607,7 +593,7 @@ This is a copy of the README on the git repo with a tiny bit more.
 7. See common steps.
 
 <a id="common-steps-after-editing"></a>
-### Common steps after editing
+#### Common steps after editing
 
 After any updates, be sure to:
 - Git commit and push changes
@@ -619,10 +605,10 @@ After any updates, be sure to:
 
 <a href="#header">Back to top</a>
 <a id="data-processing"></a>
-# Data processing
+## Data processing
 
 <a id="data-directory-structure"></a>
-## Data directory structure
+### Data directory structure
 
 We use a certain directory structure for working with data packages.
 
@@ -637,7 +623,7 @@ Within each data package directory:
 
 
 <a id="how-to-initiate-a-new-data-package"></a>
-## How to initiate a new data package
+### How to initiate a new data package
 
 Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in any R console. This will (1) create a folder named datasetid_nickname under our Austin disk Data folder, with sub-folders called FromPI and Clean > EML_generation, and (2) create a R script named datasetid.R from template with the appropriate IDs subbed into function calls. The parent folder defaults to "K:/Data" on my machine. Modify the `base_path` argument in `init_datapkg()` if needed.
 
@@ -648,7 +634,7 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 - Create a new R project under EML_generation/EML_RRproject_(datasetID) for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far. Instead, one has to open RStudio, select File/New Project/Associate project with existing directory, then navigate to the correct folder to initiate a new project.
 
 <a id="data-processing-1"></a>
-## Data processing
+### Data processing
 
 All data processing should be performed in scripts for transparency and reproducibility, and also for our convenience: PIs often re-send data, and all changes by us made manually in Excel will be lost. I use R and therefore a lot of our workflows and helper functions are centered around R, but there's no reason another scripting language would not work. 
 
@@ -656,15 +642,15 @@ The R script created by `init_datapkg()` has pre laid-out sections (but no code,
 
 Data are read in from the FromPI directory, and written out to Clean (which ideally is parent to the R script). This ensures reproducibility and transparency of processing steps taken.
 
-### netCDF
+#### netCDF
 
-#### When to use
+##### When to use
 
 Gridded data with lots of observations can be packaged a lot smaller in netCDF than CSV form. Generally, we do this when a CSV would exceed circa 20 million rows and 5/6 columns in long table form, resulting in a CSV file > 1 GB. Remember that lat/lon/time/site codes already take up 3-4 columns.
 
 netCDF cannot be checked for data-metadata congruency by PASTA's ECC.
 
-#### How to generate netCDFs
+##### How to generate netCDFs
 
 This of course depends on the source format. We have done and attempted to do this twice as of March 2020 for datasets 5 (hydrology model by Mike Rawlins) and 7 (moorings by Jeremy Kasper) and have some insights.
 
@@ -675,9 +661,9 @@ netcdf.R for an example R routine.
 
 - Mike's dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
 
-### Metadata 
+#### Metadata 
 
-#### in netCDF
+##### in netCDF
 
 We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML. 
 
@@ -695,16 +681,16 @@ Possible metadata duplication between EML and netCDF global attributes:
 - summary: use overall dataset abstract
 - keywords: use keywords applicable to data in netCDF form (assuming there are other data entities packaged alongside netCDF)
 
-#### in EML
+##### in EML
 
 Document the netCDF as otherEntity. Metabase already has netCDF as a file type that would fill in the correct metadata.
 
 <a href="#header">Back to top</a>
 <a id="metadata-processing-and-eml"></a>
-# Metadata processing and EML
+## Metadata processing and EML
 
 <a id="enter-metadata-into-metabase"></a>
-## Enter metadata into metabase
+### Enter metadata into metabase
 
 Once a metadata template is received from the data correspondent (can be PIs, can be Christina/Nathan, can be someone else) and is reasonably filled out, I start the process of transfering the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
 
@@ -743,12 +729,12 @@ Common pitfalls:
 - not having an Unit or a NumberType when attribute is interval or ratio 
 - enumerated (categorized/coded) attributes MUST be specified as nominalEnum or ordinalEnum. Otherwise even if they have corresponding entries in DataSetAttributeEnumeration, resulting EML will not have code/definition pairs
 
-### Misc quirks
+#### Misc quirks
 
 - If somebody doesn't have an ORCID, theree still MUST be an entry for them in ListPeopleID. Just leave IdentificationURL as NULL (allowable by metabase schema). If there's no entry for them, the resulting personnel table exported from metabase will not have that person (the associatedParty tree still includes them).
 
 <a id="exporting-eml"></a>
-## Exporting EML
+### Exporting EML
 Once metadata in metabase is complete, it's time to start data processing and exporting EML. One does this in R.
 
 - Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RRroject has to be created manually; I haven't found a way around that. 
@@ -764,7 +750,7 @@ In short, there are these function calls to execute each time you generate a new
 The resulting EML would be deposited into the same directory as the script.
 
 <a id="revisions"></a>
-## Revisions
+### Revisions
 
 Make sure to do these tasks if a dataset needs to be revised:
 
@@ -773,10 +759,10 @@ Make sure to do these tasks if a dataset needs to be revised:
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
-# Data archiving
+## Data archiving
 
 <a id="where-we-archive"></a>
-## Where we archive
+### Where we archive
 
 We archive most data packages at the Environmental Data Initiative (EDI).  The
 exception is for entities for which a more suitable archive already exists, such
@@ -787,12 +773,12 @@ archive in EDI at least a summary table for externally archived datasets such as
 genomics data.
 
 <a id="which-member-node-are-we"></a>
-### Which member node are we
+#### Which member node are we
 
 When signing in to the EDI data portal and asked for a member node, we're urn:node:LTER.  EDI filters on the package identifier (knb-lter-ble): any of the "knb-lter-[site acronym]" packages go through urn:node:LTER, while the rest go through urn:node:EDI.
 
 <a id="replication"></a>
-### Replication
+#### Replication
 
 We replicate our EDI data packages so that they show up in the Arctic Data Center
 catalog.  There's a single DOI for a data package, which resolves to the LTER
@@ -825,7 +811,7 @@ However, as of April 2020 this is not feasible to implement in an automated way 
 BLE has an affiliation agreement with AOOS. Rather than archive with AOOS as they typically require, we continue to archive at EDI with our relevant packages linked from AOOS's [ocean acidification data page](https://aoos.org/alaska-ocean-acidification-network/ocean-acidification-data/). Links are provided such that they always point to the latest revision of a dataset, e.g., [https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=9](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=9). In case AOOS needs a cached copy of the data, we instructed them to subscribe to dataset updates via [EDI's event subscription service](https://portal.edirepository.org/nis/eventSubscribe.jsp).
 
 <a id="why-we-archive-at-edi"></a>
-### Why we archive at EDI
+#### Why we archive at EDI
 
 We want our datasets to show up in both the LTER data portal (which EDI handles)
 and the Arctic Data Center (ADC), so we must replicate. Replication is currently
@@ -841,7 +827,7 @@ ADC, in an email sent on April 26, 2019.  He documented this in the eJacket
 under Diary notes for the record.
 
 <a id="who-does-the-archiving"></a>
-## Who does the archiving
+### Who does the archiving
 
 The BLE information manager archives data packages at EDI. For entities that are
 not archived at EDI, such as genomics data going to GenBank, the individual
@@ -849,12 +835,12 @@ researcher typically archives that entity, since they probably are already
 familiar with the archives for their field.
 
 <a id="how-we-archive-at-edi"></a>
-## How we archive at EDI
+### How we archive at EDI
 
 We currently submit data and EML metadata manually via the [EDI data portal](https://portal.edirepository.org/nis/harvester.jsp).
 
 <a id="handling-large-files"></a>
-### Handling large files
+#### Handling large files
 
 As of 2020-01-08, EDI has a maximum upload limit of 500 MB per file. If a file
 in your data package exceeds this limit, you must place the file online, and
@@ -928,7 +914,7 @@ curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/ke
 ```
 
 <a id="our-websites-data-catalog"></a>
-## Our website's data catalog
+### Our website's data catalog
 
 Our website uses the PASTA Javascript client to query the EDI repository for our datasets and display them on a webpage. This query looks for the identifier 'knb-lter-ble'. Our website also links to the same set of datasets at ADC via a canned query -- a general search for "Beaufort Lagoon Ecosystems".
 
@@ -939,12 +925,12 @@ To ensure that both queries will return the entire BLE data corpus -- and nothin
 
 <a href="#header">Back to top</a>
 <a id="ble-specific-datametadata-style-rules"></a>
-# BLE specific data/metadata style rules
+## BLE specific data/metadata style rules
 
 Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
 
 <a id="types-of-datasets-by-ble-involvement"></a>
-## Types of datasets by BLE involvement
+### Types of datasets by BLE involvement
 
 We roughly categorize three types of datasets, according to the degree and kind of BLE involvement:
 
@@ -955,16 +941,16 @@ We roughly categorize three types of datasets, according to the degree and kind 
 3. "PI-driven" datasets that are not primarily funded by BLE. 
 
 <a id="all-datasets"></a>
-## All datasets
+### All datasets
 
-### Units are abbreviated and appended to column names
+#### Units are abbreviated and appended to column names
 
 Per Yvette's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
 
 - publish a short user's guide to accessing metadata, under our data catalog
 - adopt a practice of appending units to column names, e.g. "temp_C".
 
-#### Here's how this is implemented during our normal workflow
+##### Here's how this is implemented during our normal workflow
 
 1. Attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp."
 2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
@@ -975,18 +961,18 @@ Per Yvette's request and concern over easily accessing attribute unit informatio
 	- After, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
 6. proceed as usual with EML generation.
 
-#### Why we do it this way:
+##### Why we do it this way:
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
 - No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop. 
 - Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control is not possible atm.
 
-#### Updating the EMLUnitDictionary
+##### Updating the EMLUnitDictionary
 
 Updates to the EMLUnitDictionary might be necessary with new versions of EML. Our plan is to perform a full/outer join on the existing EMLUniDictionary keeping all rows, so that (1) our custom edited abbreviations survive the mode, (2) metabase continues to support older and custom units.
 
 <a id="core-program"></a>
-## Core Program
+### Core Program
 
 Core Program datasets refer to those datasets produced by the Core Program, a common thread in our research and field sampling to obtain foundational data about the lagoons. These datasets fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
 
@@ -994,7 +980,7 @@ There are two documents on Box with some of these rules oriented towards our Pro
 
 This handbook version is a much more exhaustive version. 
 
-### Types of CP data 
+#### Types of CP data 
 
 According to the source: 
 - data from water samples
@@ -1003,7 +989,7 @@ According to the source:
 
 The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which one the dataset you're working with falls under. 
 
-### Dataset titles 
+#### Dataset titles 
 
 - Mention time series if data is continuous from moorings
 - Mention water/sediment if sample type is such
@@ -1011,7 +997,7 @@ The first two are discrete and obtained during our annual field campaigns, while
 - E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
 
 <a id="data-columns"></a>
-### Data columns 
+#### Data columns 
 
 Column names:
 
@@ -1046,7 +1032,7 @@ Data sort, sort all CP datasets by these columns in this order before submission
 - date_collected (discrete only) / date_time (mooring)
 - water_column_position (discrete water samples only)
 
-### Entities 
+#### Entities 
 
 Entity names:
 
@@ -1082,10 +1068,10 @@ File names:
 
 
 <a id="personnel--responsible-parties"></a>
-### Personnel / Responsible Parties
+#### Personnel / Responsible Parties
 
 <a id="creator"></a>
-#### Creator
+##### Creator
 
 Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
 
@@ -1096,7 +1082,7 @@ So that they are analogous to this citation from a PI-driven dataset (see comm. 
 > Beaufort Lagoon Ecosystems LTER, V. Lougheed. 2019. Carbon flux from aquatic ecosystems of the Arctic Coastal Plain along the Beaufort Sea, Alaska, 2010-2018. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
 <a id="other-people"></a>
-#### Other people
+##### Other people
 
 Other people involved in the dataset will be credited as an associated party in the EML record. The order might still matter, so order as the PI have written them down in the template. To be listed as an associated party, a person has to have handled/been responsible for the data at some point, so as to be able to answer questions if necessary. The PI supplies this list normally, so not an action item for us, just FYI. 
 
@@ -1113,7 +1099,7 @@ I call this function from inside the directory with other data files. I list the
 Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way is to duplicating the same set of attributes from a previous Core Program dataset. 
 
 <a id="stations"></a>
-### Stations
+#### Stations
 
 Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
@@ -1126,7 +1112,7 @@ Example usage:
 df <- bleutils::add_cp_cols(df, "station")
 ```
 
-### Misc
+#### Misc
 
 - Data is "2018-ongoing" not "2018-2019" although we might only have 2018-2019 data as of publication. Except in EML's temporalCoverage where we actually specify begin and end dates.
 - updateFrequency is annual
@@ -1146,7 +1132,7 @@ We add a dataSource element in EML via metabase's DataSetMethodProvenance table 
 - They are collected for different LTER sub-goals (hydrography main goal = understand hydrographic exchange. pH main goal = understand carbon dynamics).
 
 <a id="pi-driven-datasets"></a>
-## PI-driven datasets
+### PI-driven datasets
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible. Most metadata conventions from the Core Program should still be followed to the most feasible degree.
 
