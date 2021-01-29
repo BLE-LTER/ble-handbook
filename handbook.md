@@ -53,7 +53,8 @@ date: 2020-04-06
 - [Personnel management](#personnel-management)
 	- [Add/update personnel contact information](#addupdate-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
-- [Resources](#resources)
+- [Reporting](#reporting)
+	- [Obtaining metrics](#obtaining-metrics)
 
 <!-- /MarkdownTOC -->
 
@@ -1522,5 +1523,37 @@ config options of note:
 
 - Include a footer message under "message templates". I go with variations on "Distribution list for BLE LTER *insert audience*. Replies will be sent to the whole group. Email *insert list email* to send a message to the group."
 
-<a id="resources"></a>
-# Resources
+<a id="reporting"></a>
+# Reporting
+
+<a id="obtaining-metrics"></a>
+## Obtaining metrics
+
+### Data citations
+
+We need a detective! The mystery: How to find where our data are cited.
+
+a. Google scholar detects automated scraping and bans IPs. The current workaround is to pay for a proxy service that spawns our requests across a gazillion servers/IPs (one example here), but that is not honoring Google's policy so we (BLE) won't do that.
+
+b. Matt Jones suggested scythe, which I gather scrapes other sources.
+
+c. I also wonder since "Beaufort Lagoon Ecosystems LTER" appears amongst author names for every dataset, if we could just search once for that manually, and then have some code to parse the results.  It should be a partial match, since we also have "Beaufort Lagoon Ecosystems LTER, Core Program" as an author.
+
+d. Or we could just manually search Google Scholar for every DOI associated with every revision of every BLE dataset. Ugh. This is the baseline result, which we'll use to evaluate the effectiveness of other approaches.
+
+How to get every DOI associated with every revision of every BLE dataset: one of counter's two result spreadsheets will give you this, see below. 
+
+### Data downloads
+
+From discussion with EDI and other IMs, it seems data download counts are most likely inflated measures of data usage. Several factors confound these numbers: robots, repository routines (e.g. checksum checks), etc. 
+
+Bits of wisdom:
+- Download counts overcount but citations undercount (and lag behind data publication), so the truth of data reuse is somewhere in between.
+- Impossible to at the same time have data be entirely public and require no credentials to download, and have accurate reporting of how many people have downloaded it and who they are. Trade-off.
+
+I've been getting data downloads from the PASTA counter library: https://github.com/PASTAplus/counter. Without custom params, the time period would be from 2013 (when PASTA started and way before BLE) to today (the date you run the program).
+
+The counter library reports download counts by data entities, and sums of all entities for a package. For reporting purposes, these are the numbers we'll use if needed. The Arctic Data Center reports that their downloads are the same as PASTA's and the same as DataONE, so there is no need to add up numbers.
+
+
+
