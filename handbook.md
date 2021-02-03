@@ -18,6 +18,7 @@ date: 2020-04-06
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
 	- [Getting access to things](#getting-access-to-things)
 - [All about data and metadata](#all-about-data-and-metadata)
+	- [High level step-by-step](#high-level-step-by-step)
 	- [Metadata database](#metadata-database)
 	- [Metadata template](#metadata-template)
 	- [Data processing](#data-processing)
@@ -38,6 +39,7 @@ date: 2020-04-06
 	- [Mailing list admin](#mailing-list-admin)
 - [Reporting](#reporting)
 	- [Obtaining metrics](#obtaining-metrics)
+	- [Presentations](#presentations)
 
 <!-- /MarkdownTOC -->
 
@@ -185,6 +187,18 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 <a id="all-about-data-and-metadata"></a>
 # All about data and metadata
+
+<a id="high-level-step-by-step"></a>
+## High level step-by-step
+
+1. Receive data and metadata from researchers. This might be a long process, and we might hear about datasets long before we actually get them.
+
+2. 
+
+3. Archive at EDI
+
+4. Let the world know:
+- Let the researchers (people )
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
@@ -1541,5 +1555,14 @@ I've been getting data downloads from the PASTA counter library: https://github.
 
 The counter library reports download counts by data entities, and sums of all entities for a package. For reporting purposes, these are the numbers we'll use if needed. The Arctic Data Center reports that their downloads are the same as PASTA's and the same as DataONE, so there is no need to add up numbers.
 
+<a id="presentations"></a>
+## Presentations
 
+### BLE powerpoint template
+
+By request from PIs in the 2020 BLE meeting, we created a BLE powerpoint template for use by all project members. There were a number of issues I didn't foresee that came up when this template was first distributed and used by many during the lead-up to our 2021 meeting. 
+
+- Fonts: older versions of PowerPoint on Mac cannot read PowerPoint files made on Windows with embedded fonts, which we did use to include the Libre Franklin family of fonts. Yvette reported that even updating PP didn't solve this issue. To circumvent this, I swapped text in Libre Franklin to Arial, which is available most everywhere. An easy way to do this (which I only found out after the fact) was to go to Replace/Replace Fonts in PP.
+- Color usage: Yvette brought up that colors used in the presentation should be tested for color-blind user friendliness. It wasn't a big issue in this particular instance, since we didn't have colors next to each other that needed to be interpreted, but we also switched out the blue and green to be darker to enable more contrast.
+- Aspect ratio: Ken brought up that some projectors are in 4:3 ratio while the template is 16:9. Tim clarified that this will only mean black bars above and below. 
 
