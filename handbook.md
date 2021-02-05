@@ -193,12 +193,11 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 1. Receive data and metadata from researchers. This might be a long process, and we might hear about datasets long before we actually get them.
 
-2. 
+2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata. 
 
 3. Archive at EDI
 
-4. Let the world know:
-- Let the researchers (people )
+4. Let the world know. We're working on a formal announcement process. Needs to update this section later.
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
