@@ -1425,6 +1425,8 @@ Once the metadata is harvested, make sure to:
 <a id="misc-biblio-notes"></a>
 ## Misc. biblio notes
 
+The DOI field for entries should NOT start with "https://doi.org" but "10.XXXX". Otherwise, the Zotero API will pre-pend the former string resulting in duplication.
+
 ### Linking data and pubs
 
 On the journal site: PIs would normally cite data packages. Not IM's job.
