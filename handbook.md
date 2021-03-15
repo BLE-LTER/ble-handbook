@@ -197,7 +197,7 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 3. Archive at EDI
 
-4. Let the world know. We're working on a formal announcement process. Needs to update this section later.
+4. Let BLE the world know. BLE has a formal data notification policy below. 
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
@@ -935,6 +935,52 @@ To ensure that both queries will return the entire BLE data corpus -- and nothin
 
 - Put "Beaufort Lagoon Ecosystems LTER" in the keywords section of every single dataset. 
 - Use the 'knb-lter-ble' scope while archiving at EDI.
+
+### Data notification policy
+
+Part 1: When a dataset is initially published (i.e., version 1)
+
+a. Any people associated with the dataset (i.e., people who appear as authors, contacts, associated parties, etc., in the metadata) are sent a data announcement like below.
+
+b. The information manager (IM) will briefly announce the dataset to the BLE team via the ble-lter-all listserv (ble-lter-all@utlists.utexas.edu), providing the citation which includes the DOI.
+
+c. The social media manager, as notified by the IM, will announce the dataset to the public via Twitter and Facebook.
+
+ 
+
+Part 2: When a dataset is revised
+
+a. If data are revised, the IM will announce to ble-lter-all as in 1b.  The IM will indicate if the revision is appending new data or changing existing data.  If changing existing data, the IM will highlight the changes (side note: we must also remember to document the changes in the metadata).
+
+b. If only metadata are revised, e.g., fixing a typo in a contact address, then no notifications are sent.
+
+#### Example data announcement
+
+> Dear data contributors,
+> Thank you for your data contribution to the BLE LTER corpus, and for working with us on documenting and publishing this data. Your data package is now archived at the Environmental
+Data Initiative repository. Please find information below regarding use of this data.
+> Data package landing page: PLACEHOLDER URL
+> Data package DOI: PLACEHOLDER DOI
+> Suggested citation: PLACEHOLDER CITATION
+> *Citation*
+> Please cite this data in resulting publications as you would any other source; that is, place the
+suggested citation (or re-formatted as required) as a reference, in addition to placing a link to
+the data package in a "Data Availability" section if required by the publisher. If appropriate, you
+can also make inline references in the text of your manuscript.
+> Please double-check that URLs and DOI are correct and current before citing the data in
+publications.
+> *Revisions*
+> Revising published data is possible. Please let us know if you would like to revise this data
+package with any changes.
+> You will be notified on any revisions with changes to the data, such as additions to a time
+series. Other updates might only revise minor details to the metadata, but will still generate a
+new DOI. If you visit an old link, the EDI data portal will alert you to the newest revision.
+> *Use*
+> All BLE LTER data packages can be found in the data catalog on our website:
+https://ble.lter.edu/catalog. There is also a guide on our data catalog page describing how to
+access metadata for BLE data packages (linked here). The guide gives an overview to the EDI
+portal, which digests metadata we provide to generate an user-friendly display of important
+information such as variable units and code-definitions. Please follow as you explore BLE data.
 
 <a href="#header">Back to top</a>
 <a id="ble-specific-datametadata-style-rules"></a>
