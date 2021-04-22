@@ -1045,11 +1045,13 @@ Standard columns, also in this order:
 - date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok. Continuous/mooring data.
 - date_collected: date in YYYY-MM-DD format. Discrete data.
 - water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." (discrete water samples only)
+- sample_depth (discrete water samples only)
 - [data columns, including notes]
 - collection_method: grab/pump (discrete water samples only)
 - station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
 - latitude
 - longitude
+- station_depth
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
