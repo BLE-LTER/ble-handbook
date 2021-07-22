@@ -33,7 +33,7 @@ date: 2020-04-06
 	- [Algolia](#algolia)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
-	- [Misc. biblio notes](#misc-biblio-notes)
+	- [Misc notes](#misc-notes)
 - [Personnel management](#personnel-management)
 	- [Add/update personnel contact information](#addupdate-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
@@ -1440,10 +1440,12 @@ Once the metadata is harvested, make sure to:
 - if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
-<a id="misc-biblio-notes"></a>
-## Misc. biblio notes
+<a id="misc-notes"></a>
+## Misc notes
 
 The DOI field for entries should NOT start with "https://doi.org" but "10.XXXX". Otherwise, the Zotero API will pre-pend the former string resulting in duplication.
+
+If you are adding a Core Program dataset as a Zotero entry (i.e. via using the Zotero browser button while on the EDI data portal), and the first author reads "Beaufort Lagoon Ecosystems LTER, Core Program" with the comma, then Zotero will read in "Core Program" as a first name. This would then lead to the exported citation possibly listing author "Beaufort Lagoon Ecosystems LTER, C. P.". To fix this, go to the entry details. Under the first author, remove "Core Program" from the first name field and paste it into the last name field. The rest of the metadata provided by EDI and extracted by Zotero is usually pretty good and needs no modifications. 
 
 ### Linking data and pubs
 
