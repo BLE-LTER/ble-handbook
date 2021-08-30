@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2020-04-06
+date: 2021-08-29
 ---
 
 <a id="header"></a>
@@ -66,7 +66,9 @@ See our website summary on our information management system here at https://ble
 <a id="preamble"></a>
 ## Preamble
 
-I speak in first person throughout this handbook. Writing in third person, passive, or imperative voice is tiring.
+Dear reader, 
+
+We speak in first person throughout this handbook. Writing in a suitably third person, passive, or imperative voice didn't come naturally.
 
 <a id="tools"></a>
 # Tools
@@ -78,18 +80,15 @@ I speak in first person throughout this handbook. Writing in third person, passi
 
 An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL. 
 
-Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, validating EML. Lots more on this later on.
+Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, and validating EML. Lots more on this later on.
 
+### Software and tools
 
-### Actual software and tools
-
-Note that while many of the below tools are enterprise products (or have a paying option), we strive to keep our IM system free and sustainable. With the increasing abundance of open-source and free tools, we hope to be able to do so for a long time.
+Note that while many of the tools listed below are enterprise products (or have a paying option), we strive to keep our IM system free and sustainable. With the increasing abundance of open-source and free tools, we hope to be able to do so for a long time.
 
 - We use GitKraken as our Git client, and GitHub to manage, publicize, and collaborate on Git repositories. GitKraken integrates with GitHub well (you can use GH credentials in GK), and has a really neat tree visualization of changes in a repository.
 
 - We use a variety of text editors to examine and edit plain text files. Tim uses VS Studio Code and An uses Sublime Text. Big note: other IMs we know heavily use the Oxygen XML Editor to edit and validate their EML documents. Oxygen is decidedly not free, although they do give out academic licenses if their logo is displayed on one's website. We decided not to go that route, and just use a text editor to look at EML. This works fine for our automated-everything, no-manual editing philosophy.
-
-I'm sure there are others.
 
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
@@ -139,24 +138,23 @@ https://github.com/BLE-LTER/BLE-LTER-utils
 <a id="getting-access-to-things"></a>
 ## Getting access to things
 
-a.k.a. primitive personnel handover action plan
+a.k.a. rough personnel handover action plan
 
-We use many, many tools that will need logins, some needing certain privilege levels. A new person on BLE's IM team will need to make sure they have access to:
+We use many tools that will need logins, some needing certain privilege levels. A new person on BLE's IM team will need to make sure they have access to:
 
 - Stache `*`
-- UTBox (shared drived with BLE team as a whole, we also use this for  sharable file links) `+`
-- Austin Disk (more day-to-day IM working directories) `*`
-- Access to the official IM email BLE-IM@utexas.edu address `+`
-- Access to our copy of metabase `*`
+- UTBox (shared drived with BLE team as a whole, we also use this for sharable file links) `+`
+- UT-Austin Disk network storage (more day-to-day IM working directories) `*`
+- The official IM email BLE-IM@utexas.edu address `+`
+- BLE's PostgreSQL instance of LTER-core-metabase `*`
 - Netlify (static website host) `$`
 - Collaborator to the BLE-LTER Github organization
 - Editor on Zotero group library
-- EDI's three portals: production, staging, and development
+- EDI's three portals: production, staging, and development (one login for all)
 - UTLists (Sympa mailing list management software) `+`
 - Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups.
-- Subscribe to the im@lternet.edu mailing list, plus imc@lternet.edu if main IM
-- Taskade, project management app. Not a lot of usage, but something An's looked into. Notion might also be good.
-- Google Account for YouTube, etc. - beaufortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with Ken Dunton, and Christina Bonsell.
+- Subscription to the im@lternet.edu mailing list, plus imc@lternet.edu for the lead IM
+- Google Account for YouTube, etc. - beaufortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with our lead PI Ken Dunton
 
 Legend:
 
@@ -164,14 +162,14 @@ Legend:
 
 `+` UT Austin service, does not require affiliation to UT
 
-`$` Tim has the credentials
+`$` Tim only has the credentials
 
-Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials. EDI will eventually roll out 'identity mapping', i.e. allowing IM team members from sites to log on to EDI portal(s) with their own Google/Github/ORCID account. Until then, BLE has one account.
+Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials.
 
 Tim and An have their own individual accounts to metabase. However there are accounts set to do certain things (e.g. 'backup_user' has read-only access to be able to dump database contents everyday).
 
 Stache (UT service) contains the passwords to these shared accounts.
-For other things that are individual-based, a nem IM team member will need to be granted access and/or admin rights.
+For other things that are individual-based, a new IM team member will need to be granted access and appropriate privileges.
 
 #### Getting remote access 
 
@@ -181,7 +179,7 @@ How to remote access into your UT desktop, if based out of UT and working remote
 
 UT uses the Cisco AnyConnect software. This is available for all major operating systems. Simply download and follow instructions on UT's IT wiki. You will need to have set up two-factor authorization with your UT EID.
 
-2. Step 2, use a remote desktop protocol. This is built into Windows systems, and require more software in other OS. The most success I've had on Linux is with the FreeRDP2 library. 
+2. Step 2, use a remote desktop protocol. This is built into Windows systems, and require more software in other OS. The most success An's had on Linux is with the FreeRDP2 library. 
 
 Sometimes the Remote Desktop won't connect. Restarting your own computer sometimes solves that. The work computer you're VPNing into might be off though, in which case contact the service desk for help. They might need to physically go turn the computer on. You can also do this yourself if you have access.
 
@@ -195,15 +193,15 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata. 
 
-3. Archive at EDI
+3. Archive at EDI (staging). Send staged data package to researchers for approval and make changes as requested. Archive at EDI (production).
 
-4. Let BLE the world know. BLE has a formal data notification policy below. 
+4. Let BLE and the world know. BLE has a formal data notification policy below. 
 
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
 ## Metadata database
 
-See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarily concerns usage of metabase at BLE and certain issues I've encountered.
+See https://github.com/LTER/lter-core-metabase for a first stop documentation on LTER-core-metabase as a product and a project. This section in the handbook primarily concerns usage of metabase at BLE and certain issues we've encountered.
 
 <a id="installation-and-admin"></a>
 ### Installation and admin
@@ -212,7 +210,7 @@ See https://github.com/LTER/lter-core-metabase for a first stop documentation on
 
 Very verbose -- for complete newbs to the DB admin world. Windows specific, but I think once you get an idea of how the pieces get together, operating system doesn't matter as much.
 
-Assuming a vanilla installation from executable (.exe) on Windows. Some assumptions might not apply in other scenarios (e.g. where the default data directory is). 
+Assuming a vanilla installation from executable (.exe) on Windows as downloaded from the PostgreSQL website. Some assumptions might not apply in other scenarios (e.g. where the default data directory is). 
 
 **NOTE:** A good chunk of trouble might be avoided if PostgreSQL is _not_ installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
 
@@ -223,7 +221,7 @@ Assuming a vanilla installation from executable (.exe) on Windows. Some assumpti
 ##### Server/service not running
 One day as fine as any other, you log on to your computer and open up DBeaver ready to do some ecological data management. The database refuse to connect, citing "Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections." Boom. What's happening? 
 
-This normally means the server associated with the Postgres instance aka cluster (see below) that your database lives on is not running. In my experience, the default cluster is normally set to auto-start its server at system startup; this is not true for other clusters.
+This normally means the server associated with the Postgres instance, a.k.a cluster (see below), that your database lives on, is not running. In my experience, the default cluster is normally set to auto-start its server at system startup; this is not true for other clusters.
 
 How to start a Postgres server:
 
@@ -234,8 +232,6 @@ What if this doesn't work:
 Does it say permission denied anywhere in the cmd log? Is your data directory in Program Files? It's time to change it. 
 
 Follow these directions since it is fairly comprehensive (while everything else here is bits and pieces from stackoverflow): [see here.](https://radumas.info/blog/tutorial/2016/08/08/Migrating-PostgreSQL-Data-Directory-Windows.html)
-
-Do all of the clusters fail to start? 
 
 <a id="how-to-set-up-remote-connection-to-locally-hosted-postgres-database-on-windows"></a>
 #### How to set up remote connection to locally hosted Postgres database on Windows
@@ -257,7 +253,7 @@ When you install Postgres on Windows, the default cluster is located in C:\Progr
 
 You might want to either change the default cluster directory, or create a new cluster in a different directory (via the command line , for these reasons:
 
-- You might not have write access in C:\Program Files. This is the case with me.
+- You might not have write access in C:\Program Files. This was the case with me.
 - You might want to host it somewhere, of course. I briefly looked into hosting a cluster on the UT-Austin network file server, but decided against this route because (1) this seems to be a BAD IDEA(tm) reliability-wise in the DB admin world, and (2) it is unclear to me what the host to the cluster would then be. 
 
 Proceed only once you know where the cluster in which your database resides is, and what is the port the cluster uses.
@@ -299,7 +295,7 @@ Password: <your password>
 <a id="our-metabase-implementation"></a>
 ### Our metabase implementation
 
-We're using a Postgres instance on An's machine (IP address 10.157.18.129, computer number for UT-IT purposes CRWR-D08182).
+We're using a Postgres instance on An's machine (IP address 10.157.18.129, computer number for IT purposes CRWR-D08182).
 
 To connect:
 Host: 10.157.18.129
@@ -319,15 +315,15 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 1. LOGIN ROLES (i.e. users):
 
 - can login: you have to use a login role's credentials to initially connect to a database. Login roles need to be created with passwords.
-- are associated conceptually with ACTUAL PEOPLE or TASKS to be performed on the database.
+- are associated conceptually with either ACTUAL PEOPLE, or TASKS to be performed on the database.
 - to be able to perform said tasks, login roles _inherit_ permissions from the groups they are a member of.
-- if other people joins the team, or webapps that use the database are developed, a new login role should be created for their use, with membership to the appropriate groups.
+- if other people join the team, or web apps that use the database are developed, a new login role should be created for their use, with membership to the appropriate groups.
 
 2. GROUP ROLES:
 
 - cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole. 
 - are associated conceptually with PERMISSIONS on the database. Permissions to the database are granted on a group basis for easy management.
-- there are three groups corresponding with three broad levels of permissions. I do not foresee needing another group role.
+- there are three established groups, corresponding with three broad levels of permissions. I do not foresee needing another group role.
   - `ble_group_readonly` has CONNECT, USAGE, and SELECT
   - `ble_group_readwrite` has all of the above, plus INSERT and UPDATE
   - `ble_group_owner` has all of the above, plus (1) ability to GRANT membership in group roles
@@ -348,7 +344,7 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
 
-**NOTE**: postgres is the superuser on the entire cluster on An's machine. Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since ownership for superusers are hard to take away.
+**NOTE**: postgres is the superuser on the entire cluster on An's machine (or more generally, the default superuser on most clusters). Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since it's generally exceedingly difficult to remove ownership for superusers.
 
 #### User privileges needed to connect to and edit the database
 
@@ -383,7 +379,7 @@ GRANT USAGE ON SCHEMA lter_metabase TO backup_user;
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA pkg_mgmt GRANT ALL ON TABLES TO ble_group_owner;
 ```
 
-Also, executing this SQL snippet would perform all necessary tasks from scratch on a new PG cluster empty of roles. This creates both login-enabled users and groups, and assigns users to appropriate groups. 
+Also, executing this SQL snippet would perform all BLE role-related tasks from scratch on a new PG cluster empty of roles. This creates both login-enabled users and groups, grant rights to groups, and assigns users to appropriate groups. 
 
 Remember to (1) change passwords, and (2) swap out roles "an" and "tim" with appropriate usernames for real users if applicable. 
 
@@ -433,9 +429,13 @@ GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 <a id="add-ons-to-vanilla-metabase-that-are-specific-to-ble"></a>
 #### Add-ons to vanilla metabase that are specific to BLE
 
-1. Addition of two year columns to DataSetPersonnel
+1. Addition of two "year" columns to DataSetPersonnel
 
-After deciding to eschew listing people as creators in core program datasets, we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their years associated with a dataset, while still listing the same list, only sans year, as associated parties in EML. This practice now requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase, since the "vanilla" version of the schema archived at https://github.com/LTER/lter-core-metabase. Here we archive the SQL code we used, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL and also reproduced below.
+After deciding to eschew listing people as creators in BLE Core Program datasets (see section on Core Program), we settled on a solution to include a separate data table (a separate data entity in EML terms) listing personnel and their year(s) associated with a dataset. We also list the same list of people as associated parties in EML, sans year(s) as EML does not have a suitable field. 
+
+This practice requires a few modifications to our instance of LTER-core-metabase. Normally we refrain from deviating from the vanilla version of LTER-core-metabase archived at https://github.com/LTER/lter-core-metabase We archive the SQL code we used for this modification, in case we ever need to restart our metabase from an install of the vanilla. The file `add_yearspan_to_DSpersonnel.sql` contains the SQL and also reproduced below.
+
+The pkg_mgmt.personnel_years_associated view is queried by the function `bleutils::export_personnel` to export a CSV for use in data packages. 
 
 ```sql
 -- add two columns to DS personnel
@@ -497,7 +497,7 @@ Reminders for a smooth backup experience: disconnect from the database (in DBeav
 
 Having these backups mean that we're not at all tethered to any particular instance of a database, or the PG server on my computer (despite devoting so many words to its setup). It can implode tomorrow and all I've lost is the time it takes to set up a new one, plus some random test databases.
 
-The backups folder can be a bit cluttered, since there are hundreds of backups, soon to be thousands. We also sometimes go weeks without change to the underlying metabase, so there will be many duplicates in content. I've contemplated writing a little script to delete these duplicates once in a while. However, the duplicates in content are not actually true duplicates from a computer's perspective, since the pg_dump utility includes the date and time in the text, so it's a little harder to tease this out.
+The backups folder can be a bit cluttered, since there are hundreds of backups, soon to be thousands. We also sometimes go weeks without change to the underlying metabase, so there will be many duplicates in content. I've contemplated writing a little script to delete these duplicates once in a while. However, the duplicates in content are not actually true duplicates from a computer's perspective, since the pg_dump utility includes the date and time in the text body, not just the file names, so it's a little harder to tease this out.
 
 ##### Restore
 
@@ -557,7 +557,7 @@ GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 
 Remember to log in with a user in group ble_group_owner when changing the schema. This simplifies permission issues downstream, such as when granting default privileges for new tables to other users.
 
-Keep an eye on the LTER-core-metabase Github repository. "Watching" the repo will trigger email updates. An currently develops for this project, so by default keeps up with new patches and in fact wrote a lot of them. The "migration" branch will contain the latest sequentially numbered patches, see documentation on that repo for information on this system. Check the table `pkg_mgmt.version_tracker_metabase` for information on past applied patches. Note that occasionally new "one big file/OBF" or essentially a schema dump with all patches incorporated. If BLE instance of metabase has fallen too far behind, instead of applying a whole lot of patches, you might want to consider setting up a new instance from the latest OBF, dump out data from the old metabase, and insert into the new. 
+Keep an eye on the LTER-core-metabase Github repository. "Watching" the repo will trigger email updates. An currently maintains this project, so by default keeps up with new patches and in fact wrote a lot of them. The "migration" branch will contain the latest sequentially numbered patches, see documentation on that repo for information on this system. Check the table `pkg_mgmt.version_tracker_metabase` for information on past applied patches. Note that occasionally new "one big file/OBF" or essentially a schema dump with all patches incorporated. If BLE instance of metabase has fallen too far behind, instead of applying a whole lot of patches, you might want to consider setting up a new instance from the latest OBF, dump out data from the old metabase, and insert into the new. 
 
 Once you've determined that a patch needs to be applied:
 
@@ -570,20 +570,26 @@ Once you've determined that a patch needs to be applied:
 <a id="metadata-template"></a>
 ## Metadata template
 
-We use a metadata template to collect information about datasets from scientists. It resides at, well, several places. 
+We use a metadata template to collect information about datasets from scientists. This is structured similarly to metabase, while maximizing legibility and user friendliness for researchers. 
 
-On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version.
+It consists of: 
+- a metadata template (.xlsx file)
+- four pages of instructions (PDF)
+- abstract and methods templates (.docx files)
+- example package, which is a .zip of data files and accompanying, filled-out metadata templates
+
+On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip. 
 
 Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
 <a id="how-to-update-template"></a>
 ### How to update template
-This is a copy of the README on the git repo with a tiny bit more.
+This is a copy of the README on the git repo.
 
 #### Template Excel
 
 1. Open file `metadata_template.xlsx`
-2. Make changes. Make changes to sample package if applicable. Make changes to instructions if applicable.
+2. Make changes. Make changes to example package if applicable. Make changes to instructions if applicable.
 3. Save file(s)
 4. See common steps.
 
@@ -674,9 +680,9 @@ netcdf.R for an example R routine.
 
 - Mike's dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
 
-#### Metadata 
+#### netCDF metadata 
 
-##### in netCDF
+##### in the netCDF file
 
 We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML. 
 
@@ -705,13 +711,13 @@ Document the netCDF as otherEntity. Metabase already has netCDF as a file type t
 <a id="enter-metadata-into-metabase"></a>
 ### Enter metadata into metabase
 
-Once a metadata template is received from the data correspondent (can be PIs, can be Christina/Nathan, can be someone else) and is reasonably filled out, I start the process of transfering the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
+Once a metadata template is received from the data correspondent (can be PIs, can be Core Program manager Nathan, can be someone else) and is reasonably filled out, I start the process of transferring the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
 
 I populate metabase for a new dataset in this order:
 
 1. Tables that do not reference other tables via FKs 
 - DataSet. Edit title and abstract as needed during.
-- DataSetMethod. Enter methods in docbook format, edit for tense and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
+- DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
 - DataSetTemporal
 
 Common pitfalls:
@@ -744,7 +750,7 @@ Common pitfalls:
 
 #### Misc quirks
 
-- If somebody doesn't have an ORCID, theree still MUST be an entry for them in ListPeopleID. Just leave IdentificationURL as NULL (allowable by metabase schema). If there's no entry for them, the resulting personnel table exported from metabase will not have that person (the associatedParty tree still includes them).
+- If somebody doesn't have an ORCID, there still MUST be an entry for them in ListPeopleID. Just leave the column IdentificationURL as NULL (allowable in metabase schema). If there's no entry for them, the resulting personnel table exported from metabase will not have that person (the associatedParty tree still includes them).
 
 <a id="exporting-eml"></a>
 ### Exporting EML
@@ -767,7 +773,7 @@ The resulting EML would be deposited into the same directory as the script.
 
 Make sure to do these tasks if a dataset needs to be revised:
 
-- Increment the Revision number in metabase's DataSet table. Note that this number is always the *production* revision number. The *staging* revision number can get much higher. I manually edit the XML files when uploading to the staging server.
+- Increment the Revision number in metabase's DataSet table. Note that this number is always the current *production* revision number. The *staging* revision number can get much higher. I manually edit revision numbers in EML when uploading to the staging server.
 - Add a note in metabase's pkg_mgmt.maintenance_changehistory table. 
 
 <a href="#header">Back to top</a>
@@ -967,47 +973,47 @@ We roughly categorize three types of datasets, according to the degree and kind 
 
 2. "PI-driven" datasets. These arise from the research interests of individual PIs, and are primarily funded by BLE.
 
-3. "PI-driven" datasets that are not primarily funded by BLE. 
+3. "PI-driven" datasets that are not primarily funded by BLE. These get handled and archived by us on an individual basis after approval by the lead PI(s).
 
 <a id="all-datasets"></a>
 ### All datasets
 
 #### Units are abbreviated and appended to column names
 
-Per Yvette's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
+Per PI Yvette Spitz's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
 
-- publish a short user's guide to accessing metadata, under our data catalog
-- adopt a practice of appending units to column names, e.g. "temp_C".
+- publish a short user's guide to accessing metadata, accessible from our website data catalog and at https://utexas.box.com/v/ble-access-metadata
+- adopt a practice of appending abbreviated units to column names, e.g. "temp_C" or "DOC_g_L"
 
 ##### Here's how this is implemented during our normal workflow
 
-1. Attribute names are entered into metabase as usual. I.e. DataSetAttributes.ColumnName for above example would read "temp."
+1. Attribute names are entered into metabase as usual. I.e. the column DataSetAttributes.ColumnName for above example would read "temp."
 2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
-3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); once we use new units they need to be adjusted as we go. Use query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
-4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviation, use them, e.g. "partPerMillion" is ppm. 
-5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` append the abbreviation to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
-	- If `append_units` is not called, metadata produced will not have units in column names
+3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); as we make use of new units their abbreviations need to be entered as well. Use the SQL query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
+4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviations, use them, e.g. "partPerMillion" is ppm. 
+5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` appends the unit abbreviation on file to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
+	- If `append_units` is not called, EML metadata produced will not have units in column names
 	- After, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
 6. proceed as usual with EML generation.
 
 ##### Why we do it this way:
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
-- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop. 
-- Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control is not possible atm.
+- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop, without having to go in and edit all the attributes using that unit. 
+- Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control, e.g. leaving units off of specific columns, is not possible to do in R at the moment.
 
-##### Updating the EMLUnitDictionary
+##### Updating the EMLUnitDictionary table
 
 Updates to the EMLUnitDictionary might be necessary with new versions of EML. Our plan is to perform a full/outer join on the existing EMLUniDictionary keeping all rows, so that (1) our custom edited abbreviations survive the mode, (2) metabase continues to support older and custom units.
 
 <a id="core-program"></a>
-### Core Program
+### Core Program data
 
-Core Program datasets refer to those datasets produced by the Core Program, a common thread in our research and field sampling to obtain foundational data about the lagoons. These datasets fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
+Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
 
 There are two documents on Box with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands. 
 
-This handbook version is a much more exhaustive version. 
+This handbook version is a much more exhaustive version for IMs. 
 
 #### Types of CP data 
 
@@ -1016,7 +1022,7 @@ According to the source:
 - data from sediment samples
 - data from moorings/instruments
 
-The first two are discrete and obtained during our annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which one the dataset you're working with falls under. 
+The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is. 
 
 #### Dataset titles 
 
@@ -1132,7 +1138,7 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 <a id="stations"></a>
 #### Stations
 
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, I make it a practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
 Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
 
@@ -1192,7 +1198,7 @@ Somewhat exhaustive list of website technologies we use:
 - Netlify for hosting and deployment
 	- Algolia X Netlify for search
 - A Github repo as both production and development source code at https://github.com/BLE-LTER/LTER-website
-- Bootstrap 4 for pre cooked CSS and Javascript
+- Bootstrap 5 for pre-cooked CSS and Javascript
 - FontAwesome for icons
 - Leaflet for maps
 - Google Fonts for webfonts (Libre Franklin)
