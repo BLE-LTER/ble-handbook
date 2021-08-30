@@ -310,7 +310,7 @@ for An's computer which opens TCP port 5432 for just the CWE general network
 
 #### Roles: Users/Groups || Permissions
 
-Postgres has a somewhat confusing (to me) permission management scheme. To minimize confusion and make it easy, I am making a hard-and-fast distinction:
+Postgres has a somewhat confusing (to me) permission management scheme. To minimize confusion and make it easy, we make a distinction:
 
 1. LOGIN ROLES (i.e. users):
 
@@ -676,9 +676,9 @@ This of course depends on the source format. We have done and attempted to do th
 - R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. In our folder for dataset 7, see merge_nc.py for an example python routine and 
 netcdf.R for an example R routine. 
 
-- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes, well, I never stuck around long enough to see if it can even execute to completion, but at least 2 hours. Yes, R is quite a bit slower than python. I still use it.
+- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes at least 2 hours. R is indeed quite a bit slower than python here. 
 
-- Mike's dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
+- Mike Rawlins' dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
 
 #### netCDF metadata 
 
@@ -756,7 +756,7 @@ Common pitfalls:
 ### Exporting EML
 Once metadata in metabase is complete, it's time to start data processing and exporting EML. One does this in R.
 
-- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RRroject has to be created manually; I haven't found a way around that. 
+- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RProject has to be created manually; I haven't found a way around that. 
 - The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments. 
 
 In short, there are these function calls to execute each time you generate a new EML:
@@ -1088,7 +1088,7 @@ Data table entity descriptions:
 
 Other entity descriptions:
 
-- State clearly what the other entity is and how it relates in the context of the package. No need for month and year, I think.
+- State clearly what the other entity is and how it relates in the context of the package.
 - Example: Annotated RMarkdown script to process, calibrate, and flag raw TCM data.
 
 File names:
@@ -1114,7 +1114,7 @@ Core Program packages only have one creator with the organization name "Beaufort
 
 > Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
-So that they are analogous to this citation from a PI-driven dataset (see comm. with Ken/Jim October/November 2019):
+So that they are analogous to this citation from a PI-driven dataset (see comm. with Ken Dunton/Jim McClelland October/November 2019):
 
 > Beaufort Lagoon Ecosystems LTER, V. Lougheed. 2019. Carbon flux from aquatic ecosystems of the Arctic Coastal Plain along the Beaufort Sea, Alaska, 2010-2018. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
@@ -1508,7 +1508,7 @@ this for potential paper and project discussions.
 
 2. [ble-lter-pi@utlists.utexas.edu](ble-lter-pi@utlists.utexas.edu)
 
-Includes all PIs and Tim, who admins the list. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is at the request of Ken and Jim so that potentially confidential messages do not circulate outside of PIs.
+Includes all PIs and Tim, who admins the list. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is at the request of Ken Dunton and Jim McClelland so that potentially confidential messages do not circulate outside of PIs.
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
@@ -1589,7 +1589,7 @@ The counter library reports download counts by data entities, and sums of all en
 
 By request from PIs in the 2020 BLE meeting, we created a BLE powerpoint template for use by all project members. There were a number of issues I didn't foresee that came up when this template was first distributed and used by many during the lead-up to our 2021 meeting. 
 
-- Fonts: older versions of PowerPoint on Mac cannot read PowerPoint files made on Windows with embedded fonts, which we did use to include the Libre Franklin family of fonts. Yvette reported that even updating PP didn't solve this issue. To circumvent this, I swapped text in Libre Franklin to Arial, which is available most everywhere. An easy way to do this (which I only found out after the fact) was to go to Replace/Replace Fonts in PP.
-- Color usage: Yvette brought up that colors used in the presentation should be tested for color-blind user friendliness. It wasn't a big issue in this particular instance, since we didn't have colors next to each other that needed to be interpreted, but we also switched out the blue and green to be darker to enable more contrast.
-- Aspect ratio: Ken brought up that some projectors are in 4:3 ratio while the template is 16:9. Tim clarified that this will only mean black bars above and below. 
+- Fonts: older versions of PowerPoint on Mac cannot read PowerPoint files made on Windows with embedded fonts, which we did use to include the Libre Franklin family of fonts. Yvette Spitz reported that even updating PP didn't solve this issue. To circumvent this, I swapped text in Libre Franklin to Arial, which is available most everywhere. An easy way to do this (which I only found out after the fact) was to go to Replace/Replace Fonts in PP.
+- Color usage: Yvette Spitz brought up that colors used in the presentation should be tested for color-blind user friendliness. It wasn't a big issue in this particular instance, since we didn't have colors next to each other that needed to be interpreted, but we also switched out the blue and green to be darker to enable more contrast.
+- Aspect ratio: Ken Dunton brought up that some projectors are in 4:3 ratio while the template is 16:9. Tim clarified that this will only mean black bars above and below. 
 
