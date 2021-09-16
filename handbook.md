@@ -932,6 +932,14 @@ redirects are OK. For example, try
 curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/kelp_microsatellite_markers_CARP_20090910_geospatial.csv
 ```
 
+<a id="fair-checkers"></a>
+### FAIR Checkers
+
+Once a dataset is archived, you can check its FAIR compliance at EDI or DataONE using links like the ones below.
+
+* https://portal.edirepository.org/nis/reportviewer?packageid=knb-lter-ble.18.2
+* https://search.dataone.org/quality/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fknb-lter-ble%2F18%2F2
+
 <a id="our-websites-data-catalog"></a>
 ### Our website's data catalog
 
