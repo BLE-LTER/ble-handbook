@@ -633,16 +633,18 @@ We use a certain directory structure for working with data packages.
 
 Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Projects\BLE-LTER` we have a Data directory. Each data package constitutes a child directory under Data. All operations with this data package are performed within this folder. Naming convention is `(dataset ID)_(dataset nickname)`, e.g. "12_sediment_pigment".
 
-Within each data package directory:
--  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions recived from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
+**Within each data package directory:**
+-  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions received from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
 - "Clean" contains 
-	- data files after processing and ready to submit. When I go to upload to EDI, this is where I'd browse to.
-	- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live.
-	- In some earlier datasets, "EML_generation" can be level with "Clean" and/or can contain final data files. 
-
+	- data files after processing and ready to submit. When I go to upload to EDI, this is where I'd browse to get the data.
+- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live. EML documents e.g. "EML_13_20211022.xml" live here too, where 13 is the dataset ID and 20211022 is the date it was generated from one of the scripts. 
+	- This used to not have any sub directory structure. However, in 2021/2022, when I started to work on data from 2021 trips, essentially the second round of data processing, I started to see how the large amounts of files in this directory would overwhelm later, especially the endless .xml files generated in the course of generating and revising metadata. I decided to move files working on 2019 (and 2018) data into a "2019" folder, and files working on 2021 data into "2021" and so on. Note that some of the files within 2021 may be dated 2022, but the overall directory is named after 2021 the newest DATA YEAR to avoid confusion later. 
+- In 2022 I wrote a README.txt similar to this section and started including them in the top level path of each data directory to explain how to navigate them. When you run `bleutils::init_datapkg()` this README.txt gets auto-written. To edit the master template for these READMEs, go to the `inst` directory within the bleutils source folder and edit readme.txt there. 
 
 <a id="how-to-initiate-a-new-data-package"></a>
 ### How to initiate a new data package
+
+What I do:
 
 Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in any R console. This will (1) create a folder named datasetid_nickname under our Austin disk Data folder, with sub-folders called FromPI and Clean > EML_generation, and (2) create a R script named datasetid.R from template with the appropriate IDs subbed into function calls. The parent folder defaults to "K:/Data" on my machine. Modify the `base_path` argument in `init_datapkg()` if needed.
 
@@ -652,14 +654,22 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 - Create a new R project under EML_generation/EML_RRproject_(datasetID) for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far. Instead, one has to open RStudio, select File/New Project/Associate project with existing directory, then navigate to the correct folder to initiate a new project.
 
+### How to initiate an update to an existing package
+
+What I do:
+
+Run `bleutils::init_script()` in any R console and specify that `type = "update`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+
+Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*MMYYYY*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
+
 <a id="data-processing-1"></a>
-### Data processing
+### Actual data-data processing
 
 All data processing should be performed in scripts for transparency and reproducibility, and also for our convenience: PIs often re-send data, and all changes by us made manually in Excel will be lost. I use R and therefore a lot of our workflows and helper functions are centered around R, but there's no reason another scripting language would not work. 
 
-The R script created by `init_datapkg()` has pre laid-out sections (but no code, can't template processing code) for light data processing. For tasks beyond renaming columns or fixing small typos, I would create a new script.
+The R script created by `init_datapkg()` or `init_script()` has pre laid-out sections (but no code, can't template processing code) for light data processing. For tasks beyond renaming columns or fixing small typos, I would create a new script.
 
-Data are read in from the FromPI directory, and written out to Clean (which ideally is parent to the R script). This ensures reproducibility and transparency of processing steps taken.
+Data are read in from the FromPI directory, and written out to the `Clean` directory. This helps reproducibility and transparency of processing steps taken.
 
 #### netCDF
 
@@ -1148,7 +1158,7 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 
 Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
-Use the function `add_cp_cols` from the R package `bleutils` to do this quickly on a R data.frame, assuming that it contains a column containing station codes.
+I maintain a master reference sheet of stations on Box and their information, and which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
 
 Example usage: 
 
@@ -1156,6 +1166,22 @@ Example usage:
 # df is a R data.frame with "station" column containing station codes
 df <- bleutils::add_cp_cols(df, "station")
 ```
+
+**Sync the `bleutils` version of station information with the master sheet**
+
+As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. However, this needs to be synced to the internal version that the package has access to. 
+
+After editing the Excel file on Box, I then run `bleutils::update_cp_stations()` on the R console while in sort of "dev mode" for bleutils. This goes to the local version of the Box file, checks for any differences between the Box and the `bleutils` versions, and then updates the `bleutils` version if needed. Change the `source_file` parameter to point to the Excel sheet on your machine if needed. The `sheet` parameter refers to the relevant Excel sheet, and is default set to "lookup". 
+
+After this step, 
+- 1. run `devtools::document()` for good measure, 
+- 2. then Git commit the change to Github, 
+- 3. then run `remotes::install_github("BLE-LTER/bleutils")` again on your local installation of R to install the package again, 
+
+and if you need to use the functions right away:
+- 4. then restart your R session,
+- 5. then load the package again using `library(bleutils)`
+- 6. you can now use the functions with the updated station information
 
 #### Misc
 
