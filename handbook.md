@@ -197,6 +197,10 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 4. Let BLE and the world know. BLE has a formal data notification policy below. 
 
+Also refer to a flowchart we included in the 2021 midterm report to NSF. It provides a high level overview of the steps and was created for an outside audience.
+
+![The flowchart provides high level overview of BLE LTER IM data life cycle](BLE_IM_flowchart.png "BLE LTER IM flowchart")
+
 <a href="#header">Back to top</a>
 <a id="metadata-database"></a>
 ## Metadata database
