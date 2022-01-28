@@ -1474,6 +1474,7 @@ Once the metadata is harvested, make sure to:
 - add the item to appropriate sub-collection under the LTER-BLE group library:
 	- "For-Website" if item is to appear on publication page. These are primarily peer-reviewed journal articles but can include papers in conference proceeding as long as they are published in an edited volume.  What we are trying to avoid is listing a bunch of conference abstracts.
 	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
+	- "Related Data" if item is a related dataset
 - add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
 	- LTER-Funded for work funded by BLE
 	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
@@ -1484,6 +1485,10 @@ Once the metadata is harvested, make sure to:
 - skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
 - if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
+
+### Using Zotero for datasets
+
+... is very similar to using Zotero for publications. The recommended item type for now is "document" and DOI needs to be inserted into the Extra field like so "DOI: 10.xxxxxxx".
 
 <a id="misc-notes"></a>
 ## Misc notes
