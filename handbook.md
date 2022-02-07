@@ -1457,7 +1457,7 @@ These are steps we need to do.
 
 - Double check to make sure the IDs and API key are correct and refer to the appropriate Netlify page. There are two API keys Algolia will give you, the searchAPI is ok to put in public code, and the other is super not ok. Make sure it's not the latter in the snippet. If you copy from the site that risk is minimal. 
 
-- Double check that the "branch" param in the snippet says the correct branch(es). Yes, the branches need to be specified in both the `netlify.toml` file and here.
+- Double check that the "branch" param in the snippet says the correct branch. Yes, the branches need to be specified in both the `netlify.toml` file and here and they need to match.
 
 - Edit the selector if needed.
 
@@ -1496,7 +1496,38 @@ There are two minor modifications in CSS I made; otherwise we lifted their front
 - position for the class ".aa-Panel" was set to fixed, so that the search results panel does not disappear once we scroll down the page. 
 - both needed the !important declaration to override Algolia's styling.
 
+#### Troubleshooting
 
+I've had some experience troubleshooting Algolia issues. Here is my experience. 
+
+Algolia seems to be a fairly powerful and popular search solution; consequently their documentation is extensive and detailed. However, much of it is above our tiny use-case of using the Netlify integration. There are lots of terms and features that will not apply to us. Some careful reading and interpretation is needed to navigate the docs. 
+
+Some terms they use, to start with:
+
+- An application
+- An index
+- A record
+- Searchable attributes:
+- Algolia Crawler
+
+You will need access to the Algolia application to examine any of these on the web manager interface (not on Netlify or anything on our end). Access is thankfully separate from Netlify access, since Netlify doesn't allow more than one user per free tier plan.
+
+1. Certain sections of the website is not showing up when search for
+
+This was brought to the surface by Tim noticing that searching that "code of conduct" does not yield any results. The issue was that "code of conduct" the string only appeared inside anchor and button tags (i.e. it was a link to a PDF document). Algolia did not ingest this text into their record, and therefore it was not a searchable term. Word doesn't appear anywhere -> searching for it won't work!
+
+I did a lot of messing around with records in Algolia, but there didn't seem to be a way for it to index text inside of anchor tags. So, I remedied this problem by:
+
+- strategically include the phrase in paragraph text. e.g. instead of "BLE follows these policies" say "BLE follows this code of conduct"
+- adding an invisible paragraph tag to the relevant section and setting it to not display (use class "d-none" in Bootstrap 5 and up, or display: none in plain CSS)
+
+2. The search results don't seem to update when I update the website
+
+In general, pushing a master Git commit to the website and therefore triggering a deploy from Netlify should also trigger the Algolia crawler, which updates the index, which then changes the search experience. However, at some point I suddenly had trouble where the search didn't seem to update at all. 
+
+The issue turned out to be that Algolia at some point had created two indices, and the search box was pointing to the one that's not updated by the crawler. 
+
+The fix was going back and making sure the "branch" setting in the `<script>` tag and the `netlify.toml` file match and also both say "master".
 
 
 <a href="#header">Back to top</a>
