@@ -15,31 +15,68 @@ date: 2021-08-29
 	- [Preamble](#preamble)
 - [Tools](#tools)
 	- [Tools we use](#tools-we-use)
+		- [Languages](#languages)
+		- [Software and tools](#software-and-tools)
 	- [Tools we develop and maintain](#tools-we-develop-and-maintain)
+		- [Javascript apps](#javascript-apps)
+		- [R packages](#r-packages)
 	- [Getting access to things](#getting-access-to-things)
 - [All about data and metadata](#all-about-data-and-metadata)
 	- [High level step-by-step](#high-level-step-by-step)
 	- [Metadata database](#metadata-database)
+		- [Installation and admin](#installation-and-admin)
+		- [Our metabase implementation](#our-metabase-implementation)
+		- [Regular tasks](#regular-tasks)
 	- [Metadata template](#metadata-template)
+		- [How to update template](#how-to-update-template)
 	- [Data processing](#data-processing)
+		- [Data directory structure](#data-directory-structure)
+		- [How to initiate a new data package](#how-to-initiate-a-new-data-package)
+		- [How to initiate an update to an existing package](#how-to-initiate-an-update-to-an-existing-package)
+		- [Actual data-data processing](#actual-data-data-processing)
 	- [Metadata processing and EML](#metadata-processing-and-eml)
+		- [Enter metadata into metabase](#enter-metadata-into-metabase)
+		- [Exporting EML](#exporting-eml)
+		- [Revisions](#revisions)
 	- [Data archiving](#data-archiving)
+		- [Where we archive](#where-we-archive)
+		- [Who does the archiving](#who-does-the-archiving)
+		- [How we archive at EDI](#how-we-archive-at-edi)
+		- [FAIR Checkers](#fair-checkers)
+		- [Our website's data catalog](#our-websites-data-catalog)
+		- [Data notification policy](#data-notification-policy)
 	- [BLE specific data/metadata style rules](#ble-specific-datametadata-style-rules)
+		- [Types of datasets by BLE involvement](#types-of-datasets-by-ble-involvement)
+		- [All datasets](#all-datasets)
+		- [Core Program data](#core-program-data)
+		- [PI-driven datasets](#pi-driven-datasets)
 - [Website](#website)
 	- [Our website technologies](#our-website-technologies)
 	- [How to update website](#how-to-update-website)
+		- [Minor content updates](#minor-content-updates)
+		- [Less minor updates](#less-minor-updates)
 	- [Branding](#branding)
+		- [Logo color reference](#logo-color-reference)
+		- [North Slope coastline motif](#north-slope-coastline-motif)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
 	- [Algolia](#algolia)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
+		- [How to add a new item](#how-to-add-a-new-item)
+		- [Using Zotero for datasets](#using-zotero-for-datasets)
 	- [Misc notes](#misc-notes)
+		- [Linking data and pubs](#linking-data-and-pubs)
 - [Personnel management](#personnel-management)
 	- [Add/update personnel contact information](#addupdate-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
+		- [List maintenance](#list-maintenance)
+		- [List config](#list-config)
 - [Reporting](#reporting)
 	- [Obtaining metrics](#obtaining-metrics)
+		- [Data citations](#data-citations)
+		- [Data downloads](#data-downloads)
 	- [Presentations](#presentations)
+		- [BLE powerpoint template](#ble-powerpoint-template)
 
 <!-- /MarkdownTOC -->
 
@@ -76,12 +113,14 @@ We speak in first person throughout this handbook. Writing in a suitably third p
 <a id="tools-we-use"></a>
 ## Tools we use
 
+<a id="languages"></a>
 ### Languages
 
 An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL. 
 
 Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, and validating EML. Lots more on this later on.
 
+<a id="software-and-tools"></a>
 ### Software and tools
 
 Note that while many of the tools listed below are enterprise products (or have a paying option), we strive to keep our IM system free and sustainable. With the increasing abundance of open-source and free tools, we hope to be able to do so for a long time.
@@ -148,6 +187,7 @@ We use many tools that will need logins, some needing certain privilege levels. 
 - The official IM email BLE-IM@utexas.edu address `+`
 - BLE's PostgreSQL instance of LTER-core-metabase `*`
 - Netlify (static website host) `$`
+- Algolia for website search `$`
 - Collaborator to the BLE-LTER Github organization
 - Editor on Zotero group library
 - EDI's three portals: production, staging, and development (one login for all)
@@ -659,6 +699,7 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 - Create a new R project under EML_generation/EML_RRproject_(datasetID) for easy project management. I looked into how to automate this with `init_datapkg()`, no dice so far. Instead, one has to open RStudio, select File/New Project/Associate project with existing directory, then navigate to the correct folder to initiate a new project.
 
+<a id="how-to-initiate-an-update-to-an-existing-package"></a>
 ### How to initiate an update to an existing package
 
 What I do:
@@ -667,7 +708,7 @@ Run `bleutils::init_script()` in any R console and specify that `type = "update`
 
 Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*MMYYYY*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
 
-<a id="data-processing-1"></a>
+<a id="actual-data-data-processing"></a>
 ### Actual data-data processing
 
 All data processing should be performed in scripts for transparency and reproducibility, and also for our convenience: PIs often re-send data, and all changes by us made manually in Excel will be lost. I use R and therefore a lot of our workflows and helper functions are centered around R, but there's no reason another scripting language would not work. 
@@ -965,6 +1006,7 @@ To ensure that both queries will return the entire BLE data corpus -- and nothin
 - Put "Beaufort Lagoon Ecosystems LTER" in the keywords section of every single dataset. 
 - Use the 'knb-lter-ble' scope while archiving at EDI.
 
+<a id="data-notification-policy"></a>
 ### Data notification policy
 
 **Part 1: When a dataset is initially published (i.e., version 1)**
@@ -1029,7 +1071,15 @@ Per PI Yvette Spitz's request and concern over easily accessing attribute unit i
 
 Updates to the EMLUnitDictionary might be necessary with new versions of EML. Our plan is to perform a full/outer join on the existing EMLUniDictionary keeping all rows, so that (1) our custom edited abbreviations survive the mode, (2) metabase continues to support older and custom units.
 
-<a id="core-program"></a>
+#### Date time values follow a common practice
+
+Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to standardize our representation of date-times in our datasets:
+
+- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-05". 
+- Sampling teams have been asked to provide approximate times samples are collected. 
+- When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time. 
+
+<a id="core-program-data"></a>
 ### Core Program data
 
 Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
@@ -1063,7 +1113,7 @@ Column names:
 - capitalized only when denoting standard acronyms (PAR for photosynthetically active radiation) or when it's part of the variable name (pH)
 - underscores between words (date_time not date.time)
 - units appended to the end
-- date_time for mooring datasets and date_collected for discrete datasets
+- date_time (previous date_collected for discrete datasets)
 
 Standard columns, also in this order:
 
@@ -1071,8 +1121,8 @@ Standard columns, also in this order:
 - lagoon: Elson East/Elson West/Simpson/Stefansson/Jago/Kaktokvik/not applicable. River stations are assigned the lagoon they discharge into. Ocean stations are assigned "not applicable." (discrete samples only)
 - station: station codes or IDs (e.g. KALD2).
 - season: under ice/break up/open water (discrete samples only)
-- date_time: date and time in YYYY-MM-DD hh:mm:ss or YYYY-MM-DD hh:mm format. Normally applies to instrument data. Exception is when archiving raw data (see dataset ID 3, hydrography), then another date time format might be ok. Continuous/mooring data.
-- date_collected: date in YYYY-MM-DD format. Discrete data.
+- date_time: date and time in YYYY-MM-DDThh:mm:ssZZ format, where ZZ is the timezone offset. Previously only applied to instrument data but is now standard on all datasets (see All Datasets section).
+- (deprecated) date_collected: date in YYYY-MM-DD format. Discrete data.
 - water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." (discrete water samples only)
 - sample_depth (discrete water samples only)
 - [data columns, including notes]
@@ -1089,7 +1139,7 @@ Data sort, sort all CP datasets by these columns in this order before submission
 - node (discrete only)
 - lagoon (discrete only)
 - station
-- date_collected (discrete only) / date_time (mooring)
+- date_time
 - water_column_position (discrete water samples only)
 
 #### Entities 
@@ -1342,6 +1392,7 @@ Ocean dark blue (#015cab) as primary "dark" background color. Use white text aga
 
 Land dark green (#51612b) as accent "dark" background color. Use white text against it. Might also use as text color but prolly only in very big bolded heading text.
 
+<a id="north-slope-coastline-motif"></a>
 ### North Slope coastline motif
 
 <a id="miscellaneous-website-notes"></a>
@@ -1486,6 +1537,7 @@ Once the metadata is harvested, make sure to:
 - if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
+<a id="using-zotero-for-datasets"></a>
 ### Using Zotero for datasets
 
 ... is very similar to using Zotero for publications. The recommended item type for now is "document" and DOI needs to be inserted into the Extra field like so "DOI: 10.xxxxxxx".
@@ -1497,6 +1549,7 @@ The DOI field for entries should NOT start with "https://doi.org" but "10.XXXX".
 
 If you are adding a Core Program dataset as a Zotero entry (i.e. via using the Zotero browser button while on the EDI data portal), and the first author reads "Beaufort Lagoon Ecosystems LTER, Core Program" with the comma, then Zotero will read in "Core Program" as a first name. This would then lead to the exported citation possibly listing author "Beaufort Lagoon Ecosystems LTER, C. P.". To fix this, go to the entry details. Under the first author, remove "Core Program" from the first name field and paste it into the last name field. The rest of the metadata provided by EDI and extracted by Zotero is usually pretty good and needs no modifications. 
 
+<a id="linking-data-and-pubs"></a>
 ### Linking data and pubs
 
 On the journal site: PIs would normally cite data packages. Not IM's job.
@@ -1600,6 +1653,7 @@ config options of note:
 <a id="obtaining-metrics"></a>
 ## Obtaining metrics
 
+<a id="data-citations"></a>
 ### Data citations
 
 We need a detective! The mystery: How to find where our data are cited.
@@ -1614,6 +1668,7 @@ d. Or we could just manually search Google Scholar for every DOI associated with
 
 How to get every DOI associated with every revision of every BLE dataset: one of counter's two result spreadsheets will give you this, see below. 
 
+<a id="data-downloads"></a>
 ### Data downloads
 
 From discussion with EDI and other IMs, it seems data download counts are most likely inflated measures of data usage. Several factors confound these numbers: robots, repository routines (e.g. checksum checks), etc. 
@@ -1629,6 +1684,7 @@ The counter library reports download counts by data entities, and sums of all en
 <a id="presentations"></a>
 ## Presentations
 
+<a id="ble-powerpoint-template"></a>
 ### BLE powerpoint template
 
 By request from PIs in the 2020 BLE meeting, we created a BLE powerpoint template for use by all project members. There were a number of issues I didn't foresee that came up when this template was first distributed and used by many during the lead-up to our 2021 meeting. 
