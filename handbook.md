@@ -1504,11 +1504,11 @@ Algolia seems to be a fairly powerful and popular search solution; consequently 
 
 Some terms they use, to start with:
 
-- An application
-- An index
-- A record
-- Searchable attributes:
-- Algolia Crawler
+- An application: kinda sorta correspond to a site. For example, our entire BLE website is an application in Algolia. Contains indexes.
+- An index: contains all searchable content on your site. Search pointed to an index will search that index. It's possible to search multiple indexes with one search box, but we don't use that. Contains records. Can be configured.
+- A record: corresponds to a possible search result. In our case, since we use a hierarchical indexing template, a record roughly corresponds to each heading tag on a page. Contains attributes like title, content, url, description, hierarchy, etc.
+- Searchable attributes: can include or exclude attributes in records from being searchable. Setting is applied index-wide.
+- Algolia Crawler: in Algolia, one can create indices and records in many ways. Upload from a data source, manually, or using the Algolia Crawler, which crawls your website content and auto create the index and record content. We use this. 
 
 You will need access to the Algolia application to examine any of these on the web manager interface (not on Netlify or anything on our end). Access is thankfully separate from Netlify access, since Netlify doesn't allow more than one user per free tier plan.
 
