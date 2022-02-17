@@ -91,7 +91,7 @@ Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term 
 
 Information management was integral to the project from the start; our NSF proposal included a detailed section on the data types we will produce and how each of them will be treated. The information management team has been important project members ever since.
 
-Tim Whiteaker (Tim) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An) was recruited by team in November 2018 and officially started in March 2019.
+Tim Whiteaker (Tim) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An) was recruited by team in November 2018 and officially started in March 2019.  
 
 <a id="our-philosophies"></a>
 ## Our philosophies
