@@ -1077,9 +1077,10 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 
 Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to standardize our representation of date-times in our datasets:
 
-- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-05". 
-- Sampling teams have been asked to provide approximate times samples are collected. 
-- When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time. 
+- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-08".
+- Sampling teams have been asked to provide approximate times samples are collected.
+- We don't enforce a specific time zone, but times will likely be in AKDT (-08) or UTC (+00).
+- When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time.
 
 <a id="core-program-data"></a>
 ### Core Program data
@@ -1564,6 +1565,8 @@ Once the metadata is harvested, make sure to:
 	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
 	- Foundational for work we are building our work on
 	- LTER-BLE for work added to the For-Network collection
+	- LTER-IM for information management-related work
+	- LTER-EDU for education-related work
 - add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
 - edit metadata fields as needed if Zotero wasnt able to fill them out
 - skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
