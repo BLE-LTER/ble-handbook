@@ -1611,7 +1611,7 @@ Make sure to do the following:
 - Update the Box spreadsheet under Beaufort LTER/Personnel
 - Update Marty Downs if appropriate
 - Update our website display
-- Update metabase in several places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project). They might not have an entry in metabase yet.
+- Update metabase in several places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project for core personnel). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
 
 <a id="mailing-list-admin"></a>
@@ -1713,6 +1713,18 @@ Bits of wisdom:
 I've been getting data downloads from the PASTA counter library: https://github.com/PASTAplus/counter. Without custom params, the time period would be from 2013 (when PASTA started and way before BLE) to today (the date you run the program).
 
 The counter library reports download counts by data entities, and sums of all entities for a package. For reporting purposes, these are the numbers we'll use if needed. The Arctic Data Center reports that their downloads are the same as PASTA's and the same as DataONE, so there is no need to add up numbers.
+
+### FAIR scores
+FAIR is a popular suite of metadata standards. Some authorities have implemented a set of checks according to the FAIR criteria. DataONE even assigns each dataset a FAIR score, which is great for our reporting purposes:
+
+Here's how I have obtained a FAIR score for our entire corpus:
+
+- BLE graphs are generated from this trial custom portal: https://search.dataone.org/portals/5820380/Metrics. I then took the percentages for each category from the legend.
+
+- DataONE average graphs are taken from here: https://search.dataone.org/profile. We can use these percentages to compare with ours. 
+
+- See here for an example assessment report on *one* dataset, and corresponding checks in each category: https://search.dataone.org/quality/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fknb-lter-ble%2F14%2F3
+
 
 <a id="presentations"></a>
 ## Presentations
