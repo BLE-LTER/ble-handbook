@@ -1564,6 +1564,8 @@ Once the metadata is harvested, make sure to:
 	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
 	- Foundational for work we are building our work on
 	- LTER-BLE for work added to the For-Network collection
+	- LTER-IM for information management-related work
+	- LTER-EDU for education-related work
 - add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
 - edit metadata fields as needed if Zotero wasnt able to fill them out
 - skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
