@@ -1077,9 +1077,9 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 
 Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to standardize our representation of date-times in our datasets:
 
-- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-05".
+- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-08".
 - Sampling teams have been asked to provide approximate times samples are collected.
-- We don't enforce a specific time zone, but times will likely be in AKDT (-05) or UTC (+00).
+- We don't enforce a specific time zone, but times will likely be in AKDT (-08) or UTC (+00).
 - When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time.
 
 <a id="core-program-data"></a>
