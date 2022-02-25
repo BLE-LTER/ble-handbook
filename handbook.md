@@ -75,6 +75,7 @@ date: 2021-08-29
 	- [Obtaining metrics](#obtaining-metrics)
 		- [Data citations](#data-citations)
 		- [Data downloads](#data-downloads)
+		- [FAIR scores](#fair-scores)
 	- [Presentations](#presentations)
 		- [BLE powerpoint template](#ble-powerpoint-template)
 
@@ -1717,6 +1718,7 @@ I've been getting data downloads from the PASTA counter library: https://github.
 
 The counter library reports download counts by data entities, and sums of all entities for a package. For reporting purposes, these are the numbers we'll use if needed. The Arctic Data Center reports that their downloads are the same as PASTA's and the same as DataONE, so there is no need to add up numbers.
 
+<a id="fair-scores"></a>
 ### FAIR scores
 FAIR is a popular suite of metadata standards. Some authorities have implemented a set of checks according to the FAIR criteria. DataONE even assigns each dataset a FAIR score, which is great for our reporting purposes:
 
