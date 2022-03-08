@@ -1018,7 +1018,7 @@ a. Any people associated with the dataset (i.e., people who appear as authors, c
 
 b. The information manager (IM) will briefly announce the dataset to the BLE team via the ble-lter-all listserv (ble-lter-all@utlists.utexas.edu), providing the citation which includes the DOI.
 
-c. The social media manager, as notified by the IM, will announce the dataset to the public via Twitter and Facebook.
+c. The social media manager (currently the Project Manager), as notified by the IM, will announce the dataset to the public via Twitter and Facebook.
 
 **Part 2: When a dataset is revised**
 
