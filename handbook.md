@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2021-08-29
+date: 2022-04-11
 ---
 
 <a id="header"></a>
@@ -1241,6 +1241,16 @@ and if you need to use the functions right away:
 - 4. then restart your R session,
 - 5. then load the package again using `library(bleutils)`
 - 6. you can now use the functions with the updated station information
+
+
+#### Taxonomy
+In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
+- Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
+- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS)
+- We'll use WORMS but allow other authorities
+- Nathan will vet these conclusions with Danny and Susan (the quantitative benthic fauna group)
+- sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the PI's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.
+- Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
 
 #### Misc
 
