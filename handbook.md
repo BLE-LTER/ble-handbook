@@ -850,6 +850,10 @@ Because we use EDI as the sole source of our online data catalog, we still
 archive in EDI at least a summary table for externally archived datasets such as
 genomics data.
 
+If we decide to not use EDI to archive qualitative datasets from surveys/interviews, ICPSR, QDR, and Dataverse are the big three repositories in that world.
+ICPSR has a mature system for handling sensitive data over many decades via review committees.
+For more info, see [ADC's annotated list of social science data repositories](https://docs.google.com/document/d/1FHfdYZZ3pXMPSncZ5eq1i0CvVNhnMM8_lttWMfyUayQ/edit#) and [ADC's social science resources](https://arcticdata.io/social-sciences/).
+
 <a id="which-member-node-are-we"></a>
 #### Which member node are we
 
