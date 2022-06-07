@@ -1627,7 +1627,7 @@ We do not yet have a dedicated tool for central personnel management beyond:
 Make sure to do the following:
 
 - Update the Box spreadsheet under Beaufort LTER/Personnel
-- Update Marty Downs if appropriate
+- Update the LTER Network's list ([see instructions](https://lter.github.io/im-manual/site-personnel))
 - Update our website display
 - Update metabase in several places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project for core personnel). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
@@ -1650,7 +1650,7 @@ These are the lists as of June 2020:
 
 1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
 
-Includes everybody: PIs, PMs, IMs, students, postdocs, affiliates (e.g. Amanda Kelley) and other project personnel (e.g. Stephanie Jump, Brandy Cervantes). Might exclude affiliates on a
+Includes everybody: PIs, PMs, IMs, students, postdocs, REUs, RETs, affiliates (e.g. Amanda Kelley) and other project personnel (e.g. Stephanie Jump, Brandy Cervantes). Might exclude affiliates on a
 case by case basis. 2020 PI meeting in Anchorage agreed on using a listserv like
 this for potential paper and project discussions. 
 
@@ -1660,7 +1660,7 @@ Includes all PIs and Tim, who admins the list. Others can post messages to the l
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
-Includes all (and, per Ken and Jim, only) officially affiliated students. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is so that people can post e.g. papers reading group or forwarded job ads, etc.
+Includes all (and, per Ken and Jim, only) officially affiliated students including REUs. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is so that people can post e.g. papers reading group or forwarded job ads, etc.
 
 4. [ble-lter-staff@utlists.utexas.edu](ble-lter-staff@utlists.utexas.edu)
 
