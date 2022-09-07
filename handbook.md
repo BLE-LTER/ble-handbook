@@ -1219,7 +1219,7 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 <a id="stations"></a>
 #### Stations
 
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stefansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
 I maintain a master reference sheet of stations on Box and their information, and which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
 
