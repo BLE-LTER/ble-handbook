@@ -1223,7 +1223,7 @@ Core Program sampling makes use of a certain number of fixed stations. Normal pr
 
 I maintain a master reference sheet of stations on Box and their information, and which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
 
-Example usage: 
+Example usage:
 
 ```r
 # df is a R data.frame with "station" column containing station codes
@@ -1232,11 +1232,11 @@ df <- bleutils::add_cp_cols(df, "station")
 
 **Sync the `bleutils` version of station information with the master sheet**
 
-As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. However, this needs to be synced to the internal version that the package has access to. 
+As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. However, this needs to be synced to the internal version that the package has access to.
 
-After editing the Excel file on Box, I then run `bleutils::update_cp_stations()` on the R console while in sort of "dev mode" for bleutils. This goes to the local version of the Box file, checks for any differences between the Box and the `bleutils` versions, and then updates the `bleutils` version if needed. Change the `source_file` parameter to point to the Excel sheet on your machine if needed. The `sheet` parameter refers to the relevant Excel sheet, and is default set to "lookup". 
+After editing the Excel file on Box, I then run `bleutils::update_cp_stations()` on the R console while in sort of "dev mode" for bleutils. This goes to the local version of the Box file, checks for any differences between the Box and the `bleutils` versions, and then updates the `bleutils` version if needed. Change the `source_file` parameter to point to the Excel sheet on your machine if needed. The `sheet` parameter refers to the relevant Excel sheet, and is default set to "lookup".
 
-After this step, 
+After this step,
 - 1. run `devtools::document()` for good measure, 
 - 2. then Git commit the change to Github, 
 - 3. then run `remotes::install_github("BLE-LTER/bleutils")` again on your local installation of R to install the package again, 
@@ -1246,15 +1246,18 @@ and if you need to use the functions right away:
 - 5. then load the package again using `library(bleutils)`
 - 6. you can now use the functions with the updated station information
 
-
 #### Taxonomy
 In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
 - Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
-- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS)
-- We'll use WORMS but allow other authorities
-- Nathan will vet these conclusions with Danny and Susan (the quantitative benthic fauna group)
-- sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the PI's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.
+- We'll use WORMS but allow other authorities.
+- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS).
+- TaxonName will be the lowest keyed classification.  We will not include "sp." or "spp." in the TaxonName.
+- We will not accept anglicized names for taxa that have been identified, e.g., Copepod is not acceptable; must use Copepoda.
+- Some English words will be used like "ice algae", "phytoplankton", "detritus", etc., to describe end-members.
+- Researchers should remove nondescript data rows such as "unidentified" or "other".
+- sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the researcher's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.  We recommend indicating the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
 - Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
+- We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
 
 #### Misc
 
