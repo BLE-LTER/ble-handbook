@@ -1585,9 +1585,11 @@ Once the metadata is harvested, make sure to:
 	- LTER-BLE for work added to the For-Network collection
 	- LTER-IM for information management-related work
 	- LTER-EDU for education-related work
-- add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
-- edit metadata fields as needed if Zotero wasnt able to fill them out
+- look for and edit any weirdness such as incorrect first author
 - skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
+- Add data URLs if applicable to "Extra" field. URL **must** begin with "https://doi.org/". Each URL must appear on its own line.
+- if you added data URLs, find the data package in EDI, scroll to the bottom, and add the journal citation
+- edit metadata fields as needed if Zotero wasnt able to fill them out
 - if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
