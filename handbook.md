@@ -1003,6 +1003,8 @@ Once a dataset is archived, you can check its FAIR compliance at EDI or DataONE 
 * https://portal.edirepository.org/nis/reportviewer?packageid=knb-lter-ble.18.2
 * https://search.dataone.org/quality/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fknb-lter-ble%2F18%2F2
 
+You can also create your own reports following [EDI's guide to evaluate metadata content against FAIR criteria](https://ediorg.github.io/eml_content_analyses/EML_FAIR.html).
+
 <a id="our-websites-data-catalog"></a>
 ### Our website's data catalog
 
