@@ -612,25 +612,28 @@ Once you've determined that a patch needs to be applied:
 - either:
 	- download the .sql patch, make changes, make sure the BLE metabase is the active DB in DBeaver (right click > make active), then right click > execute script.
 	- copy the raw SQL code into a new SQL editor window in DBeaver, make changes, then execute line by line or Ctrl+A > Ctrl+Enter to execute the whole thing.
- 
+
 <a href="#header">Back to top</a>
 <a id="metadata-template"></a>
 ## Metadata template
 
-We use a metadata template to collect information about datasets from scientists. This is structured similarly to metabase, while maximizing legibility and user friendliness for researchers. 
+We use a metadata template to collect information about datasets from scientists. This is structured similarly to metabase, while maximizing legibility and user friendliness for researchers.
 
-It consists of: 
+It consists of:
+
 - a metadata template (.xlsx file)
 - four pages of instructions (PDF)
 - abstract and methods templates (.docx files)
 - example package, which is a .zip of data files and accompanying, filled-out metadata templates
 
-On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip. 
+On Box, we publish publish a zip at a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip.
 
 Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
 <a id="how-to-update-template"></a>
+
 ### How to update template
+
 This is a copy of the README on the git repo.
 
 #### Template Excel
@@ -648,13 +651,14 @@ This is a copy of the README on the git repo.
 4. Navigate to the current directory containing template and source Markdown. 
 5. Execute these commands in Windows Command Prompt. pandoc needs to be installed and visible on your system (e.g. in the system PATH). In my case, pandoc comes bundled with RMarkdown/RStudio and RStudio kindly adds it to the PATH environment variable for me.  
 
-```
+```console
 >K:
 
 >cd "K:\Data-Notes\BLE-Practices\metadata_templates\canon"
 
 >pandoc data_submission_instructions.md --pdf-engine=xelatex -o data_submission_instructions.pdf
 ```
+
 6. Check result PDF to make sure your edits appear.
 7. See common steps.
 
@@ -1056,7 +1060,7 @@ We roughly categorize three types of datasets, according to the degree and kind 
 
 Per PI Yvette Spitz's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
 
-- publish a short user's guide to accessing metadata, accessible from our website data catalog and at https://utexas.box.com/v/ble-access-metadata
+- publish on Box (Beaufort LTER > Website > FileLinks) a short user's guide to accessing metadata, accessible from our website data catalog and at https://utexas.box.com/v/ble-access-metadata
 - adopt a practice of appending abbreviated units to column names, e.g. "temp_C" or "DOC_g_L"
 
 ##### Here's how this is implemented during our normal workflow
@@ -1092,22 +1096,23 @@ Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to
 <a id="core-program-data"></a>
 ### Core Program data
 
-Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
+Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error.
 
-There are two documents on Box with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands. 
+There are two documents on Box (Beaufort LTER > Core Program > Data notes) with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands.
 
-This handbook version is a much more exhaustive version for IMs. 
+This handbook version is a much more exhaustive version for IMs.
 
-#### Types of CP data 
+#### Types of CP data
 
-According to the source: 
+According to the source:
+
 - data from water samples
 - data from sediment samples
 - data from moorings/instruments
 
 The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is. 
 
-#### Dataset titles 
+#### Dataset titles
 
 - Mention time series if data is continuous from moorings
 - Mention water/sediment if sample type is such
@@ -1115,7 +1120,7 @@ The first two are discrete and obtained during our three annual field campaigns,
 - E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
 
 <a id="data-columns"></a>
-#### Data columns 
+#### Data columns
 
 Column names:
 
@@ -1223,7 +1228,7 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 
 Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stefansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
-I maintain a master reference sheet of stations on Box and their information, and which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
+I maintain a master reference sheet of stations and their information on Box (Beaufort LTER > Core Program > BLE_LTER_CP_Stations.xlsx), which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
 
 Example usage:
 
