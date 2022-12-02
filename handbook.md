@@ -132,7 +132,7 @@ Note that while many of the tools listed below are enterprise products (or have 
 
 - We use a variety of text editors to examine and edit plain text files. Tim uses VS Studio Code and An uses Sublime Text. Big note: other IMs we know heavily use the Oxygen XML Editor to edit and validate their EML documents. Oxygen is decidedly not free, although they do give out academic licenses if their logo is displayed on one's website. We decided not to go that route, and just use a text editor to look at EML. This works fine for our automated-everything, no-manual editing philosophy.
 
-- BLE uses UT's subscription to Box for file sharing. There's a [folder for all of BLE](https://utexas.app.box.com/folder/7974766549), and a [folder for just information managers](https://utexas.app.box.com/folder/42467776128) which is currently just used for website links, although IMs use some stuff in the all-of-BLE folder as well.
+- BLE uses UT's subscription to Box for file sharing. There's a [folder for all of BLE](https://utexas.app.box.com/folder/7974766549), and a [folder for just information managers](https://utexas.app.box.com/folder/42467776128) which is currently just used for website links, although IMs use some stuff in the all-of-BLE folder as well. Note that Box is not truly backed up. You may find deleted files in Trash, but if someone moves a file or folder out, you may never get it back. The best you can do is ask [ITS](mailto:ut@service-now.com) to run a report on the containing folder to see activity and find out who moved the file.
 
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
