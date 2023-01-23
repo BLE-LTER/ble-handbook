@@ -1583,23 +1583,23 @@ Easiest way is to use the Zotero connector, a browser add-on for Chrome/Firefox/
 
 Once the metadata is harvested, make sure to:
 
-- add the item to appropriate sub-collection under the LTER-BLE group library:
+- Add the item to appropriate sub-collection under the LTER-BLE group library:
 	- "For-Website" if item is to appear on publication page. These are primarily peer-reviewed journal articles but can include papers in conference proceeding as long as they are published in an edited volume.  What we are trying to avoid is listing a bunch of conference abstracts.
 	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
 	- "Related Data" if item is a related dataset
-- add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
+- Add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
 	- LTER-Funded for work funded by BLE
 	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
 	- Foundational for work we are building our work on
 	- LTER-BLE for work added to the For-Network collection
 	- LTER-IM for information management-related work
 	- LTER-EDU for education-related work
-- look for and edit any weirdness such as incorrect first author
-- skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
+- Look for and edit any weirdness such as incorrect first author
+- Skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
 - Add data URLs if applicable to "Extra" field. URL **must** begin with "https://doi.org/". Each URL must appear on its own line.
-- if you added data URLs, find the data package in EDI, scroll to the bottom, and add the journal citation
-- edit metadata fields as needed if Zotero wasnt able to fill them out
-- if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
+- If you added data URLs, find the data package in EDI, scroll to the bottom, and add the journal citation
+- Edit metadata fields as needed if Zotero wasn't able to fill them out
+- If your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
 <a id="using-zotero-for-datasets"></a>
