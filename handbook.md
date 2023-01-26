@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2022-04-11
+date: 2023-01-26
 ---
 
 <a id="header"></a>
@@ -755,7 +755,7 @@ Our goal for netCDFs:
 
 - Compliance with CF conventions
 
-- Compliance with the applicable NCEI netCDF template. See list of templates [here](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/). 
+- Compliance with the applicable NCEI netCDF template. See list of templates [here](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/).
 
 - Opens in ArcGIS with correct projection and correct location (i.e. ArcGIS recognizes the CRS plus the lat/lon values).
 
@@ -778,19 +778,27 @@ Document the netCDF as otherEntity. Metabase already has netCDF as a file type t
 
 Once a metadata template is received from the data correspondent (can be PIs, can be Core Program manager Nathan, can be someone else) and is reasonably filled out, I start the process of transferring the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
 
+Some things to keep in mind when entering values:
+
+- Avoid non-ASCII characters if reasonable. You can use an [online Diacritics Remover](https://pteo.paranoiaworks.mobi/diacriticsremover/) for this.
+- If you paste an Excel cell, it inserts an unwanted newline character at the end. It's better to edit the cell in Excel and copy the text from there.
+
 I populate metabase for a new dataset in this order:
 
-1. Tables that do not reference other tables via FKs 
-- DataSet. Edit title and abstract as needed during.
-- DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
+1. Tables that do not reference other tables via FKs
+
+- DataSet. Edit title and abstract as needed.
+- DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this.
 - DataSetTemporal
 
 Common pitfalls:
+
 - Forgetting closing tags in docbook formatted abstract/methods
 - Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Use "&amp;"
 - Having less than/greater than signs "</>" in docbook formatted things.
 
 2. Tables that do reference other tables via FKs but still are relatively simple
+
 - DataSetEntities
 - DataSetSites
 - DataSetKeywords
@@ -802,13 +810,15 @@ Common pitfalls:
 Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
 
 3. Tables that are more involved
+
 - DataSetAttributes (remember: check units (1) if they're in EMLUnitDictionary yet, and (2) if they have abbreviations in our style yet)
 - DataSetAttributeEnumeration
 - DataSetAttributeMissingCodes
 
 Sometimes it is easier and quicker to copy attributes and enumeration/missing codes from similar existing datasets. This is especially true for Core Program datasets. 
 
-Common pitfalls: 
+Common pitfalls:
+
 - not having a TextPatternDefinition when attribute is nominalText or ordinalText. I normally just say "any text".
 - not having an Unit or a NumberType when attribute is interval or ratio 
 - enumerated (categorized/coded) attributes MUST be specified as nominalEnum or ordinalEnum. Otherwise even if they have corresponding entries in DataSetAttributeEnumeration, resulting EML will not have code/definition pairs
@@ -821,8 +831,8 @@ Common pitfalls:
 ### Exporting EML
 Once metadata in metabase is complete, it's time to start data processing and exporting EML. One does this in R.
 
-- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RProject has to be created manually; I haven't found a way around that. 
-- The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments. 
+- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RProject has to be created manually; I haven't found a way around that.
+- The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments.
 
 In short, there are these function calls to execute each time you generate a new EML:
 - `MetaEgress::get_meta()`. This queries metabase for that dataset ID. Most of the time this call will be wrapped in a call to `bleutils::append_units()`. The R console will ask you for your metabase username & password after this is called. Any user with READ privileges would suffice.
