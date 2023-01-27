@@ -1174,14 +1174,13 @@ Data sort, sort all CP datasets by these columns in this order before submission
 - date_time
 - water_column_position (discrete water samples only)
 
-#### Entities 
+#### Entities
 
 Entity names:
 
 - Include variables in data
-- Include timeframe to year resolution
 - Do not include "BLE LTER"
-- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
+- Example: Dissolved organic carbon and total dissolved nitrogen
 
 Data table entity descriptions:
 
@@ -1202,11 +1201,11 @@ File names:
 - Prepend with "BLE_LTER"
 - Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g. dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel". 
 - For data files: add one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
-- Examples: 
+- Examples:
 	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
 	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
 - Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv".
-- Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv". 
+- Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv".
 
 
 <a id="personnel--responsible-parties"></a>
@@ -1215,7 +1214,7 @@ File names:
 <a id="creator"></a>
 ##### Creator
 
-Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
+Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form:
 
 > Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
