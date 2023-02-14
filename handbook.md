@@ -800,7 +800,7 @@ Common pitfalls:
 2. Tables that do reference other tables via FKs but still are relatively simple
 
 - DataSetEntities
-- DataSetSites
+- DataSetSites - we typically just use bounding boxes for lagoons
 - DataSetKeywords
 - DataSetPersonnel
 - DataSetAnnotation
@@ -1306,7 +1306,7 @@ We add a dataSource element in EML via metabase's DataSetMethodProvenance table 
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible. Most metadata conventions from the Core Program should still be followed to the most feasible degree.
 
-The biggest difference between CP datasets/PI-driven/non-BLE funded datasets is the degree of attribution we give to BLE in the metadata. 
+The biggest difference between CP datasets/PI-driven/non-BLE funded datasets is the degree of attribution we give to BLE in the metadata.
 
 Generally, we give credit to BLE in these following places:
 
@@ -1316,7 +1316,7 @@ Generally, we give credit to BLE in these following places:
 4. Our LTER award is listed as the funding source
 5. BLE is listed as the metadata provider
 
-For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this). 
+For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this).
 
 <a href="#header">Back to top</a>
 <a id="website"></a>
