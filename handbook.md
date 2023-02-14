@@ -1162,7 +1162,7 @@ Standard columns, also in this order:
 - station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
 - latitude
 - longitude
-- station_depth
+- station_depth: only include if provided by the PI for a given dataset
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
