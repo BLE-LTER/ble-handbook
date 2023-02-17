@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2023-01-26
+date: 2023-02-17
 ---
 
 <a id="header"></a>
@@ -1244,7 +1244,8 @@ Remember to list the seven columns of the personnel CSV in DataSetAttributes. Ea
 
 Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stefansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
-I maintain a master reference sheet of stations and their information on Box (Beaufort LTER > Core Program > BLE_LTER_CP_Stations.xlsx), which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
+I maintain a master reference sheet of stations and their information on Box (BLE-IM > BLE_LTER_CP_Stations.csv). This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes. As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. `add_cp_cols` reads the information directly from Box via a direct link. 
+
 
 Example usage:
 
@@ -1252,22 +1253,6 @@ Example usage:
 # df is a R data.frame with "station" column containing station codes
 df <- bleutils::add_cp_cols(df, "station")
 ```
-
-**Sync the `bleutils` version of station information with the master sheet**
-
-As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. However, this needs to be synced to the internal version that the package has access to.
-
-After editing the Excel file on Box, I then run `bleutils::update_cp_stations()` on the R console while in sort of "dev mode" for bleutils. This goes to the local version of the Box file, checks for any differences between the Box and the `bleutils` versions, and then updates the `bleutils` version if needed. Change the `source_file` parameter to point to the Excel sheet on your machine if needed. The `sheet` parameter refers to the relevant Excel sheet, and is default set to "lookup".
-
-After this step,
-- 1. run `devtools::document()` for good measure, 
-- 2. then Git commit the change to Github, 
-- 3. then run `remotes::install_github("BLE-LTER/bleutils")` again on your local installation of R to install the package again, 
-
-and if you need to use the functions right away:
-- 4. then restart your R session,
-- 5. then load the package again using `library(bleutils)`
-- 6. you can now use the functions with the updated station information
 
 #### Taxonomy
 In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
