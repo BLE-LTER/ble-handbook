@@ -854,7 +854,8 @@ The resulting EML would be deposited into the same directory as the script.
 Make sure to do these tasks if a dataset needs to be revised:
 
 - Increment the Revision number in metabase's DataSet table. Note that this number is always the current *production* revision number. The *staging* revision number can get much higher. I manually edit revision numbers in EML when uploading to the staging server.
-- Add a note in metabase's pkg_mgmt.maintenance_changehistory table. 
+- Update dates in DataSetTemporal.
+- Add a note in metabase's pkg_mgmt.maintenance_changehistory table.
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
