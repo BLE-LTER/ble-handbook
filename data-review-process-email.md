@@ -1,4 +1,4 @@
-## to send to researchers who submit to us the first time once we have a staging
+## to send to first-time data submitters, once we have a staging
 
 Hi all,
 
