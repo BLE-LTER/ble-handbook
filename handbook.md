@@ -1588,8 +1588,7 @@ Once the metadata is harvested, make sure to:
 	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
 	- "Related Data" if item is a related dataset
 - Add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
-	- LTER-Funded for work funded by BLE
-	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
+	- Supported for work directly funded or otherwise enabled by BLE. Enabled includes 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
 	- Foundational for work we are building our work on
 	- LTER-BLE for work added to the For-Network collection
 	- LTER-IM for information management-related work
