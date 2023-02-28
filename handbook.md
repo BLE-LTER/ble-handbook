@@ -1588,11 +1588,14 @@ Once the metadata is harvested, make sure to:
 	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
 	- "Related Data" if item is a related dataset
 - Add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
-	- Supported for work directly funded or otherwise enabled by BLE. Enabled includes 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
-	- Foundational for work we are building our work on
-	- LTER-BLE for work added to the For-Network collection
-	- LTER-IM for information management-related work
-	- LTER-EDU for education-related work
+	- **Supported** for work directly funded or otherwise enabled by BLE. Enabled includes 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
+	- **Foundational** for work we are building our work on
+	- **LTER-BLE** for work added to the For-Network collection
+	- **LTER-IM** for information management-related work
+	- **LTER-EDU** for education-related work
+	- **LTER-Funded Data at Other Archives** for related data funded at least in part by BLE which do not have representation in BLE's datasets at EDI
+	- **Data Used by BLE** for external datasets that BLE uses
+	- **Legacy Data** for data related to and predating BLE 
 - Look for and edit any weirdness such as incorrect first author
 - Skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
 - Add data URLs if applicable to "Extra" field. URL **must** begin with "https://doi.org/". Each URL must appear on its own line.
