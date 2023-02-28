@@ -39,6 +39,7 @@ date: 2023-02-17
 		- [Exporting EML](#exporting-eml)
 		- [Revisions](#revisions)
 	- [Data archiving](#data-archiving)
+		- [What we archive](#what-we-archive)
 		- [Where we archive](#where-we-archive)
 		- [Who does the archiving](#who-does-the-archiving)
 		- [How we archive at EDI](#how-we-archive-at-edi)
@@ -860,6 +861,15 @@ Make sure to do these tasks if a dataset needs to be revised:
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
 ## Data archiving
+
+<a id="what-we-archive"></a>
+### What we archive
+
+We archive most data funded purely by BLE. Exceptions are specialized data such as genomics data for which the PI has better knowledge about how to archive and typically handles it, though the PI should at least notify the IM so that IM can ensure the data are discoverable under the BLE umbrella.
+
+For datasets partially funded by BLE, we'd like to archive that as well so it shows up under the BLE umbrella and so it is well described. We're particularly eager to help students get archiving done right. However, other funding sources may have other requirements, and the IM team may be too limited in capacity to take every dataset related to BLE, so evaluate each sitiuation as it arises.
+
+Do not be offended if datasets slip through the cracks and get archived without the IM knowing. It has happened before and it will happen again. Just do your best and move on with life.  You can catalog such datasets without much work using Zotero in our Related Data collection.
 
 <a id="where-we-archive"></a>
 ### Where we archive
