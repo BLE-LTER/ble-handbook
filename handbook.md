@@ -795,7 +795,7 @@ I populate metabase for a new dataset in this order:
 Common pitfalls:
 
 - Forgetting closing tags in docbook formatted abstract/methods
-- Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Use "&amp;"
+- Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Escape the ampersand like "&amp;", or if you're reading the rendered version of this markdown, "&amp;amp;".
 - Having less than/greater than signs "</>" in docbook formatted things.
 
 2. Tables that do reference other tables via FKs but still are relatively simple
