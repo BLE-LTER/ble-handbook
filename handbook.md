@@ -118,7 +118,7 @@ We speak in first person throughout this handbook. Writing in a suitably third p
 <a id="languages"></a>
 ### Languages
 
-An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL. 
+An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL.
 
 Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, and validating EML. Lots more on this later on.
 
@@ -262,7 +262,7 @@ Very verbose -- for complete newbs to the DB admin world. Windows specific, but 
 
 Assuming a vanilla installation from executable (.exe) on Windows as downloaded from the PostgreSQL website. Some assumptions might not apply in other scenarios (e.g. where the default data directory is). 
 
-**NOTE:** A good chunk of trouble might be avoided if PostgreSQL is _not_ installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
+**NOTE:** A good chunk of trouble might be avoided if PostgreSQL is *not* installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
 
 <a id="issues-ive-run-into"></a>
 #### Issues I've run into
@@ -366,12 +366,12 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 - can login: you have to use a login role's credentials to initially connect to a database. Login roles need to be created with passwords.
 - are associated conceptually with either ACTUAL PEOPLE, or TASKS to be performed on the database.
-- to be able to perform said tasks, login roles _inherit_ permissions from the groups they are a member of.
+- to be able to perform said tasks, login roles *inherit* permissions from the groups they are a member of.
 - if other people join the team, or web apps that use the database are developed, a new login role should be created for their use, with membership to the appropriate groups.
 
 2. GROUP ROLES:
 
-- cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole. 
+- cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole.
 - are associated conceptually with PERMISSIONS on the database. Permissions to the database are granted on a group basis for easy management.
 - there are three established groups, corresponding with three broad levels of permissions. I do not foresee needing another group role.
   - `ble_group_readonly` has CONNECT, USAGE, and SELECT
@@ -543,7 +543,7 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 A scheduled task on An's computer backs up the database to the **daily_backups**
 folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
 
-Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea. 
+Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea.
 
 Having these backups mean that we're not at all tethered to any particular instance of a database, or the PG server on my computer (despite devoting so many words to its setup). It can implode tomorrow and all I've lost is the time it takes to set up a new one, plus some random test databases.
 
@@ -841,6 +841,7 @@ Once metadata in metabase is complete, it's time to start data processing and ex
 - The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments.
 
 In short, there are these function calls to execute each time you generate a new EML:
+
 - `MetaEgress::get_meta()`. This queries metabase for that dataset ID. Most of the time this call will be wrapped in a call to `bleutils::append_units()`. The R console will ask you for your metabase username & password after this is called. Any user with READ privileges would suffice.
 - `MetaEgress::create_entity_all()`. This assembles the data entity components of EML.
 - `MetaEgress::create_EML()`. This takes the assembled entities and assembles the other stuff and outputs a complete emld list structure ready to be validated and written to file.
@@ -1068,7 +1069,7 @@ b. If only metadata are revised, e.g., fixing a typo in a contact address, then 
 <a id="ble-specific-datametadata-style-rules"></a>
 ## BLE specific data/metadata style rules
 
-Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
+Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER".
 
 <a id="types-of-datasets-by-ble-involvement"></a>
 ### Types of datasets by BLE involvement
@@ -1094,18 +1095,18 @@ Per PI Yvette Spitz's request and concern over easily accessing attribute unit i
 ##### Here's how this is implemented during our normal workflow
 
 1. Attribute names are entered into metabase as usual. I.e. the column DataSetAttributes.ColumnName for above example would read "temp."
-2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
-3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); as we make use of new units their abbreviations need to be entered as well. Use the SQL query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
-4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviations, use them, e.g. "partPerMillion" is ppm. 
-5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` appends the unit abbreviation on file to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
-	- If `append_units` is not called, EML metadata produced will not have units in column names
+2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius".
+3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e., referenced as FK in DataSetAttributes.Unit); as we make use of new units their abbreviations need to be entered as well. Use the SQL query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table.
+4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviations, use them, e.g. "partPerMillion" is ppm.
+5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` appends the unit abbreviation on file to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables.
+	- If `append_units` is not called, EML metadata produced will not have units in column names.
 	- After, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
 6. proceed as usual with EML generation.
 
-##### Why we do it this way:
+##### Why we do it this way
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
-- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop, without having to go in and edit all the attributes using that unit. 
+- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop, without having to go in and edit all the attributes using that unit.
 - Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control, e.g. leaving units off of specific columns, is not possible to do in R at the moment.
 
 ##### Updating the EMLUnitDictionary table
@@ -1138,7 +1139,7 @@ According to the source:
 - data from sediment samples
 - data from moorings/instruments
 
-The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is. 
+The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is.
 
 #### Dataset titles
 
@@ -1209,11 +1210,11 @@ Other entity descriptions:
 File names:
 
 - underscored
-- Prepend with "BLE_LTER"
-- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g. dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel". 
+- Prepend with "BLE_LTER". This helps distinguish BLE files from others if the user has downloaded many files.
+- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g., dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel".
 - For data files: add one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
 - Examples:
-	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary.
 	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
 - Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv".
 - Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv".
