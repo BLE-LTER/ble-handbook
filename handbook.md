@@ -56,6 +56,7 @@ date: 2023-02-17
 	- [How to update website](#how-to-update-website)
 		- [Minor content updates](#minor-content-updates)
 		- [Less minor updates](#less-minor-updates)
+		- [Website file download links](#website-file-download-links)
 	- [Branding](#branding)
 		- [Logo color reference](#logo-color-reference)
 		- [North Slope coastline motif](#north-slope-coastline-motif)
@@ -133,7 +134,7 @@ Note that while many of the tools listed below are enterprise products (or have 
 
 - We use a variety of text editors to examine and edit plain text files. Tim uses VS Studio Code and An uses Sublime Text. Big note: other IMs we know heavily use the Oxygen XML Editor to edit and validate their EML documents. Oxygen is decidedly not free, although they do give out academic licenses if their logo is displayed on one's website. We decided not to go that route, and just use a text editor to look at EML. This works fine for our automated-everything, no-manual editing philosophy.
 
-- BLE uses UT's subscription to Box for file sharing. There's a [folder for all of BLE](https://utexas.app.box.com/folder/7974766549), and a [folder for just information managers](https://utexas.app.box.com/folder/42467776128) which is currently just used for website links, although IMs use some stuff in the all-of-BLE folder as well. Note that Box is not truly backed up. You may find deleted files in Trash, but if someone moves a file or folder out, you may never get it back. The best you can do is ask [ITS](mailto:ut@service-now.com) to run a report on the containing folder to see activity and find out who moved the file. For Box permissions, most collaborators are set as "Viewer Uploader". They can view files, add files, and update existing files. They cannot invite collaborators, and they cannot delete, rename, or move files. We restrict access to just BLE team members for most folders.  For sharing with external people, we use the "External Sharing" folder with subfolders that include the files to share for a particular collaboration and a readme that explains the collaboration, include who and how long.
+- BLE uses UT's subscription to Box for file sharing. There's a [folder named Beaufort LTER for all of BLE](https://utexas.app.box.com/folder/7974766549), and a [folder named BLE-IM for just information managers](https://utexas.app.box.com/folder/42467776128) which is currently just used for website links and a list of sampling stations, although IMs use some stuff in the all-of-BLE folder as well. Note that Box is not truly backed up. You may find deleted files in Trash, but if someone moves a file or folder out, you may never get it back. The best you can do is ask [ITS](mailto:ut@service-now.com) to run a report on the containing folder to see activity and find out who moved the file. For Box permissions, most collaborators are set as "Viewer Uploader". They can view files, add files, and update existing files. They cannot invite collaborators, and they cannot delete, rename, or move files. We restrict access to just BLE team members for most folders.  For sharing with external people, we use the "External Sharing" folder with subfolders that include the files to share for a particular collaboration and a readme that explains the collaboration, include who and how long.
 
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
@@ -1391,6 +1392,22 @@ To change footer/header/common HTML `<header>` element:
 - Browse to root `LTER-website` folder.
 - Enter this command: `node apply_template.js`.
 
+<a id="website-file-download-links"></a>
+## Website file download links
+
+For downloadable files such as our metadata template or REU applications, we usually link out to the file on Box. This has some advantages over storing the file in the website GitHub repo:
+
+- GitHub can't track the actual changes in binary files, so there's not much point to using GitHub for these files except to keep all website files in one place.
+- Collaborators can update files without knowing Git. They simply upload a new copy of a file to Box, overwriting the existing file.
+- Box provides download statistics.
+
+However, there is also one big disadvantage with Box: Collaborators with enough permissions on Box can break the file links. For example, this might happen if a collaborator decided to reorganize Box folders without alerting the IM.  To avoid this, the IMs could use their own Box folder, which is why you'll currently find downloadable files in two separate Box folders:
+
+- Box > Beaufort LTER > Website > FileLinks. This folder is shared by other BLE team members.
+- Box > BLE-IM > Public. This folder is only accessible by the IMs.
+
+Moving forward, we don't have a strong recommendation on which Box folder to use, or whether we should put the files in Git instead. Until a compelling reason to make a decision surfaes, for now we just recommend keeping like files together. For example, old REU announcements are in FileLinks, so place future REU announcements there.
+
 <a id="branding"></a>
 ## Branding
 
@@ -1448,7 +1465,7 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 <a id="algolia"></a>
 ## Algolia
 
-Here we document the nitty gritties of Algolia search on our website. 
+Here we document the nitty gritties of Algolia search on our website.
 
 #### Why we like it
 
@@ -1530,7 +1547,7 @@ Think about logical breaks in content so that headings (and therefore searchable
 
 3. Commitments and usage limits
 
-The free tier we get with Algolia and Netlify allows for 20 monthly "commitments". According to their website, a commitment equals to 1000 searches and 1000 records. We are probably not in any danger, but it is something to look out for. 
+The free tier we get with Algolia and Netlify allows for 20 monthly "commitments". According to their website, a commitment equals to 1000 searches and 1000 records. We are probably not in any danger, but it is something to look out for.
 Algolia will also send usage reports to the email address associated with the Netlify page. This report details keywords used and their frequencies, etc., and whether there were any keywords that resulted in no hits. This latter especially would be useful to think about new content or SEO.
 
 4. CSS mods
