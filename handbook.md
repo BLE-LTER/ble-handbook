@@ -1271,6 +1271,8 @@ Example usage:
 df <- bleutils::add_cp_cols(df, "station")
 ```
 
+For trawls, we only record the from station. In practice, we trawl/tow for ~5 mins, and at 1-2 kts that's just a copule hundred meters. So we really are very close to one station and not very close to the other. And during ice-cover, we pull the nets/dredge right on top of the station, not between. Also FYI, trawls happen between shallow stations only, or deep stations only, but never from shallow to deep or vice versa.
+
 #### Taxonomy
 In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
 - Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
