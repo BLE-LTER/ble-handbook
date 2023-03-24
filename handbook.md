@@ -801,7 +801,7 @@ Common pitfalls:
 
 2. Tables that do reference other tables via FKs but still are relatively simple
 
-- DataSetEntities
+- DataSetEntities - Use "data table" for EntityType for MetaEgress to process it as such. MetaEgress will treat anything else as otherEntity.
 - DataSetSites - we typically just use bounding boxes for lagoons
 - DataSetKeywords
 - DataSetPersonnel
