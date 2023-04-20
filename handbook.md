@@ -1757,7 +1757,9 @@ config options of note:
 <a id="data-citations"></a>
 ### Data citations
 
-We need a detective! The mystery: How to find where our data are cited.
+We use the PASTA API to get DOIs and descriptions of all BLE datasets. Then we use DataCite and Crossref to get data citation DOIs and info on those items, respectively. See the [citations_for_data repo](https://github.com/BLE-LTER/citations_for_data) for example code.
+
+Some alternatives we considered:
 
 a. Google scholar detects automated scraping and bans IPs. The current workaround is to pay for a proxy service that spawns our requests across a gazillion servers/IPs (one example here), but that is not honoring Google's policy so we (BLE) won't do that.
 
@@ -1766,8 +1768,6 @@ b. Matt Jones suggested scythe, which I gather scrapes other sources.
 c. I also wonder since "Beaufort Lagoon Ecosystems LTER" appears amongst author names for every dataset, if we could just search once for that manually, and then have some code to parse the results.  It should be a partial match, since we also have "Beaufort Lagoon Ecosystems LTER, Core Program" as an author.
 
 d. Or we could just manually search Google Scholar for every DOI associated with every revision of every BLE dataset. Ugh. This is the baseline result, which we'll use to evaluate the effectiveness of other approaches.
-
-How to get every DOI associated with every revision of every BLE dataset: one of counter's two result spreadsheets will give you this, see below. 
 
 <a id="data-downloads"></a>
 ### Data downloads
