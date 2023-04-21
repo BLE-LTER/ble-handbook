@@ -1322,6 +1322,8 @@ Generally, we give credit to BLE in these following places:
 
 For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this).
 
+For cases in between, such as in-kind support from BLE, typically skip 1 and 3. Modify the boilerplate to describe the primary funding source, but in the funding section describe the specific contributions from BLE. Since the award element is repeatable, provide an award element for each funding source, including one for BLE.
+
 <a href="#header">Back to top</a>
 <a id="website"></a>
 # Website
