@@ -803,6 +803,7 @@ Common pitfalls:
 
 - DataSetEntities - Use "data table" for EntityType for MetaEgress to process it as such. MetaEgress will treat anything else as otherEntity.
 - DataSetSites - we typically just use bounding boxes for lagoons
+- DataSetTaxa - Use the lowest taxa in the dataset. The rest of the hierarchy is filled in by MetaEgress.
 - DataSetKeywords
 - DataSetPersonnel
 - DataSetAnnotation
