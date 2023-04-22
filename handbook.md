@@ -1274,7 +1274,9 @@ df <- bleutils::add_cp_cols(df, "station")
 For trawls, we only record the from station. In practice, we trawl/tow for ~5 mins, and at 1-2 kts that's just a copule hundred meters. So we really are very close to one station and not very close to the other. And during ice-cover, we pull the nets/dredge right on top of the station, not between. Also FYI, trawls happen between shallow stations only, or deep stations only, but never from shallow to deep or vice versa.
 
 #### Taxonomy
+
 In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
+
 - Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
 - We'll use WORMS but allow other authorities.
 - For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS).
@@ -1285,6 +1287,8 @@ In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss t
 - sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the researcher's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.  We recommend indicating the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
 - Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
 - We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
+
+To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match).
 
 #### Misc
 
