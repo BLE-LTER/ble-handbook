@@ -1657,6 +1657,11 @@ The DOI field for entries should NOT start with "https://doi.org" but "10.XXXX".
 
 If you are adding a Core Program dataset as a Zotero entry (i.e. via using the Zotero browser button while on the EDI data portal), and the first author reads "Beaufort Lagoon Ecosystems LTER, Core Program" with the comma, then Zotero will read in "Core Program" as a first name. This would then lead to the exported citation possibly listing author "Beaufort Lagoon Ecosystems LTER, C. P.". To fix this, go to the entry details. Under the first author, remove "Core Program" from the first name field and paste it into the last name field. The rest of the metadata provided by EDI and extracted by Zotero is usually pretty good and needs no modifications. 
 
+Deprecated Zotero tags:
+
+- **LTER-Funded** for work directly funded by BLE. This is now replaced by **Supported**.
+- **LTER-Enabled** for 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets. Cases 1 and 2 were absorbed into **Supported**. For case 3, we harvest this as a table when needed using the [citations_for_data repo](https://github.com/BLE-LTER/citations_for_data).
+
 <a id="linking-data-and-pubs"></a>
 ### Linking data and pubs
 
