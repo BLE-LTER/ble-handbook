@@ -238,11 +238,11 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 1. Receive data and metadata from researchers. This might be a long process, and we might hear about datasets long before we actually get them.
 
-2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata. 
+2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata.
 
-3. Archive at EDI (staging). Send staged data package to researchers for approval and make changes as requested. Archive at EDI (production).
+3. Archive at EDI ([staging](https://portal-s.edirepository.org/nis/harvester.jsp)). Send staged data package to researchers for approval and make changes as requested. Archive at EDI ([production](https://portal.edirepository.org/nis/harvester.jsp)).
 
-4. Let BLE and the world know. BLE has a formal data notification policy below. 
+4. Let BLE and the world know. BLE has a formal data notification policy below.
 
 Also refer to a flowchart we included in the 2021 midterm report to NSF. It provides a high level overview of the steps and was created for an outside audience.
 
