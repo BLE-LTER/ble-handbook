@@ -806,6 +806,7 @@ Common pitfalls:
 - DataSetTaxa - Use the lowest taxa in the dataset. The rest of the hierarchy is filled in by MetaEgress.
 - DataSetKeywords
 - DataSetPersonnel
+- DataSetPublications - For cited publications in the methods or abstract, add rows to this table with the RelationshipType `literatureCited`.
 - DataSetAnnotation
 - DataSetAttributeAnnotation
 - DataSetMethod* (Software/Protocols/Instruments/Provenance). With the exception of Provenance, the other tables haven't seen play so far.
