@@ -690,12 +690,12 @@ Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Pro
 
 **Within each data package directory:**
 -  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions received from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
-- "Clean" contains 
+- "Clean" contains
 	- data files after processing and ready to submit. When I go to upload to EDI, this is where I'd browse to get the data.
-	- however, note that clean and ready to submit is an ephemeral state. Clean data is out of date when there is an update or a revision or if the hash is mismatched with what the metadata says. So, I don't consider the data in Clean to be an archive or a reference, but as a place to park finished data for when you go to submit the package to EDI. I will overwrite the data for new revisions. I will download the latest revision from EDI as a basis to append new data onto in subsequent years. 
-- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live. EML documents e.g. "EML_13_20211022.xml" live here too, where 13 is the dataset ID and 20211022 is the date it was generated from one of the scripts. 
-	- This used to not have any sub directory structure. However, in 2021/2022, when I started to work on data from 2021 trips, essentially the second round of data processing, I started to see how the large amounts of files in this directory would overwhelm later, especially the endless .xml files generated in the course of generating and revising metadata. I decided to move files working on 2019 (and 2018) data into a "2019" folder, and files working on 2021 data into "2021" and so on. Note that some of the files within 2021 may be dated 2022, but the overall directory is named after 2021 the newest DATA YEAR to avoid confusion later. 
-- In 2022 I wrote a README.txt similar to this section and started including them in the top level path of each data directory to explain how to navigate them. When you run `bleutils::init_datapkg()` this README.txt gets auto-written. To edit the master template for these READMEs, go to the `inst` directory within the bleutils source folder and edit readme.txt there. 
+	- however, note that clean and ready to submit is an ephemeral state. Clean data is out of date when there is an update or a revision or if the hash is mismatched with what the metadata says. So, I don't consider the data in Clean to be an archive or a reference, but as a place to park finished data for when you go to submit the package to EDI. I will overwrite the data for new revisions. I will download the latest revision from EDI as a basis to append new data onto in subsequent years.
+- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live. EML documents e.g. "EML_13_20211022.xml" live here too, where 13 is the dataset ID and 20211022 is the date it was generated from one of the scripts.
+	- This used to not have any sub directory structure. However, in 2021/2022, when I started to work on data from 2021 trips, essentially the second round of data processing, I started to see how the large amounts of files in this directory would overwhelm later, especially the endless .xml files generated in the course of generating and revising metadata. I decided to move files working on 2019 (and 2018) data into a "2019" folder, and files working on 2021 data into "2021" and so on. Note that some of the files within 2021 may be dated 2022, but the overall directory is named after 2021 the newest DATA YEAR to avoid confusion later.
+- In 2022 I wrote a README.txt similar to this section and started including them in the top level path of each data directory to explain how to navigate them. When you run `bleutils::init_datapkg()` this README.txt gets auto-written. To edit the master template for these READMEs, go to the `inst` directory within the bleutils source folder and edit readme.txt there.
 
 <a id="how-to-initiate-a-new-data-package"></a>
 ### How to initiate a new data package
@@ -715,9 +715,11 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 What I do:
 
-Run `bleutils::init_script()` in any R console and specify that `type = "update`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+In the EML_RProject_(datasetID) folder, create a subfolder for the current data year, e.g., "2022".
 
-Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*MMYYYY*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
+Run `bleutils::init_script()` in any R console and specify that `type = "update"`, e.g., for dataset 15 with data updates from 2022, `bleutils::init_script(15, file.path(getwd(), "2022"), type = "update")`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+
+Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*YYYYMM*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
 
 <a id="actual-data-data-processing"></a>
 ### Actual data-data processing
