@@ -2,7 +2,7 @@
 title: BLE LTER Information Management Handbook
 subtitle: Everything, including the kitchen sink
 author: An T. Nguyen and Tim Whiteaker -- BLE-LTER Information Managers
-date: 2021-08-29
+date: 2023-02-17
 ---
 
 <a id="header"></a>
@@ -39,6 +39,7 @@ date: 2021-08-29
 		- [Exporting EML](#exporting-eml)
 		- [Revisions](#revisions)
 	- [Data archiving](#data-archiving)
+		- [What we archive](#what-we-archive)
 		- [Where we archive](#where-we-archive)
 		- [Who does the archiving](#who-does-the-archiving)
 		- [How we archive at EDI](#how-we-archive-at-edi)
@@ -55,6 +56,7 @@ date: 2021-08-29
 	- [How to update website](#how-to-update-website)
 		- [Minor content updates](#minor-content-updates)
 		- [Less minor updates](#less-minor-updates)
+		- [Website file download links](#website-file-download-links)
 	- [Branding](#branding)
 		- [Logo color reference](#logo-color-reference)
 		- [North Slope coastline motif](#north-slope-coastline-motif)
@@ -75,6 +77,7 @@ date: 2021-08-29
 	- [Obtaining metrics](#obtaining-metrics)
 		- [Data citations](#data-citations)
 		- [Data downloads](#data-downloads)
+		- [FAIR scores](#fair-scores)
 	- [Presentations](#presentations)
 		- [BLE powerpoint template](#ble-powerpoint-template)
 
@@ -91,7 +94,7 @@ Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term 
 
 Information management was integral to the project from the start; our NSF proposal included a detailed section on the data types we will produce and how each of them will be treated. The information management team has been important project members ever since.
 
-Tim Whiteaker (Tim) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An) was recruited by team in November 2018 and officially started in March 2019.
+Tim Whiteaker (Tim) was first recruited as project data/information manager by lead project PI Ken Dunton from the 2017 beginnings. An T. Nguyen (An) was recruited by team in November 2018 and officially started in March 2019.  
 
 <a id="our-philosophies"></a>
 ## Our philosophies
@@ -116,7 +119,7 @@ We speak in first person throughout this handbook. Writing in a suitably third p
 <a id="languages"></a>
 ### Languages
 
-An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL. 
+An uses a lot of R. Tim uses a lot of Python. We also write things in JavaScript, HTML, CSS, Markdown, SQL.
 
 Our metadata is based on the Ecological Metadata Language (EML), which is XML. Many of the actual tools we use and develop revolve around making, reading, and validating EML. Lots more on this later on.
 
@@ -127,7 +130,11 @@ Note that while many of the tools listed below are enterprise products (or have 
 
 - We use GitKraken as our Git client, and GitHub to manage, publicize, and collaborate on Git repositories. GitKraken integrates with GitHub well (you can use GH credentials in GK), and has a really neat tree visualization of changes in a repository.
 
+2022-02-17: An is setting up a new machine and had some trouble installing GitKraken (probably machine permission issues) and so went on a little quest of finding an alternative. My search parameters were: free, open source is nice, graph view, minimalistic, nice polished UI (with plenty of negative space for things to breathe. overcrowding is my biggest problem with design). I came up with Aurees, TortoiseGit, and eventually settled on GitFiend. So far so good, it's different and a lot more minimalistic than GitKraken's overwhelming power user options, which I appreciate as a relatively simple Git user. The graph is not as front and center as in GitKraken, and not everything takes place in the same display.
+
 - We use a variety of text editors to examine and edit plain text files. Tim uses VS Studio Code and An uses Sublime Text. Big note: other IMs we know heavily use the Oxygen XML Editor to edit and validate their EML documents. Oxygen is decidedly not free, although they do give out academic licenses if their logo is displayed on one's website. We decided not to go that route, and just use a text editor to look at EML. This works fine for our automated-everything, no-manual editing philosophy.
+
+- BLE uses UT's subscription to Box for file sharing. There's a [folder named Beaufort LTER for all of BLE](https://utexas.app.box.com/folder/7974766549), and a [folder named BLE-IM for just information managers](https://utexas.app.box.com/folder/42467776128) which is currently just used for website links and a list of sampling stations, although IMs use some stuff in the all-of-BLE folder as well. Note that Box is not truly backed up. You may find deleted files in Trash, but if someone moves a file or folder out, you may never get it back. The best you can do is ask [ITS](mailto:ut@service-now.com) to run a report on the containing folder to see activity and find out who moved the file. For Box permissions, most collaborators are set as "Viewer Uploader". They can view files, add files, and update existing files. They cannot invite collaborators, and they cannot delete, rename, or move files. We restrict access to just BLE team members for most folders.  For sharing with external people, we use the "External Sharing" folder with subfolders that include the files to share for a particular collaboration and a readme that explains the collaboration, include who and how long.
 
 <a id="tools-we-develop-and-maintain"></a>
 ## Tools we develop and maintain
@@ -231,11 +238,11 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 1. Receive data and metadata from researchers. This might be a long process, and we might hear about datasets long before we actually get them.
 
-2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata. 
+2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata.
 
-3. Archive at EDI (staging). Send staged data package to researchers for approval and make changes as requested. Archive at EDI (production).
+3. Archive at EDI ([staging](https://portal-s.edirepository.org/nis/harvester.jsp)). Send staged data package to researchers for approval and make changes as requested. Archive at EDI ([production](https://portal.edirepository.org/nis/harvester.jsp)).
 
-4. Let BLE and the world know. BLE has a formal data notification policy below. 
+4. Let BLE and the world know. BLE has a formal data notification policy below.
 
 Also refer to a flowchart we included in the 2021 midterm report to NSF. It provides a high level overview of the steps and was created for an outside audience.
 
@@ -256,7 +263,7 @@ Very verbose -- for complete newbs to the DB admin world. Windows specific, but 
 
 Assuming a vanilla installation from executable (.exe) on Windows as downloaded from the PostgreSQL website. Some assumptions might not apply in other scenarios (e.g. where the default data directory is). 
 
-**NOTE:** A good chunk of trouble might be avoided if PostgreSQL is _not_ installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
+**NOTE:** A good chunk of trouble might be avoided if PostgreSQL is *not* installed in C:\Program Files. This folder is write-protected in many work PC systems where you are not the admin, and generally quite inaccessible in many ways. Change the directory during the installation process. 
 
 <a id="issues-ive-run-into"></a>
 #### Issues I've run into
@@ -360,12 +367,12 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 - can login: you have to use a login role's credentials to initially connect to a database. Login roles need to be created with passwords.
 - are associated conceptually with either ACTUAL PEOPLE, or TASKS to be performed on the database.
-- to be able to perform said tasks, login roles _inherit_ permissions from the groups they are a member of.
+- to be able to perform said tasks, login roles *inherit* permissions from the groups they are a member of.
 - if other people join the team, or web apps that use the database are developed, a new login role should be created for their use, with membership to the appropriate groups.
 
 2. GROUP ROLES:
 
-- cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole. 
+- cannot login: you can not use a group credential to make the initial connection to a database. It follows that group roles do not have passwords. To grant membership to a group role, the logged in user has to be an admin of the group role, so this is not a security loophole.
 - are associated conceptually with PERMISSIONS on the database. Permissions to the database are granted on a group basis for easy management.
 - there are three established groups, corresponding with three broad levels of permissions. I do not foresee needing another group role.
   - `ble_group_readonly` has CONNECT, USAGE, and SELECT
@@ -537,7 +544,7 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 A scheduled task on An's computer backs up the database to the **daily_backups**
 folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
 
-Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time for me and quitting DBeaver solved it, so yea. 
+Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea.
 
 Having these backups mean that we're not at all tethered to any particular instance of a database, or the PG server on my computer (despite devoting so many words to its setup). It can implode tomorrow and all I've lost is the time it takes to set up a new one, plus some random test databases.
 
@@ -611,25 +618,28 @@ Once you've determined that a patch needs to be applied:
 - either:
 	- download the .sql patch, make changes, make sure the BLE metabase is the active DB in DBeaver (right click > make active), then right click > execute script.
 	- copy the raw SQL code into a new SQL editor window in DBeaver, make changes, then execute line by line or Ctrl+A > Ctrl+Enter to execute the whole thing.
- 
+
 <a href="#header">Back to top</a>
 <a id="metadata-template"></a>
 ## Metadata template
 
-We use a metadata template to collect information about datasets from scientists. This is structured similarly to metabase, while maximizing legibility and user friendliness for researchers. 
+We use a metadata template to collect information about datasets from scientists. This is structured similarly to metabase, while maximizing legibility and user friendliness for researchers.
 
-It consists of: 
+It consists of:
+
 - a metadata template (.xlsx file)
 - four pages of instructions (PDF)
 - abstract and methods templates (.docx files)
 - example package, which is a .zip of data files and accompanying, filled-out metadata templates
 
-On Box, we keep a zip and publishes it on a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip. 
+On Box, we publish publish a zip at a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip.
 
 Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
 <a id="how-to-update-template"></a>
+
 ### How to update template
+
 This is a copy of the README on the git repo.
 
 #### Template Excel
@@ -647,13 +657,14 @@ This is a copy of the README on the git repo.
 4. Navigate to the current directory containing template and source Markdown. 
 5. Execute these commands in Windows Command Prompt. pandoc needs to be installed and visible on your system (e.g. in the system PATH). In my case, pandoc comes bundled with RMarkdown/RStudio and RStudio kindly adds it to the PATH environment variable for me.  
 
-```
+```console
 >K:
 
 >cd "K:\Data-Notes\BLE-Practices\metadata_templates\canon"
 
 >pandoc data_submission_instructions.md --pdf-engine=xelatex -o data_submission_instructions.pdf
 ```
+
 6. Check result PDF to make sure your edits appear.
 7. See common steps.
 
@@ -681,12 +692,12 @@ Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Pro
 
 **Within each data package directory:**
 -  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions received from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
-- "Clean" contains 
+- "Clean" contains
 	- data files after processing and ready to submit. When I go to upload to EDI, this is where I'd browse to get the data.
-	- however, note that clean and ready to submit is an ephemeral state. Clean data is out of date when there is an update or a revision or if the hash is mismatched with what the metadata says. So, I don't consider the data in Clean to be an archive or a reference, but as a place to park finished data for when you go to submit the package to EDI. I will overwrite the data for new revisions. I will download the latest revision from EDI as a basis to append new data onto in subsequent years. 
-- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live. EML documents e.g. "EML_13_20211022.xml" live here too, where 13 is the dataset ID and 20211022 is the date it was generated from one of the scripts. 
-	- This used to not have any sub directory structure. However, in 2021/2022, when I started to work on data from 2021 trips, essentially the second round of data processing, I started to see how the large amounts of files in this directory would overwhelm later, especially the endless .xml files generated in the course of generating and revising metadata. I decided to move files working on 2019 (and 2018) data into a "2019" folder, and files working on 2021 data into "2021" and so on. Note that some of the files within 2021 may be dated 2022, but the overall directory is named after 2021 the newest DATA YEAR to avoid confusion later. 
-- In 2022 I wrote a README.txt similar to this section and started including them in the top level path of each data directory to explain how to navigate them. When you run `bleutils::init_datapkg()` this README.txt gets auto-written. To edit the master template for these READMEs, go to the `inst` directory within the bleutils source folder and edit readme.txt there. 
+	- however, note that clean and ready to submit is an ephemeral state. Clean data is out of date when there is an update or a revision or if the hash is mismatched with what the metadata says. So, I don't consider the data in Clean to be an archive or a reference, but as a place to park finished data for when you go to submit the package to EDI. I will overwrite the data for new revisions. I will download the latest revision from EDI as a basis to append new data onto in subsequent years.
+- A directory named something like "EML_generation" or "EML_RPRoject_datasetID". This is where R scripts and RProject files (history, RData) live. EML documents e.g. "EML_13_20211022.xml" live here too, where 13 is the dataset ID and 20211022 is the date it was generated from one of the scripts.
+	- This used to not have any sub directory structure. However, in 2021/2022, when I started to work on data from 2021 trips, essentially the second round of data processing, I started to see how the large amounts of files in this directory would overwhelm later, especially the endless .xml files generated in the course of generating and revising metadata. I decided to move files working on 2019 (and 2018) data into a "2019" folder, and files working on 2021 data into "2021" and so on. Note that some of the files within 2021 may be dated 2022, but the overall directory is named after 2021 the newest DATA YEAR to avoid confusion later.
+- In 2022 I wrote a README.txt similar to this section and started including them in the top level path of each data directory to explain how to navigate them. When you run `bleutils::init_datapkg()` this README.txt gets auto-written. To edit the master template for these READMEs, go to the `inst` directory within the bleutils source folder and edit readme.txt there.
 
 <a id="how-to-initiate-a-new-data-package"></a>
 ### How to initiate a new data package
@@ -706,9 +717,11 @@ Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in 
 
 What I do:
 
-Run `bleutils::init_script()` in any R console and specify that `type = "update`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+In the EML_RProject_(datasetID) folder, create a subfolder for the current data year, e.g., "2022".
 
-Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*MMYYYY*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
+Run `bleutils::init_script()` in any R console and specify that `type = "update"`, e.g., for dataset 15 with data updates from 2022, `bleutils::init_script(15, file.path(getwd(), "2022"), type = "update")`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+
+Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*YYYYMM*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
 
 <a id="actual-data-data-processing"></a>
 ### Actual data-data processing
@@ -748,7 +761,7 @@ Our goal for netCDFs:
 
 - Compliance with CF conventions
 
-- Compliance with the applicable NCEI netCDF template. See list of templates [here](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/). 
+- Compliance with the applicable NCEI netCDF template. See list of templates [here](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/).
 
 - Opens in ArcGIS with correct projection and correct location (i.e. ArcGIS recognizes the CRS plus the lat/lon values).
 
@@ -771,37 +784,54 @@ Document the netCDF as otherEntity. Metabase already has netCDF as a file type t
 
 Once a metadata template is received from the data correspondent (can be PIs, can be Core Program manager Nathan, can be someone else) and is reasonably filled out, I start the process of transferring the information from the template Excel to metabase. I used to edit the template itself, e.g. to fill in hidden attributes columns, but no longer do so as it was IMO unnecessary extra work.
 
+Some things to keep in mind when entering values:
+
+- Avoid non-ASCII characters if reasonable. You can use an [online Diacritics Remover](https://pteo.paranoiaworks.mobi/diacriticsremover/) for this.
+- If you paste an Excel cell, it inserts an unwanted newline character at the end. It's better to edit the cell in Excel and copy the text from there.
+
 I populate metabase for a new dataset in this order:
 
-1. Tables that do not reference other tables via FKs 
-- DataSet. Edit title and abstract as needed during.
-- DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this. 
+1. Tables that do not reference other tables via FKs
+
+- DataSet. Edit title and abstract as needed.
+- DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this.
 - DataSetTemporal
 
 Common pitfalls:
+
 - Forgetting closing tags in docbook formatted abstract/methods
-- Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Use "&amp;"
+- Having ampersands "&" in docbook formatted things. Very common in references. This will result in a "failed to parse" xml error in the very last EML generation step. Escape the ampersand like "&amp;", or if you're reading the rendered version of this markdown, "&amp;amp;".
 - Having less than/greater than signs "</>" in docbook formatted things.
 
 2. Tables that do reference other tables via FKs but still are relatively simple
-- DataSetEntities
-- DataSetSites
+
+- DataSetEntities - Use "data table" for EntityType for MetaEgress to process it as such. MetaEgress will treat anything else as otherEntity.
+- DataSetSites - we typically just use bounding boxes for lagoons
+- DataSetTaxa - Use the lowest taxa in the dataset. The rest of the hierarchy is filled in by MetaEgress.
 - DataSetKeywords
 - DataSetPersonnel
+- DataSetPublications - For cited publications in the methods or abstract, add rows to this table with the RelationshipType `literatureCited`.
 - DataSetAnnotation
 - DataSetAttributeAnnotation
 - DataSetMethod* (Software/Protocols/Instruments/Provenance). With the exception of Provenance, the other tables haven't seen play so far.
 
 Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
 
+You can search the following resources for semantic annotation terms. We typically use terms from ENVO or ECSO. We almost always apply the term ENVO_00000038 for a dataset to indicate that it is about "lagoon".
+
+- [ENVO](https://www.ebi.ac.uk/ols/ontologies/envo)
+- [BioPortal](https://bioportal.bioontology.org/search) - Searches many ontologies including ENVO and ECSO
+
 3. Tables that are more involved
+
 - DataSetAttributes (remember: check units (1) if they're in EMLUnitDictionary yet, and (2) if they have abbreviations in our style yet)
 - DataSetAttributeEnumeration
 - DataSetAttributeMissingCodes
 
 Sometimes it is easier and quicker to copy attributes and enumeration/missing codes from similar existing datasets. This is especially true for Core Program datasets. 
 
-Common pitfalls: 
+Common pitfalls:
+
 - not having a TextPatternDefinition when attribute is nominalText or ordinalText. I normally just say "any text".
 - not having an Unit or a NumberType when attribute is interval or ratio 
 - enumerated (categorized/coded) attributes MUST be specified as nominalEnum or ordinalEnum. Otherwise even if they have corresponding entries in DataSetAttributeEnumeration, resulting EML will not have code/definition pairs
@@ -814,10 +844,11 @@ Common pitfalls:
 ### Exporting EML
 Once metadata in metabase is complete, it's time to start data processing and exporting EML. One does this in R.
 
-- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RProject has to be created manually; I haven't found a way around that. 
-- The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments. 
+- Open up the RProject associated with the dataset and open up script `dataset(datasetID).R`. This script would have been generated from template for you if `bleutils::init_datapkg()` was called to initialize the package. The RProject has to be created manually; I haven't found a way around that.
+- The script should be set up with most of the script lines you need, with dataset IDs subbed into function call arguments.
 
 In short, there are these function calls to execute each time you generate a new EML:
+
 - `MetaEgress::get_meta()`. This queries metabase for that dataset ID. Most of the time this call will be wrapped in a call to `bleutils::append_units()`. The R console will ask you for your metabase username & password after this is called. Any user with READ privileges would suffice.
 - `MetaEgress::create_entity_all()`. This assembles the data entity components of EML.
 - `MetaEgress::create_EML()`. This takes the assembled entities and assembles the other stuff and outputs a complete emld list structure ready to be validated and written to file.
@@ -832,11 +863,22 @@ The resulting EML would be deposited into the same directory as the script.
 Make sure to do these tasks if a dataset needs to be revised:
 
 - Increment the Revision number in metabase's DataSet table. Note that this number is always the current *production* revision number. The *staging* revision number can get much higher. I manually edit revision numbers in EML when uploading to the staging server.
-- Add a note in metabase's pkg_mgmt.maintenance_changehistory table. 
+- Update dates in DataSetTemporal.
+- Updates dates and people in DataSetPersonnel.
+- Add a note in metabase's pkg_mgmt.maintenance_changehistory table.
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
 ## Data archiving
+
+<a id="what-we-archive"></a>
+### What we archive
+
+We archive most data funded purely by BLE. Exceptions are specialized data such as genomics data for which the PI has better knowledge about how to archive and typically handles it, though the PI should at least notify the IM so that IM can ensure the data are discoverable under the BLE umbrella.
+
+For datasets partially funded by BLE, we'd like to archive that as well so it shows up under the BLE umbrella and so it is well described. We're particularly eager to help students get archiving done right. However, other funding sources may have other requirements, and the IM team may be too limited in capacity to take every dataset related to BLE, so evaluate each sitiuation as it arises.
+
+Do not be offended if datasets slip through the cracks and get archived without the IM knowing. It has happened before and it will happen again. Just do your best and move on with life.  You can catalog such datasets without much work using Zotero in our Related Data collection.
 
 <a id="where-we-archive"></a>
 ### Where we archive
@@ -848,6 +890,10 @@ as GenBank for genomics data.
 Because we use EDI as the sole source of our online data catalog, we still
 archive in EDI at least a summary table for externally archived datasets such as
 genomics data.
+
+If we decide to not use EDI to archive qualitative datasets from surveys/interviews, ICPSR, QDR, and Dataverse are the big three repositories in that world.
+ICPSR has a mature system for handling sensitive data over many decades via review committees.
+For more info, see [ADC's annotated list of social science data repositories](https://docs.google.com/document/d/1FHfdYZZ3pXMPSncZ5eq1i0CvVNhnMM8_lttWMfyUayQ/edit#) and [ADC's social science resources](https://arcticdata.io/social-sciences/).
 
 <a id="which-member-node-are-we"></a>
 #### Which member node are we
@@ -998,6 +1044,8 @@ Once a dataset is archived, you can check its FAIR compliance at EDI or DataONE 
 * https://portal.edirepository.org/nis/reportviewer?packageid=knb-lter-ble.18.2
 * https://search.dataone.org/quality/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fknb-lter-ble%2F18%2F2
 
+You can also create your own reports following [EDI's guide to evaluate metadata content against FAIR criteria](https://ediorg.github.io/eml_content_analyses/EML_FAIR.html).
+
 <a id="our-websites-data-catalog"></a>
 ### Our website's data catalog
 
@@ -1017,7 +1065,7 @@ a. Any people associated with the dataset (i.e., people who appear as authors, c
 
 b. The information manager (IM) will briefly announce the dataset to the BLE team via the ble-lter-all listserv (ble-lter-all@utlists.utexas.edu), providing the citation which includes the DOI.
 
-c. The social media manager, as notified by the IM, will announce the dataset to the public via Twitter and Facebook.
+c. The social media manager (currently the Project Manager), as notified by the IM, will announce the dataset to the public via Twitter and Facebook.
 
 **Part 2: When a dataset is revised**
 
@@ -1029,7 +1077,7 @@ b. If only metadata are revised, e.g., fixing a typo in a contact address, then 
 <a id="ble-specific-datametadata-style-rules"></a>
 ## BLE specific data/metadata style rules
 
-Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER". 
+Refer to BLE as either "Beaufort Lagoon Ecosystems LTER" or "BLE LTER". Avoid using just "BLE" except when talking to other LTER people, as it's without context, and avoid the hyphenated form "BLE-LTER".
 
 <a id="types-of-datasets-by-ble-involvement"></a>
 ### Types of datasets by BLE involvement
@@ -1049,24 +1097,28 @@ We roughly categorize three types of datasets, according to the degree and kind 
 
 Per PI Yvette Spitz's request and concern over easily accessing attribute unit information, as of April 2020 we have decided to:
 
-- publish a short user's guide to accessing metadata, accessible from our website data catalog and at https://utexas.box.com/v/ble-access-metadata
+- publish on Box (Beaufort LTER > Website > FileLinks) a short user's guide to accessing metadata, accessible from our website data catalog and at https://utexas.box.com/v/ble-access-metadata
 - adopt a practice of appending abbreviated units to column names, e.g. "temp_C" or "DOC_g_L"
 
 ##### Here's how this is implemented during our normal workflow
 
 1. Attribute names are entered into metabase as usual. I.e. the column DataSetAttributes.ColumnName for above example would read "temp."
-2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius"
-3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e. referenced as FK in DataSetAttributes.Unit); as we make use of new units their abbreviations need to be entered as well. Use the SQL query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table. 
-4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviations, use them, e.g. "partPerMillion" is ppm. 
-5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` appends the unit abbreviation on file to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables. 
-	- If `append_units` is not called, EML metadata produced will not have units in column names
+2. If applicable, the attribute is associated with a fully spelled out unit, i.e. DataSetAttributes.Unit has "celsius".
+3. The handling IM makes sure that this unit has an abbreviation, i.e. the corresponding row in EMLUnitDictionary has column abbreviation filled out. Note: initially I've gone into metabase and filled out abbreviations for the units we do use (i.e., referenced as FK in DataSetAttributes.Unit); as we make use of new units their abbreviations need to be entered as well. Use the SQL query `SELECT DISTINCT id, abbreviation FROM lter_metabase."EMLUnitDictionary" d INNER JOIN lter_metabase."DataSetAttributes" a ON d.id = a."Unit";` to return a result set of only units we currently use. Edits on column abbreviation in the result set apply to the parent EMLUnitDictionary table.
+4. How to abbreviate: abbreviate each component in the unit according to convention, separating each component by underscores. No super/subscripts, no "per", no special characters (e.g. "micro" is u). E.g. "micromolePerMeterSquaredPerDay" becomes umol_m2_day. Where there are widely acknowledged existing abbreviations, use them, e.g. "partPerMillion" is ppm.
+5. During processing in R, e.g. in script dataset1.R (all datasets have this script within a R project folder), the `MetaEgress::get_meta` call gets wrapped by a call to `bleutils::append_units`, e.g. `metadata <- append_units(get_meta("ble_metabase", dataset_ids = 1))`. `append_units` appends the unit abbreviation on file to the attribute name after an underscore, e.g. "temp" becomes "temp_C" in all the appropriate metadata tables.
+	- If `append_units` is not called, EML metadata produced will not have units in column names.
 	- After, use `bleutils::rename_attibutes` to rename the headers of the appropriate data file. Columns in data must be in exact order of attributes listed in metadata; make sure this is true. `rename_attributes` requires the queried metadata list structure as input, so it will always take whatever attribute names are listed, whether `append_units` was called or not.
-6. proceed as usual with EML generation.
+6. Proceed as usual with EML generation. Make sure that names in metadata match names in data, and that you haven't accidentally appended units to one and not the other.
 
-##### Why we do it this way:
+To skip appending units IN METADATA to certain attributes: for example, we do not append "_degree" to lat/lon column names. I'm assuming that similarly we do not want to append the unit to any attribute names with the "degree" unit. To achieve this, I do not provide an abbreviation for the degree unit in Metabase.
+	
+To skip appending units IN METADATA to certain entities: use the argument "skip" to `append_units()` and provide the entity number(s). 
+
+##### Why we do it this way
 
 - No modifications to metabase schema. We are pretty pro-vanilla-metabase. The column we use EMLUnitDictionary.abbreviation is an existing column and an under-utilized one; we only modify its contents.
-- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop, without having to go in and edit all the attributes using that unit. 
+- No direct modification of attribute names mean that all attributes sharing the same unit are appended to consistently and using the same abbreviation. If we want to change the abbreviation we can do it and re-generate EML in one fell swoop, without having to go in and edit all the attributes using that unit.
 - Very easy to leave it off a dataset (just don't call `append_units`), although finer grained control, e.g. leaving units off of specific columns, is not possible to do in R at the moment.
 
 ##### Updating the EMLUnitDictionary table
@@ -1077,29 +1129,31 @@ Updates to the EMLUnitDictionary might be necessary with new versions of EML. Ou
 
 Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to standardize our representation of date-times in our datasets:
 
-- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-05". 
-- Sampling teams have been asked to provide approximate times samples are collected. 
-- When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time. 
+- All date-times will follow ISO 8601 standard, include the time zone offset, and have a resolution of seconds. e.g. datetime strings will always look like this "2022-02-07T15:33:00-08".
+- Sampling teams have been asked to provide approximate times samples are collected.
+- We don't enforce a specific time zone, but times will likely be in AKDT (-08) or UTC (+00).
+- When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time.
 
 <a id="core-program-data"></a>
 ### Core Program data
 
-Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error. 
+Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error.
 
-There are two documents on Box with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands. 
+There are two documents on Box (Beaufort LTER > Core Program > Data notes) with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands.
 
-This handbook version is a much more exhaustive version for IMs. 
+This handbook version is a much more exhaustive version for IMs.
 
-#### Types of CP data 
+#### Types of CP data
 
-According to the source: 
+According to the source:
+
 - data from water samples
 - data from sediment samples
 - data from moorings/instruments
 
-The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is. 
+The first two are discrete and obtained during our three annual field campaigns, while moorings give continuous data. This determines how we apply some of the following practices, so be sure to know which type the dataset you're working with is.
 
-#### Dataset titles 
+#### Dataset titles
 
 - Mention time series if data is continuous from moorings
 - Mention water/sediment if sample type is such
@@ -1107,7 +1161,7 @@ The first two are discrete and obtained during our three annual field campaigns,
 - E.g. "Sediment pigment from lagoon sites along the Alaska Beaufort Sea coast, 2018-ongoing"
 
 <a id="data-columns"></a>
-#### Data columns 
+#### Data columns
 
 Column names:
 
@@ -1132,7 +1186,7 @@ Standard columns, also in this order:
 - station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
 - latitude
 - longitude
-- station_depth
+- station_depth: only include if provided by the PI for a given dataset
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
@@ -1144,14 +1198,13 @@ Data sort, sort all CP datasets by these columns in this order before submission
 - date_time
 - water_column_position (discrete water samples only)
 
-#### Entities 
+#### Entities
 
 Entity names:
 
 - Include variables in data
-- Include timeframe to year resolution
 - Do not include "BLE LTER"
-- Example: Dissolved organic carbon and total dissolved nitrogen, 2018-ongoing
+- Example: Dissolved organic carbon and total dissolved nitrogen
 
 Data table entity descriptions:
 
@@ -1169,14 +1222,14 @@ Other entity descriptions:
 File names:
 
 - underscored
-- Prepend with "BLE_LTER"
-- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g. dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel". 
+- Prepend with "BLE_LTER". This helps distinguish BLE files from others if the user has downloaded many files.
+- Then with the nickname for the dataset if applicable, e.g. "hydrography", not if dataset is nicknamed after PI. I avoid PI nicknames in contexts outside of BLE IM team though, as it makes less sense for users. E.g., dataset ID is nicknamed informally "Rawlins" within the team, after Mike Rawlins, but in the published dataset the shortname is "hydromodel".
 - For data files: add one or two word descriptive moniker for data, if the dataset has more than one primary data sheet.
-- Examples: 
-	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary. 
+- Examples:
+	- "BLE_LTER_hydrography_CTD.csv". I used to add the timeframe to filenames, e.g. "BLE_LTER_CTD_2018_ongoing.csv" but on reflection I do not think this is necessary.
 	- "BLE_LTER_sediment_pigment.csv" "sediment_pigment" is the dataset nickname, but also the content of the only data table.
 - Personnel tables are named "BLE_LTER_datasetnickname_personnel.csv". E.g. "BLE_LTER_hydrography_personnel.csv".
-- Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv". 
+- Additional files that are not data, e.g. deployment details, script, or schematics: use the the same principles as naming data files. E.g. "BLE_LTER_hydrography_CTD_QAQC.Rmd" or "BLE_LTER_SIMB_deployment_information.csv".
 
 
 <a id="personnel--responsible-parties"></a>
@@ -1185,7 +1238,7 @@ File names:
 <a id="creator"></a>
 ##### Creator
 
-Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form: 
+Core Program packages only have one creator with the organization name "Beaufort Lagoon Ecosystems LTER, Core Program". See the entry in metabase with NameID "blecreator-core". This is in order to generate citations in this form:
 
 > Beaufort Lagoon Ecosystems LTER, Core Program. 2019. Stable oxygen isotope ratios of water (H2O-d18O) from coastal river, lagoon, and open ocean sites along the Beaufort Sea, Alaska, 2019-ongoing. Environmental Data Initiative. https://doi.org/DOI_PLACE_HOLDER. Dataset accessed 12/04/2019.
 
@@ -1206,39 +1259,43 @@ To generate a CSV table once metabase is populated, use the R function
 
 This function takes care of querying metabase for the specified dataset ID, and spits out a ready made personnel CSV. Rough naming convention is `BLE_LTER_[dataset nickname]_personnel.csv`. 
 
-I call this function from inside the directory with other data files. I list the personnel entity last in metabase: e.g. if there are five actual data entities, the EntitySortOrder for the personnel table is 6. Note that due to a MetaEgress quirk, all dataTables will be listed before all otherEntities. 
+I call this function from inside the directory with other data files. I list the personnel entity last in metabase: e.g. if there are five actual data entities, the EntitySortOrder for the personnel table is 6. Note that due to a MetaEgress quirk, all dataTables will be listed before all otherEntities. This does not matter in EML since the sort order is mainly used in Metabase as a key field and does not appear in EML, but it does mean the order of entities in the repository may differ from the order in Metabase.
 
 Remember to list the seven columns of the personnel CSV in DataSetAttributes. Easiest way is to duplicating the same set of attributes from a previous Core Program dataset. 
 
 <a id="stations"></a>
 #### Stations
 
-Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stenfansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
+Core Program sampling makes use of a certain number of fixed stations. Normal practice for PIs in their data is to include station codes (e.g. KALD1). For Core Program datasets and most other datasets where this is applicable, it's our practice to include contextualizing columns in the same data table. These include: station name (KALD1 is Kaktovik Lagoon Deep Station 1), lat/lon coordinates, habitat type (river/ocean/lagoon), type (primary/secondary/river/ocean), lagoon (Elson East, Elson West, Stefansson, Simpson, Kaktovik, Jago), and node (West/Central/East).
 
-I maintain a master reference sheet of stations on Box and their information, and which gets copied to an internal data source in the `bleutils` package. This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes.
+I maintain a master reference sheet of stations and their information on Box (BLE-IM > BLE_LTER_CP_Stations.csv). This means that one can use the function `add_cp_cols` from the R package `bleutils` to append the information quickly to a R data.frame, assuming that it contains a column containing station codes. As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. `add_cp_cols` reads the information directly from Box via a direct link. 
 
-Example usage: 
+
+Example usage:
 
 ```r
 # df is a R data.frame with "station" column containing station codes
 df <- bleutils::add_cp_cols(df, "station")
 ```
 
-**Sync the `bleutils` version of station information with the master sheet**
+For trawls, we only record the from station. In practice, we trawl/tow for ~5 mins, and at 1-2 kts that's just a copule hundred meters. So we really are very close to one station and not very close to the other. And during ice-cover, we pull the nets/dredge right on top of the station, not between. Also FYI, trawls happen between shallow stations only, or deep stations only, but never from shallow to deep or vice versa.
 
-As field crews sample one-off stations for Core Program samples, new stations may appear in CP data. I add even the one-off ones to the master sheet to facilitate use of `bleutils` functions. However, this needs to be synced to the internal version that the package has access to. 
+#### Taxonomy
 
-After editing the Excel file on Box, I then run `bleutils::update_cp_stations()` on the R console while in sort of "dev mode" for bleutils. This goes to the local version of the Box file, checks for any differences between the Box and the `bleutils` versions, and then updates the `bleutils` version if needed. Change the `source_file` parameter to point to the Excel sheet on your machine if needed. The `sheet` parameter refers to the relevant Excel sheet, and is default set to "lookup". 
+In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
 
-After this step, 
-- 1. run `devtools::document()` for good measure, 
-- 2. then Git commit the change to Github, 
-- 3. then run `remotes::install_github("BLE-LTER/bleutils")` again on your local installation of R to install the package again, 
+- Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
+- We'll use WORMS but allow other authorities.
+- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS).
+- TaxonName will be the lowest keyed classification.  We will not include "sp." or "spp." in the TaxonName.
+- We will not accept anglicized names for taxa that have been identified, e.g., Copepod is not acceptable; must use Copepoda.
+- Some English words will be used like "ice algae", "phytoplankton", "detritus", etc., to describe end-members.
+- Researchers should remove nondescript data rows such as "unidentified" or "other".
+- sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the researcher's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.  We recommend indicating the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
+- Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
+- We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
 
-and if you need to use the functions right away:
-- 4. then restart your R session,
-- 5. then load the package again using `library(bleutils)`
-- 6. you can now use the functions with the updated station information
+To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match).
 
 #### Misc
 
@@ -1264,7 +1321,7 @@ We add a dataSource element in EML via metabase's DataSetMethodProvenance table 
 
 Follow conventions set out by PI and edit sparingly when needed and when feasible. Most metadata conventions from the Core Program should still be followed to the most feasible degree.
 
-The biggest difference between CP datasets/PI-driven/non-BLE funded datasets is the degree of attribution we give to BLE in the metadata. 
+The biggest difference between CP datasets/PI-driven/non-BLE funded datasets is the degree of attribution we give to BLE in the metadata.
 
 Generally, we give credit to BLE in these following places:
 
@@ -1274,7 +1331,9 @@ Generally, we give credit to BLE in these following places:
 4. Our LTER award is listed as the funding source
 5. BLE is listed as the metadata provider
 
-For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this). 
+For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 4, and keep 2 and 5. This means removing any mention of BLE as a project in the creator + associated parties list, so only the people involved appear in the citation, and modifying the boilerplate to remove BLE project and funding information, and replace with appropriate copy (ask the PI for this).
+
+For cases in between, such as in-kind support from BLE, typically skip 1 and 3. Modify the boilerplate to describe the primary funding source, but in the funding section describe the specific contributions from BLE. Since the award element is repeatable, provide an award element for each funding source, including one for BLE.
 
 <a href="#header">Back to top</a>
 <a id="website"></a>
@@ -1348,6 +1407,22 @@ To change footer/header/common HTML `<header>` element:
 - Browse to root `LTER-website` folder.
 - Enter this command: `node apply_template.js`.
 
+<a id="website-file-download-links"></a>
+## Website file download links
+
+For downloadable files such as our metadata template or REU applications, we usually link out to the file on Box. This has some advantages over storing the file in the website GitHub repo:
+
+- GitHub can't track the actual changes in binary files, so there's not much point to using GitHub for these files except to keep all website files in one place.
+- Collaborators can update files without knowing Git. They simply upload a new copy of a file to Box, overwriting the existing file.
+- Box provides download statistics.
+
+However, there is also one big disadvantage with Box: Collaborators with enough permissions on Box can break the file links. For example, this might happen if a collaborator decided to reorganize Box folders without alerting the IM.  To avoid this, the IMs could use their own Box folder, which is why you'll currently find downloadable files in two separate Box folders:
+
+- Box > Beaufort LTER > Website > FileLinks. This folder is shared by other BLE team members.
+- Box > BLE-IM > Public. This folder is only accessible by the IMs.
+
+Moving forward, we don't have a strong recommendation on which Box folder to use, or whether we should put the files in Git instead. Until a compelling reason to make a decision surfaes, for now we just recommend keeping like files together. For example, old REU announcements are in FileLinks, so place future REU announcements there.
+
 <a id="branding"></a>
 ## Branding
 
@@ -1405,7 +1480,7 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 <a id="algolia-search"></a>
 ## Algolia search
 
-Here we document the nitty gritties of Algolia search on our website. 
+Here we document the nitty gritties of Algolia search on our website.
 
 #### Why we like it
 
@@ -1487,7 +1562,7 @@ Think about logical breaks in content so that headings (and therefore searchable
 
 3. Commitments and usage limits
 
-The free tier we get with Algolia and Netlify allows for 20 monthly "commitments". According to their website, a commitment equals to 1000 searches and 1000 records. We are probably not in any danger, but it is something to look out for. 
+The free tier we get with Algolia and Netlify allows for 20 monthly "commitments". According to their website, a commitment equals to 1000 searches and 1000 records. We are probably not in any danger, but it is something to look out for.
 Algolia will also send usage reports to the email address associated with the Netlify page. This report details keywords used and their frequencies, etc., and whether there were any keywords that resulted in no hits. This latter especially would be useful to think about new content or SEO.
 
 4. CSS mods
@@ -1555,19 +1630,25 @@ Easiest way is to use the Zotero connector, a browser add-on for Chrome/Firefox/
 
 Once the metadata is harvested, make sure to:
 
-- add the item to appropriate sub-collection under the LTER-BLE group library:
+- Add the item to appropriate sub-collection under the LTER-BLE group library:
 	- "For-Website" if item is to appear on publication page. These are primarily peer-reviewed journal articles but can include papers in conference proceeding as long as they are published in an edited volume.  What we are trying to avoid is listing a bunch of conference abstracts.
 	- "For-Network" if item is to appear in the broad LTER network group library (see [instructions for contributing to the LTER group library](https://lternet.edu/lter-publications-and-products-instructions/))
 	- "Related Data" if item is a related dataset
-- add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
-	- LTER-Funded for work funded by BLE
-	- LTER-Enabled - 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
-	- Foundational for work we are building our work on
-	- LTER-BLE for work added to the For-Network collection
-- add data URL if applicable to "Extra" field. URL **must** begin with "https://doi.org/"
-- edit metadata fields as needed if Zotero wasnt able to fill them out
-- skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
-- if your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
+- Add appropriate custom tags (via Tags tab, right hand pane on Zotero desktop): 
+	- **Supported** for work directly funded or otherwise enabled by BLE. Enabled includes 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets.
+	- **Foundational** for work we are building our work on
+	- **LTER-BLE** for work added to the For-Network collection
+	- **LTER-IM** for information management-related work
+	- **LTER-EDU** for education-related work
+	- **LTER-Funded Data at Other Archives** for related data funded at least in part by BLE which do not have representation in BLE's datasets at EDI
+	- **Data Used by BLE** for external datasets that BLE uses
+	- **Legacy Data** for data related to and predating BLE 
+- Look for and edit any weirdness such as incorrect first author
+- Skim the work for unpublished BLE datasets, and if any are found, work with the investigator to publish them (while you're at it, it wouldn't hurt to read the work and build your understanding of BLE science!)
+- Add data URLs if applicable to "Extra" field. URL **must** begin with "https://doi.org/". Each URL must appear on its own line.
+- If you added data URLs, find the data package in EDI, scroll to the bottom, and add the journal citation
+- Edit metadata fields as needed if Zotero wasn't able to fill them out
+- If your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.js in the website root folder. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
 <a id="using-zotero-for-datasets"></a>
@@ -1581,6 +1662,11 @@ Once the metadata is harvested, make sure to:
 The DOI field for entries should NOT start with "https://doi.org" but "10.XXXX". Otherwise, the Zotero API will pre-pend the former string resulting in duplication.
 
 If you are adding a Core Program dataset as a Zotero entry (i.e. via using the Zotero browser button while on the EDI data portal), and the first author reads "Beaufort Lagoon Ecosystems LTER, Core Program" with the comma, then Zotero will read in "Core Program" as a first name. This would then lead to the exported citation possibly listing author "Beaufort Lagoon Ecosystems LTER, C. P.". To fix this, go to the entry details. Under the first author, remove "Core Program" from the first name field and paste it into the last name field. The rest of the metadata provided by EDI and extracted by Zotero is usually pretty good and needs no modifications. 
+
+Deprecated Zotero tags:
+
+- **LTER-Funded** for work directly funded by BLE. This is now replaced by **Supported**.
+- **LTER-Enabled** for 1) pubs by BLE personnel that were enabled by the LTER but funded through other sources, 2) pubs by non-BLE personnel that were enabled by BLE through leveraging of logistical support, sample collections, etc., and 3) pubs by non-BLE personnel that use BLE datasets. Cases 1 and 2 were absorbed into **Supported**. For case 3, we harvest this as a table when needed using the [citations_for_data repo](https://github.com/BLE-LTER/citations_for_data).
 
 <a id="linking-data-and-pubs"></a>
 ### Linking data and pubs
@@ -1609,9 +1695,9 @@ We do not yet have a dedicated tool for central personnel management beyond:
 Make sure to do the following:
 
 - Update the Box spreadsheet under Beaufort LTER/Personnel
-- Update Marty Downs if appropriate
+- Update the LTER Network's list ([see instructions](https://lter.github.io/im-manual/site-personnel))
 - Update our website display
-- Update metabase in several places (lter_metabase."ListPersonnel" and mb2eml_r.boilerplate.project). They might not have an entry in metabase yet.
+- Update metabase in several places (lter_metabase."ListPeople" and mb2eml_r.boilerplate.project for core personnel). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
 
 <a id="mailing-list-admin"></a>
@@ -1632,7 +1718,7 @@ These are the lists as of June 2020:
 
 1. [ble-lter-all@utlists.utexas.edu](ble-lter-all@utlists.utexas.edu)
 
-Includes everybody: PIs, PMs, IMs, students, postdocs, affiliates (e.g. Amanda Kelley) and other project personnel (e.g. Stephanie Jump, Brandy Cervantes). Might exclude affiliates on a
+Includes everybody: PIs, PMs, IMs, students, postdocs, REUs, RETs, affiliates (e.g. Amanda Kelley) and other project personnel (e.g. Stephanie Jump, Brandy Cervantes). Might exclude affiliates on a
 case by case basis. 2020 PI meeting in Anchorage agreed on using a listserv like
 this for potential paper and project discussions. 
 
@@ -1642,7 +1728,7 @@ Includes all PIs and Tim, who admins the list. Others can post messages to the l
 
 3. [ble-lter-student@utlists.utexas.edu](ble-lter-student@utlists.utexas.edu)
 
-Includes all (and, per Ken and Jim, only) officially affiliated students. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is so that people can post e.g. papers reading group or forwarded job ads, etc.
+Includes all (and, per Ken and Jim, only) officially affiliated students including REUs. Others can post messages to the list after moderation from an admin but would not see regular conversations. This is so that people can post e.g. papers reading group or forwarded job ads, etc.
 
 4. [ble-lter-staff@utlists.utexas.edu](ble-lter-staff@utlists.utexas.edu)
 
@@ -1689,7 +1775,9 @@ config options of note:
 <a id="data-citations"></a>
 ### Data citations
 
-We need a detective! The mystery: How to find where our data are cited.
+We use the PASTA API to get DOIs and descriptions of all BLE datasets. Then we use DataCite and Crossref to get data citation DOIs and info on those items, respectively. See the [citations_for_data repo](https://github.com/BLE-LTER/citations_for_data) for example code.
+
+Some alternatives we considered:
 
 a. Google scholar detects automated scraping and bans IPs. The current workaround is to pay for a proxy service that spawns our requests across a gazillion servers/IPs (one example here), but that is not honoring Google's policy so we (BLE) won't do that.
 
@@ -1698,8 +1786,6 @@ b. Matt Jones suggested scythe, which I gather scrapes other sources.
 c. I also wonder since "Beaufort Lagoon Ecosystems LTER" appears amongst author names for every dataset, if we could just search once for that manually, and then have some code to parse the results.  It should be a partial match, since we also have "Beaufort Lagoon Ecosystems LTER, Core Program" as an author.
 
 d. Or we could just manually search Google Scholar for every DOI associated with every revision of every BLE dataset. Ugh. This is the baseline result, which we'll use to evaluate the effectiveness of other approaches.
-
-How to get every DOI associated with every revision of every BLE dataset: one of counter's two result spreadsheets will give you this, see below. 
 
 <a id="data-downloads"></a>
 ### Data downloads
@@ -1713,6 +1799,19 @@ Bits of wisdom:
 I've been getting data downloads from the PASTA counter library: https://github.com/PASTAplus/counter. Without custom params, the time period would be from 2013 (when PASTA started and way before BLE) to today (the date you run the program).
 
 The counter library reports download counts by data entities, and sums of all entities for a package. For reporting purposes, these are the numbers we'll use if needed. The Arctic Data Center reports that their downloads are the same as PASTA's and the same as DataONE, so there is no need to add up numbers.
+
+<a id="fair-scores"></a>
+### FAIR scores
+FAIR is a popular suite of metadata standards. Some authorities have implemented a set of checks according to the FAIR criteria. DataONE even assigns each dataset a FAIR score, which is great for our reporting purposes:
+
+Here's how I have obtained a FAIR score for our entire corpus:
+
+- BLE graphs are generated from this trial custom portal: https://search.dataone.org/portals/5820380/Metrics. I then took the percentages for each category from the legend.
+
+- DataONE average graphs are taken from here: https://search.dataone.org/profile. We can use these percentages to compare with ours. 
+
+- See here for an example assessment report on *one* dataset, and corresponding checks in each category: https://search.dataone.org/quality/https%3A%2F%2Fpasta.lternet.edu%2Fpackage%2Fmetadata%2Feml%2Fknb-lter-ble%2F14%2F3
+
 
 <a id="presentations"></a>
 ## Presentations
