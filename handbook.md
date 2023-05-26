@@ -59,7 +59,7 @@ date: 2021-08-29
 		- [Logo color reference](#logo-color-reference)
 		- [North Slope coastline motif](#north-slope-coastline-motif)
 	- [Miscellaneous website notes](#miscellaneous-website-notes)
-	- [Algolia](#algolia)
+	- [Algolia search](#algolia-search)
 - [Bibliographic management](#bibliographic-management)
 	- [Zotero best practices](#zotero-best-practices)
 		- [How to add a new item](#how-to-add-a-new-item)
@@ -537,11 +537,13 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 A scheduled task on An's computer backs up the database to the **daily_backups**
 folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
 
-Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea. 
+Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time for me and quitting DBeaver solved it, so yea. 
 
 Having these backups mean that we're not at all tethered to any particular instance of a database, or the PG server on my computer (despite devoting so many words to its setup). It can implode tomorrow and all I've lost is the time it takes to set up a new one, plus some random test databases.
 
 The backups folder can be a bit cluttered, since there are hundreds of backups, soon to be thousands. We also sometimes go weeks without change to the underlying metabase, so there will be many duplicates in content. I've contemplated writing a little script to delete these duplicates once in a while. However, the duplicates in content are not actually true duplicates from a computer's perspective, since the pg_dump utility includes the date and time in the text body, not just the file names, so it's a little harder to tease this out.
+
+2023-05-25: another user reported having permissions trouble with the public schema, which often gets created automatically upon database creation and whose owner seems to default to the superuser postgres. One stopgap measure I use to create backups/dumps that step around this issue is to de-select the public schema in the Backup dialogue in DBeaver.
 
 ##### Restore
 
@@ -1400,8 +1402,8 @@ Land dark green (#51612b) as accent "dark" background color. Use white text agai
 
 - Job postings need to include a diversity statement. See email communication from Ken circa Dec 2019. Example: Our BLE LTER program benefits from nurturing a culture of diversity. We encourage applications from potential students that are traditionally underrepresented to help us connect our research to the broader global community.
 
-<a id="algolia"></a>
-## Algolia
+<a id="algolia-search"></a>
+## Algolia search
 
 Here we document the nitty gritties of Algolia search on our website. 
 
