@@ -8,7 +8,7 @@ Dear Person,
 
 Welcome to the team! My name is An and along with Tim Whiteaker whom you'll meet later for sure, we are the data/information managers for the BLE LTER. Ask us anything about existing/upcoming BLE or LTER data, our website, mailing lists, data analysis, data munging, etc.
 
-I have added you to our relevant mailing lists. [ble-lter-all@utlists.utexas.edu](mailto:ble-lter-all@utlists.utexas.edu) is for general announcements to the entire group, and [ble-lter-student@utlists-utexas.edu](mailto:ble-lter-student@utlists-utexas.edu) is for students. You should start receiving messages from them soon, and remember that you can send your own messages (maybe an introduction?) to these groups as well.
+I have added you to our relevant mailing lists. [ble-lter-all@utlists.utexas.edu](mailto:ble-lter-all@utlists.utexas.edu) is for general announcements to the entire group, and [ble-lter-student@utlists.utexas.edu](mailto:ble-lter-student@utlists.utexas.edu) is for students. You should start receiving messages from them soon, and remember that you can send your own messages (maybe an introduction?) to these groups as well.
 
 On [our website](https://ble.lternet.edu/) you can read more about the project and team. Of particular interest may be:
 
