@@ -218,6 +218,8 @@ Tim and An have their own individual accounts to metabase. However there are acc
 Stache (UT service) contains the passwords to these shared accounts.
 For other things that are individual-based, a new IM team member will need to be granted access and appropriate privileges.
 
+The Core Program lead (Nathan McTigue currently) knows the Twitter credentials.
+
 #### Getting remote access 
 
 How to remote access into your UT desktop, if based out of UT and working remotely:
@@ -1353,7 +1355,7 @@ Somewhat exhaustive list of website technologies we use:
 - Leaflet for maps
 - Google Fonts for webfonts (Libre Franklin)
 - Google Analytics for tracking usage
-- Twitter embedded timeline
+- Twitter embedded timeline (disabled due to Twitter bug as of 2023-07-19)
 - YouTube for embedded videos
 - Custom apps (see Tools we develop section):
 	- Data Catalog built on PASTA API
