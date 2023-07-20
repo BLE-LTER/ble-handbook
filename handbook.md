@@ -201,7 +201,7 @@ We use many tools that will need logins, some needing certain privilege levels. 
 - UTLists (Sympa mailing list management software) `+`
 - Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups.
 - Subscription to the im@lternet.edu mailing list, plus imc@lternet.edu for the lead IM
-- Google Account for YouTube, etc. - beaufortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with our lead PI Ken Dunton
+- Google Account for YouTube, etc. - beaufortlagoons@gmail.com. Credentials in Tim's UT Stache, shared with our lead PI Ken Dunton. You must log in once every two years to keep the account active.
 
 Legend:
 
