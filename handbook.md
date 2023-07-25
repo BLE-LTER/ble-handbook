@@ -197,7 +197,7 @@ We use many tools that will need logins, some needing certain privilege levels. 
 - Algolia for website search `$`
 - Collaborator to the BLE-LTER Github organization
 - Editor on Zotero group library
-- EDI's three portals: production, staging, and development (one login for all)
+- EDI's three portals: production, staging, and development (one login for all) (credentials in UT Stache)
 - UTLists (Sympa mailing list management software) `+`
 - Slack groups for LTER IMs (at https://lter.slack.com). Optional: EDI/NCEAS groups.
 - Subscription to the im@lternet.edu mailing list, plus imc@lternet.edu for the lead IM
@@ -212,6 +212,10 @@ Legend:
 `$` Tim only has the credentials
 
 Most of these are individual accounts and each IM team member manage their own, however some accounts are shared between the BLE IM team as a whole. The most important is the PASTA 'BLE' account under 'LTER' affiliation. Only this account can upload new or revised data packages with the "knb-lter-ble" scope. All three EDI portals (production, staging, and development), plus the corresponding LTER ones, share the same authentication system, and so we log on to all of them with the same credentials.
+
+[Click here to change the EDI password.](https://dashboard.edirepository.org/dashboard/auth/change_password)
+
+The link to reset the EDI password is in UT Stache.
 
 Tim and An have their own individual accounts to metabase. However there are accounts set to do certain things (e.g. 'backup_user' has read-only access to be able to dump database contents everyday).
 
@@ -395,7 +399,7 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 | read_write_user |  | {ble_group_readonly, ble_group_readwrite}  |  |
 | tim | Create role, Create DB, can login | {ble_group_owner, ble_group_readonly, ble_group_readwrite} |  |
 
-We use UT's Stache service to share passwords to the shared users. Tim and An each manage their own.
+We use UT's Stache service to share passwords to the shared users.
 
 **NOTE**: postgres is the superuser on the entire cluster on An's machine (or more generally, the default superuser on most clusters). Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since it's generally exceedingly difficult to remove ownership for superusers.
 
