@@ -814,7 +814,6 @@ Common pitfalls:
 - DataSetPersonnel
 - DataSetPublications - For cited publications in the methods or abstract, add rows to this table with the RelationshipType `literatureCited`.
 - DataSetAnnotation
-- DataSetAttributeAnnotation
 - DataSetMethod* (Software/Protocols/Instruments/Provenance). With the exception of Provenance, the other tables haven't seen play so far.
 
 Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
@@ -829,6 +828,7 @@ You can search the following resources for semantic annotation terms. We typical
 - DataSetAttributes (remember: check units (1) if they're in EMLUnitDictionary yet, and (2) if they have abbreviations in our style yet)
 - DataSetAttributeEnumeration
 - DataSetAttributeMissingCodes
+- DataSetAttributeAnnotation
 
 Sometimes it is easier and quicker to copy attributes and enumeration/missing codes from similar existing datasets. This is especially true for Core Program datasets. 
 
@@ -1184,8 +1184,8 @@ Standard columns, also in this order:
 - water_column_position: surface/bottom. There is also mid-column, which CP data does not use. Formerly we assigned river and ocean stations "not applicable" but now all shallow/river/ocean stations are assigned "surface." (discrete water samples only)
 - sample_depth (discrete water samples only)
 - [data columns, including notes]
-- collection_method: grab/pump (discrete water samples only)
-- station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2 
+- collection_method: grab/pump/sensor (discrete water samples or sensor measurements only)
+- station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2
 - latitude
 - longitude
 - station_depth: only include if provided by the PI for a given dataset
