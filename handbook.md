@@ -803,7 +803,7 @@ I populate metabase for a new dataset in this order:
 - DataSetMethod. Enter methods in docbook format, edit for formatting, tense, and clarity. I do this manually; but one can use pandoc (command line tool, comes with RStudio) to do this.
 - DataSetTemporal
 
-If entering complex equations, use docbook and LaTeX. See this [online LaTeX editor](https://editor.codecogs.com/) and this [LaTeX cheat sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf). See methods in [BLE.20](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=20) for an example.
+If entering complex equations, use docbook and LaTeX. See [what EDI supports](https://edirepository.org/news/news-20210430.00), this [online LaTeX editor](https://editor.codecogs.com/) and this [LaTeX cheat sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf). See methods in [BLE.20](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=20) for an example.
 
 Common pitfalls:
 
