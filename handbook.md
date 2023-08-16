@@ -43,6 +43,7 @@ date: 2023-02-17
 		- [Where we archive](#where-we-archive)
 		- [Who does the archiving](#who-does-the-archiving)
 		- [How we archive at EDI](#how-we-archive-at-edi)
+		- [Restricted dataset access](#restricted-dataset-access)
 		- [FAIR Checkers](#fair-checkers)
 		- [Our website's data catalog](#our-websites-data-catalog)
 		- [Data notification policy](#data-notification-policy)
@@ -1043,6 +1044,11 @@ redirects are OK. For example, try
 ```shell
 curl -i -L -X HEAD https://sbc.lternet.edu/external/InformationManagement/tmp/kelp_microsatellite_markers_CARP_20090910_geospatial.csv
 ```
+
+<a id="restricted-dataset-access"></a>
+### Restricted dataset access
+
+Suppose a journal requires a DOI for data and wants to see the data but the researcher doesn't want to make the data publicly available. EDI suggests this approach. We create a shared "BLE-reviewer" EDI user account. This user would be added to the EML access control rules of any data package (now and in the future) that falls into the use case under consideration. This would be an account that you manage and distribute to anyone requiring access during an embargo period. One aspect of managing such an account could be resetting the password from time to time to keep party access up-to-date.
 
 <a id="fair-checkers"></a>
 ### FAIR Checkers
