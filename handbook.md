@@ -548,8 +548,8 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 
 ##### Backups
 
-A scheduled task on An's computer backs up the database to the **daily_backups**
-folder once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to An's Box Sync folder, which gets auto-synced to the cloud, wherever that is. Yay for multiple backups to multiple servers!
+A scheduled task on Tim's computer backs up the database to the **daily_backups**
+folder on Austin disk once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to Tim's Box Sync folder, which gets auto-synced to  the BLE-IM/BLE_metabase_backups folder. Yay for multiple backups to multiple servers!
 
 Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea.
 
