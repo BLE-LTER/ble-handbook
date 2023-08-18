@@ -91,7 +91,7 @@ date: 2023-02-17
 <a id="introduction-to-ble-lter-information-management"></a>
 ## Introduction to BLE LTER Information Management
 
-Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term Ecological Research Network. The project was first funded in 2017 as one of three sites newest to the network. 
+Beaufort Lagoon Ecosystems (BLE LTER) is a new site and member of the Long Term Ecological Research Network. The project was first funded in 2017 as one of three sites newest to the network.
 
 Information management was integral to the project from the start; our NSF proposal included a detailed section on the data types we will produce and how each of them will be treated. The information management team has been important project members ever since.
 
@@ -107,7 +107,7 @@ See our website summary on our information management system here at https://ble
 <a id="preamble"></a>
 ## Preamble
 
-Dear reader, 
+Dear reader,
 
 We speak in first person throughout this handbook. Writing in a suitably third person, passive, or imperative voice didn't come naturally.
 
@@ -739,6 +739,10 @@ The R script created by `init_datapkg()` or `init_script()` has pre laid-out sec
 
 Data are read in from the FromPI directory, and written out to the `Clean` directory. This helps reproducibility and transparency of processing steps taken.
 
+#### Correcting data
+
+Avoid apostrophes in CSV files. They mess up the row count when MetaEgress computes number of records. Until MetaEgress is fixed, spell out contractions instead.
+
 #### netCDF
 
 ##### When to use
@@ -751,18 +755,18 @@ netCDF cannot be checked for data-metadata congruency by PASTA's ECC.
 
 This of course depends on the source format. We have done and attempted to do this twice as of March 2020 for datasets 5 (hydrology model by Mike Rawlins) and 7 (moorings by Jeremy Kasper) and have some insights.
 
-- R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. In our folder for dataset 7, see merge_nc.py for an example python routine and 
-netcdf.R for an example R routine. 
+- R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. In our folder for dataset 7, see merge_nc.py for an example python routine and
+netcdf.R for an example R routine.
 
-- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes at least 2 hours. R is indeed quite a bit slower than python here. 
+- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes at least 2 hours. R is indeed quite a bit slower than python here.
 
 - Mike Rawlins' dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
 
-#### netCDF metadata 
+#### netCDF metadata
 
 ##### in the netCDF file
 
-We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML. 
+We strive to make the netCDFs self-contained with complete metadata on their own. This might mean duplicating metadata already in EML, even if the netCDF will be packaged with EML.
 
 Our goal for netCDFs:
 
