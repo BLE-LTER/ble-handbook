@@ -726,7 +726,7 @@ What I do:
 
 In the EML_RProject_(datasetID) folder, create a subfolder for the current data year, e.g., "2022".
 
-Run `bleutils::init_script()` in any R console and specify that `type = "update"`, e.g., for dataset 15 with data updates from 2022, `bleutils::init_script(15, file.path(getwd(), "2022"), type = "update")`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "initial"` instead. So, you can also use that option outside of initiating a whole new package.
+Run `bleutils::init_script()` in any R console and specify that `type = "update"`, e.g., for dataset 15 with data updates from 2022, `bleutils::init_script(15, file.path(getwd(), "2022"), type = "update")`. Note that for `init_datapkg()` also calls `init_script()` but with `type = "init"` instead. So, you can also use that option outside of initiating a whole new package.
 
 Back to topic: this will create a script in the directory of your choosing named `dataset*datasetID*_*YYYYMM*.R`. The key thing about this script is that it will download the latest version of the dataset from EDI, and uses that definitive, archival version as the basis to which you will append new data. Aside from that, it has the usual library calls and sections to process data and then generate EML documents.
 
