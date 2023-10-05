@@ -1026,10 +1026,10 @@ it somewhere, and then sends the link so you can insert it into EML.
 
 Care to know more about why those supposedly direct links won't work? EDI uses
 an initial test with an HTTP HEAD call to ascertain the liveness of URLs.
-Because the assume that an HTML response is generally either an error or a
+Because they assume that an HTML response is generally either an error or a
 request to login - that is, not data (unless clearly stated in EML in the
-"physical/dataFormat/externallyDefinedFormat/formatName" as "text/html", they
-judge the quality test as a failure when they do receive a "Content-Type" as
+"physical/dataFormat/externallyDefinedFormat/formatName" as "text/html"), they
+judge the quality test as a failure when they receive a "Content-Type" as
 "text/html". In the case of the UTexas Box URLs for a CSV file, for example,
 they see a "text/html" content type for the HEAD method (in addition to a 404
 Not Found response), but a "text/csv" for the GET method.  For example, the
