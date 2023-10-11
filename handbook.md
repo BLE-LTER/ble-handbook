@@ -1790,6 +1790,8 @@ config options of note:
 <a id="obtaining-metrics"></a>
 ## Obtaining metrics
 
+To produce a list of BLE datasets in CSV format, or to see when each revision was uploaded, see the Reports section of the [EDI dashboard](https://dashboard.edirepository.org/dashboard/health/glance).
+
 <a id="data-citations"></a>
 ### Data citations
 
