@@ -1204,7 +1204,7 @@ Standard columns, also in this order:
 - station_name: fully spelled out station names, e.g. Kaktovik Deep Station 2
 - latitude
 - longitude
-- station_depth: only include if provided by the PI for a given dataset
+- station_depth: only include if provided by the PI for a given dataset. This is likely only included in the YSI dataset since it reflects the physiochemical properties of the station while we occupy for sampling. If we added station depth to all the CP datasets, it would be identical to what is currently part of the YSI dataset since we only have one depth measurement per visit.
 - habitat_type: lagoon/river/ocean
 - station_sampling_priority: primary/secondary/river/ocean (discrete samples only)
 
