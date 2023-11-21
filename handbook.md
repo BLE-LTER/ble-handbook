@@ -1724,7 +1724,7 @@ Bios for former students should be removed from the student page on the website.
 ## Mailing list admin
 
 We maintain several mailing lists for BLE LTER. Distribution and management are
-based on [UTLists](utlists.utexas.edu), which in turn is based on Sympa
+based on [UTLists](https://utlists.utexas.edu), which in turn is based on Sympa
 software. 
 
 We have settled on these settings. However, see config section below if you ever wanna change.
@@ -1770,7 +1770,7 @@ These tasks need to be done periodically:
 <a id="list-config"></a>
 ### List config
 
-Most of this is done at initial setup. Adjust as needed. Note that An also created and is admin on another list called [ble-lter-test@utlists.utexas.edu](ble-lter-test@utlists.utexas.edu) for config testing purposes; e.g. all subscribers are just me. 
+Most of this is done at initial setup. Adjust as needed. You can create your own list for config testing purposes if needed. 
 
 For documentation, I've found that [this article collection from UChicago](https://uchicago.service-now.com/it?id=kb_article&kb=KB00016472) is more helpful that what UT offers. Both unis seem to have similar Sympa instances; the admin config options are named similarly. The UChicago articles expand on how different options behave. 
 
