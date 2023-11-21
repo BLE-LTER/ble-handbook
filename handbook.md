@@ -1714,9 +1714,11 @@ Make sure to do the following:
 
 - Update the Box spreadsheet under Beaufort LTER/Personnel
 - Update the LTER Network's list ([see instructions](https://lter.github.io/im-manual/site-personnel))
-- Update our website display
+- Update our website display (team page, and student research page if student)
 - Update metabase in several places (lter_metabase."ListPeople" and mb2eml_r.boilerplate.project for core personnel). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
+
+Bios for former students should be removed from the student page on the website.
 
 <a id="mailing-list-admin"></a>
 ## Mailing list admin
