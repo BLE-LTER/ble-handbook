@@ -865,7 +865,7 @@ In short, there are these function calls to execute each time you generate a new
 - `MetaEgress::get_meta()`. This queries metabase for that dataset ID. Most of the time this call will be wrapped in a call to `bleutils::append_units()`. The R console will ask you for your metabase username & password after this is called. Any user with READ privileges would suffice.
 - `MetaEgress::create_entity_all()`. This assembles the data entity components of EML.
 - `MetaEgress::create_EML()`. This takes the assembled entities and assembles the other stuff and outputs a complete emld list structure ready to be validated and written to file.
-- `EML::eml_validates()` tests the resulting emld structure for schema validity.
+- `EML::eml_validate()` tests the resulting emld structure for schema validity.
 - `EML::write_eml()` writes the emld list structure to file.
 
 The resulting EML would be deposited into the same directory as the script.
