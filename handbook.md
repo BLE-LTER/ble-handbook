@@ -191,7 +191,7 @@ We use many tools that will need logins, some needing certain privilege levels. 
 
 - Stache `*`
 - UTBox (shared drived with BLE team as a whole, we also use this for sharable file links) `+`
-- UT-Austin Disk network storage (more day-to-day IM working directories) `*`
+- OneDrive for shared IM file storage (more day-to-day IM working directories and all files for archiving) `*`
 - The official IM email BLE-IM@utexas.edu address `+`
 - BLE's PostgreSQL instance of LTER-core-metabase `*`
 - Netlify (static website host) `$`
@@ -312,7 +312,7 @@ When you install Postgres on Windows, the default cluster is located in C:\Progr
 You might want to either change the default cluster directory, or create a new cluster in a different directory (via the command line , for these reasons:
 
 - You might not have write access in C:\Program Files. This was the case with me.
-- You might want to host it somewhere, of course. I briefly looked into hosting a cluster on the UT-Austin network file server, but decided against this route because (1) this seems to be a BAD IDEA(tm) reliability-wise in the DB admin world, and (2) it is unclear to me what the host to the cluster would then be. 
+- You might want to host it somewhere, of course. 
 
 Proceed only once you know where the cluster in which your database resides is, and what is the port the cluster uses.
 
@@ -549,7 +549,7 @@ GRANT ALL ON TABLE pkg_mgmt.personnel_years_associated TO ble_group_owner;
 ##### Backups
 
 A scheduled task on Tim's computer backs up the database to the **daily_backups**
-folder on Austin disk once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to Tim's Box Sync folder, which gets auto-synced to  the BLE-IM/BLE_metabase_backups folder. Yay for multiple backups to multiple servers!
+folder in OneDrive on Austin disk once per day and logs the standard output and error (stdout & stderr) in **daily_backups/logs**. The task also copies the backups to Tim's Box Sync folder, which gets auto-synced to the BLE-IM/BLE_metabase_backups folder. Yay for multiple backups to multiple servers!
 
 Reminders for a smooth backup experience: disconnect from the database (in DBeaver: right-click database name/Disconnect) and quit DBeaver when not using it. This is not essential, I'm pretty sure the backup process will still run without it, I think it just threw up an error one time and quitting DBeaver solved it, so yea.
 
@@ -641,7 +641,7 @@ It consists of:
 
 On Box, we publish publish a zip at a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip.
 
-Austin Disk is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
+OneDrive is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
 <a id="how-to-update-template"></a>
 
@@ -695,7 +695,7 @@ After any updates, be sure to:
 
 We use a certain directory structure for working with data packages.
 
-Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Projects\BLE-LTER` we have a Data directory. Each data package constitutes a child directory under Data. All operations with this data package are performed within this folder. Naming convention is `(dataset ID)_(dataset nickname)`, e.g. "12_sediment_pigment".
+Under the OneDrive folder we have a Data directory. Each data package constitutes a child directory under Data. All operations with this data package are performed within this folder. Naming convention is `(dataset ID)_(dataset nickname)`, e.g. "12_sediment_pigment".
 
 **Within each data package directory:**
 -  "FromPI" contains data and metadata files as scientists sent them. If there have been multiple versions received from PIs, then create folders with ISO dates received as dir names. If lots of confusing versions, consider making a README to explain the difference. 
@@ -711,7 +711,7 @@ Under the Austin disk folder at `\\austin.utexas.edu\disk\engr\research\crwr\Pro
 
 What I do:
 
-Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in any R console. This will (1) create a folder named datasetid_nickname under our Austin disk Data folder, with sub-folders called FromPI and Clean > EML_generation, and (2) create a R script named datasetid.R from template with the appropriate IDs subbed into function calls. The parent folder defaults to "K:/Data" on my machine. Modify the `base_path` argument in `init_datapkg()` if needed.
+Run `bleutils::init_datapkg(*insert dataset_id*, *insert dataset nickname*)` in any R console. This will (1) create a folder named datasetid_nickname under our OneDrive Data folder, with sub-folders called FromPI and Clean > EML_generation, and (2) create a R script named datasetid.R from template with the appropriate IDs subbed into function calls. The parent folder defaults to "K:/Data" on An's old machine. Modify the `base_path` argument in `init_datapkg()` if needed.  E.g., `bleutils::init_datapkg(as.integer(31), "polar_bear_sightings", "D:/OneDrive - The University of Texas at Austin/General - BLE LTER/Data", as.integer(2023))`
 
 - Our dataset IDs increment from 1. `init_datapkg()` will return error if you attempt to use an ID already existing within that folder, and tell you the next available ID (i.e. the largest existing ID + 1). I don't see any reason right now to skip numbers, so this should work. 
 
@@ -758,7 +758,7 @@ This of course depends on the source format. We have done and attempted to do th
 - R and Python can both handle these tasks. Use package `ncdf4` in R and module `netCDF4` in Python. In our folder for dataset 7, see merge_nc.py for an example python routine and
 netcdf.R for an example R routine.
 
-- Execute the conversion on local storage, not Austin disk. A network drive dramatically slows these packages down by as much as 100 times. Our python routine that takes 6 seconds on local disk takes 650 seconds on Austin disk. The equivalent R routine that takes 5 minutes on local disk takes at least 2 hours. R is indeed quite a bit slower than python here.
+- In one case, our python routine took 6 seconds. The equivalent R routine took 5 minutes. R is indeed quite a bit slower than python here.
 
 - Mike Rawlins' dataset used the EASE-grid, on a Lambert azimuthal projection. We had a lot of trouble configuring the netCDF file so that ArcGIS would pick up the EASE-grid. For more documentation on what we did, see folder Data > 5_rawlins > netcdf.
 
