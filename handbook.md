@@ -247,7 +247,7 @@ Sometimes the Remote Desktop won't connect. Restarting your own computer sometim
 
 2. Enter metadata into metabase, clarifying with researchers along the way. Process the data, reformat it to whatever. Make metadata.
 
-3. Archive at EDI ([staging](https://portal-s.edirepository.org/nis/harvester.jsp)). Send staged data package to researchers for approval and make changes as requested. Archive at EDI ([production](https://portal.edirepository.org/nis/harvester.jsp)).
+3. Archive at EDI ([staging](https://portal-s.edirepository.org/nis/harvester.jsp)). Send staged data package to researchers for approval and make changes as requested. CC the core program manager if the dataset is a core program dataset. Archive at EDI ([production](https://portal.edirepository.org/nis/harvester.jsp)).
 
 4. Let BLE and the world know. BLE has a formal data notification policy below.
 
@@ -799,6 +799,8 @@ Some things to keep in mind when entering values:
 
 - Avoid non-ASCII characters if reasonable. You can use an [online Diacritics Remover](https://pteo.paranoiaworks.mobi/diacriticsremover/) for this.
 - If you paste an Excel cell, it inserts an unwanted newline character at the end. It's better to edit the cell in Excel and copy the text from there.
+
+For core program datasets, if the core program team has provided a station-date lookup for a given season, make sure the submitted data conforms to that. If not, it may indicate an error in recording data, and you should reach out to the core program team and whomever submitted the data.
 
 I populate metabase for a new dataset in this order:
 
