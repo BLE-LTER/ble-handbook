@@ -1315,7 +1315,7 @@ In April of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss t
 - Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
 - We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
 
-To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match).
+To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match). To check validity of a list of aphiaIDs, use [our aphiaID checker](https://ble-lter.github.io/check_aphiaIDs/).
 
 #### Misc
 
