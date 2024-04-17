@@ -1302,7 +1302,7 @@ For trawls, we only record the from station. In practice, we trawl/tow for ~5 mi
 
 #### Taxonomy
 
-In april of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
+In April of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
 
 - Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
 - We'll use WORMS but allow other authorities.
