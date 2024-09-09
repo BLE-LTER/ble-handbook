@@ -810,6 +810,8 @@ I populate metabase for a new dataset in this order:
 
 If entering complex equations, use docbook and LaTeX. See [what EDI supports](https://edirepository.org/news/news-20210430.00), this [online LaTeX editor](https://editor.codecogs.com/) and this [LaTeX cheat sheet](http://tug.ctan.org/info/undergradmath/undergradmath.pdf). See methods in [BLE.20](https://portal.edirepository.org/nis/mapbrowse?scope=knb-lter-ble&identifier=20) for an example.
 
+You can test how equations will render at EDI using ezEML. To do so,  log in to [ezEML](https://ezeml.edirepository.org/eml), create a test document, and enter methods. It's best just to enter the equations, because if you're using docbook, you have to escape every XML bracket. To preview the result, click **Import/Export > Preview Your Metadata in the EDI Data Portal > Generate Preview**. The docbook may not render, but the equations should.
+
 Common pitfalls:
 
 - Forgetting closing tags in docbook formatted abstract/methods
