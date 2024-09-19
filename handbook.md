@@ -1314,8 +1314,7 @@ In April of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss t
 - We will not accept anglicized names for taxa that have been identified, e.g., Copepod is not acceptable; must use Copepoda.
 - Some English words will be used like "ice algae", "phytoplankton", "detritus", etc., to describe end-members.
 - Researchers should remove nondescript data rows such as "unidentified" or "other".
-- sample IDs will be included and managed by researchers. For those collecting data where you'd want to know when two data points are from the same sample, we're asking researchers to prefix sample identifiers with the researcher's initials and an underscore, and they can put whatever they want after the first underscore (alphanumeric, underscores). This probably applies only to taxonomic data.  We recommend indicating the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
-- Kaylie came up with this sample ID structure: KP_2022EEOWB_SI_000 (minus the KP_, for now)
+- sample IDs will be included and managed by researchers. They can do what they want. If they want guidance, we recommend the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
 - We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
 
 To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match). To check validity of a list of aphiaIDs, use [our aphiaID checker](https://ble-lter.github.io/check_aphiaIDs/).
