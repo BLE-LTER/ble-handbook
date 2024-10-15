@@ -934,7 +934,7 @@ Replication requires these two steps:
 2. Once the dataset is synced to DataONE, the BLE information manager must
    provide the DOI of the dataset to ADC so they can harvest the metadata.
 
-We wrote [a replication guide](https://docs.google.com/document/d/1QJyj3biai9k5Kaxp3v3Rk2r7pmjirYRHMLySgagMAnw/edit#heading=h.wn7g8mmmpq5c). In this we expound on how to best enable replication between EDI-DataONE-ADC and what we as IMs can do to facilitate this. Aside from metadata best practices, this guide also recommends adding a snippet of XML into additionalMetadata:
+We also recommend adding a snippet of XML into additionalMetadata:
 
 ```xml
 <additionalMetadata>
