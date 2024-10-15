@@ -941,7 +941,7 @@ We also recommend adding a snippet of XML into additionalMetadata:
     <metadata>
       <d1v1:replicationPolicy xmlns:d1v1="http://ns.dataone.org/service/types/v1" numberReplicas="1"
         replicationAllowed="true">
-        <preferredMemberNode>urn:node:ADC</preferredMemberNode>
+        <preferredMemberNode>urn:node:ARCTIC</preferredMemberNode>
       </d1v1:replicationPolicy>
     </metadata>
   </additionalMetadata>
