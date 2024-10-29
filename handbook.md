@@ -317,26 +317,32 @@ Proceed only once you know where the cluster in which your database resides is, 
 ###### Change the cluster configuration
 In the directory where the Postgres cluster lives, there are a number of .conf files. These contain the very high level configuration settings to the entire cluster, so treat them with caution. 
 
-You need to change two files:
+You need to change pg_hba.conf. This file controls who can connect to the cluster and how they can do it.
 
-1. postgres.conf
+Add a line to the end as follows:
+host all all [client IP address]/24 scram-sha-256
 
-Change listen_addresses to the client's IP address(es). You need to string-quote it. In BLE's case, this is the IP mask for the CWE group. This tells Postgres to "listen" or in other words, to expect connection attempts from these addresses.
+The client IP address is the Default Gateway when they run ipconfig in a command window. 
 
-2. pg_hba.conf
-
-The 'hba' stands for host-based authentication. This file controls who can connect to the cluster and how they can do it.
-
-Add a line to the end as following:
-host all all <client IP address> md5;
-
-This tells Postgres to allow the connection attempt from the specified address 
-with md5 authentication.
-
-**NOTE:** the slash thing in an IP address is very important here. Example: if you say 10.157.28.0 without appending "/24", eventually downstream you will not be able to connect to the cluster at all with a generic message, e.g. "could not load pg_hba.conf".
+**NOTE:** the slash thing in an IP address is very important here. Otherwise, eventually downstream you will not be able to connect to the cluster at all with a generic message, e.g. "could not load pg_hba.conf".
 
 ###### Change firewall rules to open port
+
 Now that we're done telling Postgres to expect and allow connection, we need to tell the operating system the same. Create a Windows Defender Firewall inbound rule to open up port TCP 5432, or whatever port your cluster uses. Enable this rule. Contact your network admin if you can't do this or don't have the right to do so. This is likely the case if you see anything that says "group policy".
+
+1. Windows Key + R to open the Run dialog.
+2. Type firewall.cpl and press Enter.
+3. In the left pane, click on Advanced settings. This will open the Windows Defender Firewall with Advanced Security window.
+4. In the left pane, click on Inbound Rules.
+5. In the right pane, click on New Rule....
+6. Select Port and click Next.
+7. In the Specific local ports field, enter 5432 and click Next.
+8. Choose Allow the connection and click Next.
+9. Select only Private and click Next.
+10. Name the rule *Postgres allow CWE connections* and click Finish.
+11. View properties for the new rule.
+12. On the Scope tab, for Remote IP address, select **These IP addresses** and click Add.
+13. Enter the client IP address, e.g., 1.2.3.4/24.
 
 <a id="on-the-client-pc"></a>
 ##### On the client PC
@@ -447,6 +453,8 @@ Remember to (1) change passwords, and (2) swap out roles "an" and "tim" with app
 
 CREATE ROLE an;
 ALTER ROLE an WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE tim;
+ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE backup_user;
 ALTER ROLE backup_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE ble_group_owner;
@@ -462,8 +470,6 @@ CREATE ROLE read_only_user;
 ALTER ROLE read_only_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE read_write_user;
 ALTER ROLE read_write_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
-CREATE ROLE tim;
-ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 
 
 --
@@ -559,13 +565,13 @@ The backups folder can be a bit cluttered, since there are hundreds of backups, 
 
 ##### Restore
 
-Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it for any irregularities. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore, which requires a special format. To restore from plain-text format, either right-click on a newly created database in DBeaver/Tools/Execute script, or run the file on a newly created and connected to database in command-line psql.
+Backups are made in plain-text SQL format. This means we can open it in a text editor and just, you know, look at it for any irregularities. This also means we cannot use the pg_restore tool or restore via right-click on a database in DBeaver/Tools/Restore, which requires a special format. To restore from plain-text format, you must run the SQL file on a newly-created database in command-line psql.
 
-Existing users must be created prior to running the SQL to restore into another
+First, create users. Existing users must be created prior to running the SQL to restore into another
 server that's not the original host. It is less work to create new users than make a backup
 without user privileges, then assign them.
 
-Use this snippet, which is a copy from the one above.
+Use this snippet, which is a copy from the one above. Replace usernames **an** and **tim** with your own.
 
 ```sql
 --
@@ -575,11 +581,13 @@ Use this snippet, which is a copy from the one above.
 
 CREATE ROLE an;
 ALTER ROLE an WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
+CREATE ROLE tim;
+ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE backup_user;
 ALTER ROLE backup_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE ble_group_owner;
 ALTER ROLE ble_group_owner WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
-COMMENT ON ROLE ble_group_readonly IS 'This group owns everything in the database, thus has all rights current and future.';
+COMMENT ON ROLE ble_group_owner IS 'This group owns everything in the database, thus has all rights current and future.';
 CREATE ROLE ble_group_readonly;
 ALTER ROLE ble_group_readonly WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
 COMMENT ON ROLE ble_group_readonly IS 'This group has GRANT SELECT ON TABLES plus default future permissions for the same.';
@@ -590,8 +598,6 @@ CREATE ROLE read_only_user;
 ALTER ROLE read_only_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE read_write_user;
 ALTER ROLE read_write_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
-CREATE ROLE tim;
-ALTER ROLE tim WITH NOSUPERUSER INHERIT CREATEROLE CREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 
 
 --
@@ -610,6 +616,16 @@ GRANT ble_group_readwrite TO read_write_user GRANTED BY postgres;
 GRANT ble_group_readwrite TO tim WITH ADMIN OPTION GRANTED BY postgres;
 ```
 
+Next make the new empty database in DBeaver.
+
+1. Right-click **Databases** and click **Create New Database**.
+2. Name it ble_metabase and set the owner to you (or another information manager).
+
+Next you'll load the backup file using a command prompt. It's easiest if you have the Postgres bin path, e.g., C:\Software\Postgres\bin, in your Path environment variable before opening the command prompt.
+
+1. Open a command window.
+2. Change directory to where your SQL backup file, e.g., BLE_metabase_2024_10_14_2321.sql, is located.
+3. Enter this command: `psql -U your_username -d ble_metabase -f BLE_metabase_2024_10_14_2321.sql`
 
 #### Applying new features or patches
 
