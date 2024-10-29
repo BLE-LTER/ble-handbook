@@ -451,7 +451,7 @@ CREATE ROLE backup_user;
 ALTER ROLE backup_user WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN NOREPLICATION NOBYPASSRLS PASSWORD '%password%';
 CREATE ROLE ble_group_owner;
 ALTER ROLE ble_group_owner WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
-COMMENT ON ROLE ble_group_readonly IS 'This group owns everything in the database, thus has all rights current and future.';
+COMMENT ON ROLE ble_group_owner IS 'This group owns everything in the database, thus has all rights current and future.';
 CREATE ROLE ble_group_readonly;
 ALTER ROLE ble_group_readonly WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB NOLOGIN NOREPLICATION NOBYPASSRLS;
 COMMENT ON ROLE ble_group_readonly IS 'This group has GRANT SELECT ON TABLES plus default future permissions for the same.';
