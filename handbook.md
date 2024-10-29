@@ -357,18 +357,7 @@ Password: <your password>
 <a id="our-metabase-implementation"></a>
 ### Our metabase implementation
 
-We're using a Postgres instance on An's machine (IP address 10.157.18.129, computer number for IT purposes CRWR-D08182).
-
-To connect:
-Host: 10.157.18.129
-Port: 5432
-Database: ble_metabase
-User:
-Password:
-
-To enable Tim to connect, we had to work with ITG. They set up a firewall policy
-for An's computer which opens TCP port 5432 for just the CWE general network
-(10.157.18.0/24). They then ran a gpupdate on An's computer.
+We're using a Postgres instance on Tim's machine.
 
 #### Roles: Users/Groups || Permissions
 
@@ -406,7 +395,7 @@ Postgres has a somewhat confusing (to me) permission management scheme. To minim
 
 We use UT's Stache service to share passwords to the shared users.
 
-**NOTE**: postgres is the superuser on the entire cluster on An's machine (or more generally, the default superuser on most clusters). Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since it's generally exceedingly difficult to remove ownership for superusers.
+**NOTE**: postgres is the superuser on the entire cluster (or more generally, the default superuser on most clusters). Do not use for mundane tasks, especially creating new objects (tables/roles/databases), since it then becomes the default owner and it's quite a hard task to revoke ownership from its clutches, since it's generally exceedingly difficult to remove ownership for superusers.
 
 #### User privileges needed to connect to and edit the database
 
