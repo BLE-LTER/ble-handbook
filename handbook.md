@@ -1310,17 +1310,19 @@ For trawls, we only record the from station. In practice, we trawl/tow for ~5 mi
 
 #### Taxonomy
 
-In April of 2022 the BLE team (Tim & An) met with Nathan and Kaylie to discuss taxonomy in the stable isotope dataset. First time we explicitly discussed how to deal with taxonomy in a BLE context. Here are the conclusions:
+Notes on how to deal with taxonomy in a BLE context, by Tim Whiteaker, An Nguyen, Susan Schonberg, Kaylie Plumb, Nathan McTigue:
 
+- We'll use WoRMS. The aphia_id column indicates the WoRMS identifier. Use n.a. if no aphia_id, such as for unidentified samples.
 - Researchers will be responsible for ascertaining the correct and up-to-date taxonomy in their data. This includes providing aphiaIDs or other IDs, and reviewing the existing entries at data update time.
-- We'll use WORMS but allow other authorities.
-- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. SampleId, K, P, C, O, F, G, S, TaxonName, TaxonId (n.a. if no Id), TaxonIdAuthority (Enum: WoRMS, ITIS).
-- TaxonName will be the lowest keyed classification.  We will not include "sp." or "spp." in the TaxonName.
+- IMs will also check aphiaID and taxa hierarcy congruency. Both IMs and researchers can use bleutils to check congruency.
+- For stable isotope data, the full taxonomic tree will be included in the data. Kingdom to species, no in-betweens like super orders. K, P, C, O, F, G, S.
+- The taxa_id column stores the taxon name at the most specific level identified.
+- We will not include "sp." or "spp." in taxa_id.
+- Unidentified taxa may be identified at a later date. Include them for now, with taxa_id "unidentified" and aphia_ID n.a.
 - We will not accept anglicized names for taxa that have been identified, e.g., Copepod is not acceptable; must use Copepoda.
-- Some English words will be used like "ice algae", "phytoplankton", "detritus", etc., to describe end-members.
-- Researchers should remove nondescript data rows such as "unidentified" or "other".
-- sample IDs will be included and managed by researchers. They can do what they want. If they want guidance, we recommend the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
-- We will not explicitly track previous names of taxa, but instead rely on synonym functionality from taxonomic identifier providers such as [WoRMS](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487) and ITIS.
+- For datasets providing counts, do include the following when present and use the number 1 for the count: colonies, complexes, fragments. For taxa_id, provide the most specific level possible. For example, for a complex that can only be identified down to either _Eteone flava_ or _Eteone longa_, use Eteone for taxa_id, [129443](https://www.marinespecies.org/aphia.php?p=taxdetails&id=129443) for aphia_id, and enter "colony" in the taxa_flag column. If you need to indicate this could be flava or long, input something like "Eteone flava long complex" in the comment column.
+- We do not promise to track previous names of taxa. As WoRMS evolves, we rely on synonym functionality such as this example: [species with some synonyms](https://www.marinespecies.org/aphia.php?p=taxdetails&id=226487). When we change the taxa_id in a dataset revision, we will attempt to log our previously used taxa_ids in the name_synonyms column. For example, if we previously used taxa_id "Eteone flava long complex", with our current rules we could put "Eteone" for taxa_id, and add "Eteone flava long complex" to the list of names in name_synonyms. This way, users have some provenance on how the item was described in a previous dataset revision.  Use this same approach if unidentified taxa are identified in a later revision (put "unidentified" in name_synonyms).
+- If including sample IDs, they will be included and managed by researchers. They can do what they want. If they want guidance, we recommend the researcher initials, date, station abbreviation, and then other items as needed, e.g., KP_20220731_SILD1_SI_000.
 
 To verify aphiaIDs and taxa names, create a CSV file with just the taxa names and no column header and upload it to the [WoRMS Taxon Match site](https://www.marinespecies.org/aphia.php?p=match). To check validity of a list of aphiaIDs, use [our aphiaID checker](https://ble-lter.github.io/check_aphiaIDs/).
 
