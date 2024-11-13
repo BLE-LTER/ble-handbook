@@ -889,6 +889,7 @@ Make sure to do these tasks if a dataset needs to be revised:
 - Update dates in DataSetTemporal and DataSet (although it doesn't matter much in DataSet since EDI overwrites it).
 - Updates dates and people in DataSetPersonnel.
 - Add a note in metabase's pkg_mgmt.maintenance_changehistory table.
+- Notify the [Arctic Data Center](mailto:support@arcticdata.io?subject=metadata%20harvest&body=Dear%20wonderful%20Arctic%20Data%20Center,%0D%0A%0D%0AWe%20recently%20published%20a%20revision%20to%20this%20dataset%20at%20EDI.%20Will%20you%20please%20update%20your%20metadata%20that%20you%20have%20harvested?%0D%0A%0D%0APASTE%20DATASET%20URL%20HERE%0D%0AThanks!%0D%0A) once you've published at EDI.
 
 <a href="#header">Back to top</a>
 <a id="data-archiving"></a>
@@ -925,6 +926,8 @@ When signing in to the EDI data portal and asked for a member node, we're urn:no
 
 <a id="replication"></a>
 #### Replication
+
+**Currently, automated harvesting is broken at the Arctic Data Center, so you must notify the [Arctic Data Center](mailto:support@arcticdata.io?subject=metadata%20harvest&body=Dear%20wonderful%20Arctic%20Data%20Center,%0D%0A%0D%0AWe%20recently%20published%20a%20dataset%20at%20EDI.%20Will%20you%20please%20harvest%20metadata%20so%20it%20shows%20up%20in%20your%20catalog%20as%20well?%0D%0A%0D%0APASTE%20DATASET%20URL%20HERE%0D%0AThanks!%0D%0A) for a manual harvest when you publish data. Below we document the procedure for when harvesting is fixed.**
 
 We replicate our EDI data packages so that they show up in the Arctic Data Center
 catalog.  There's a single DOI for a data package, which resolves to the LTER
