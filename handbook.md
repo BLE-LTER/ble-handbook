@@ -842,7 +842,7 @@ You can search the following resources for semantic annotation terms. We typical
 - [BioPortal](https://bioportal.bioontology.org/search) - Searches many ontologies including ENVO and ECSO
 - [VCR Unit Lookup](https://www.vcrlter.virginia.edu/data/test_unitsws.html) - John Porter's site to match your units to QUDT
 - [QUDT](https://ble-lter.github.io/QUDT_Browser/) - QUDT list, in case John's tool fails
-
+- [See 7.4 "Vocabularies and repositories used in examples"](https://eml.ecoinformatics.org/semantic-annotation-primer.html) for more recommended ontologies
 
 3. Tables that are more involved
 
