@@ -1170,7 +1170,7 @@ Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to
 
 Datasets produced by the Core Program fall under an umbrella and as such need to follow a common format. Following are practices we have for Core Program datasets following much discussion and trial-and-error.
 
-There are two documents on Box (Beaufort LTER > Core Program > Data notes) with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by CB with the general workflow of Core Program data from lab to our IM's hands.
+There are two documents on Box (Beaufort LTER > Core Program > Data notes) with some of these rules oriented towards our Project Managers/scientists to help them as they submit Core Program data. This is [a spreadsheet](https://utexas.app.box.com/file/422189027582) with predefined columns and the appropriate way to assign them to data, and this is a [Word doc](https://utexas.app.box.com/file/649019663047) written by Christina Bonsell with the general workflow of Core Program data from lab to IM hands. For naming auxilliary stations, scientists should refer to [**Break up station datasheet.docx** on Box](https://utexas.app.box.com/file/1557227481299).
 
 This handbook version is a much more exhaustive version for IMs.
 
