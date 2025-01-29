@@ -1731,6 +1731,7 @@ Make sure to do the following:
 - Update our website display (team page, and student research page if student)
 - Update metabase in several places (lter_metabase."ListPeople" and mb2eml_r.boilerplate.project for core personnel). They might not have an entry in metabase yet.
 - Update appropriate mailing lists
+- Add the team member to Box as Viewer/Uploader
 
 Bios for former students should be removed from the student page on the website.
 
