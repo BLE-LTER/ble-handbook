@@ -73,6 +73,7 @@ date: 2023-02-17
 	- [Add/update personnel contact information](#addupdate-personnel-contact-information)
 	- [Mailing list admin](#mailing-list-admin)
 		- [List maintenance](#list-maintenance)
+		- [List debugging](#list-debug)
 		- [List config](#list-config)
 - [Reporting](#reporting)
 	- [Obtaining metrics](#obtaining-metrics)
@@ -1747,7 +1748,7 @@ We have settled on these settings. However, see config section below if you ever
 Only list members can send messages. Messages are not moderated. Replies to messages from others will be sent to the entire list, i.e., default reply behavior is reply-all. Email the original poster directly for tangential thoughts, specific questions, etc. 
 
 List members can invite others to join, but a list owner must approve once a
-person has been invited. An Nguyen, Tim Whiteaker, Christina Bonsell, and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed, will not be included on conversations they didn't initiate. 
+person has been invited. Tim Whiteaker and Nathan McTigue own/admin the lists. No moderators are set, so mods are the same as owners. Note that owners are not necessarily subscribers. Owners/mods can always post to a group, but if they are not themselves subscribed, will not be included on conversations they didn't initiate. 
 
 These are the lists as of June 2020:
 
@@ -1781,6 +1782,15 @@ These tasks need to be done periodically:
 - Check if messages are getting past spam filters. We'll assume the best and look into it if issues come up. 
 
 - From August 2020 on, UTLists will delete mailing list archives that are more than 4 years old. Our mailing lists were created in September 2019. So, before September 1st 2023, old archives need to be downloaded. Unfortunately I don't know of any options to download them in a nice format besides UTLists' clunky way. 
+
+<a id="list-debug"></a>
+### List debugging
+
+Here are some issues, and sometimes solutions, we have for the lists.
+
+#### Authorization Denied
+
+When attempting to email the list, if you get a message with subject "Message distribution: Authorization denied" from UT Lists <sympa-request@utlists.utexas.edu>, then it may be that we don't have the right email address for you. For example, I had Yvette's email as yvette.spitz@oregonstate.edu, but in her mail client it's spitzy@oregonstate.edu. spitzy is associated with her account with the university and yvette.spitz is the email structure associated with Microsoft and is linked at the university level to the first one.  The solution was to add both addresses to the list. When receiving, she only got one copy of the message (instead of two, since she has two addresses on the list), so it's possible her email is smart enough to only deliver one.
 
 <a id="list-config"></a>
 ### List config
