@@ -1788,6 +1788,18 @@ These tasks need to be done periodically:
 
 Here are some issues, and sometimes solutions, we have for the lists.
 
+#### Missing Messages
+
+Some users don't get some mailing list messages even though they show up in the archives with no bounces, for example messages from Amber sent from vims.edu. In two cases, this was because messages are being flagged as spam by Microsoft Defender at the receipient institution. Defender thinks they are spoofed.
+
+Solution: In Defender, release the message and mark it as "Not Junk".
+
+To safe list the sender:
+
+1.	Go to Microsoft Defender → Policies & rules → Threat policies → Anti-spam policies.
+2.	Add the domain utlists.utexas.edu, and also vims.edu, to the Allowed Senders list.
+3.	If you don’t have access to this setting, your IT department or email admin needs to do this.
+
 #### Authorization Denied
 
 When attempting to email the list, if you get a message with subject "Message distribution: Authorization denied" from UT Lists <sympa-request@utlists.utexas.edu>, then it may be that we don't have the right email address for you. For example, I had Yvette's email as yvette.spitz@oregonstate.edu, but in her mail client it's spitzy@oregonstate.edu. spitzy is associated with her account with the university and yvette.spitz is the email structure associated with Microsoft and is linked at the university level to the first one.  The solution was to add both addresses to the list. When receiving, she only got one copy of the message (instead of two, since she has two addresses on the list), so it's possible her email is smart enough to only deliver one.
