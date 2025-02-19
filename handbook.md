@@ -643,7 +643,7 @@ It consists of:
 - abstract and methods templates (.docx files)
 - example package, which is a .zip of data files and accompanying, filled-out metadata templates
 
-On Box, we publish publish a zip at a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip.
+On Box, we publish a zip at a stable link https://utexas.box.com/v/ble-metadata-template. This zip should always be updated to the latest canon version. BLE website links to this zip.
 
 OneDrive is where we keep the canon version: under BLE LTER > Data-notes > BLE practices > metadata_template > canon. This itself is a git repo at https://github.com/BLE-LTER/ble-metadata-template for version control purposes.
 
