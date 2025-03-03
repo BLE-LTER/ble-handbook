@@ -1369,6 +1369,21 @@ For non-BLE funded datasets, where we still archive the data, we skip 1, 3, and 
 
 For cases in between, such as in-kind support from BLE, typically skip 1 and 3. Modify the boilerplate to describe the primary funding source, but in the funding section describe the specific contributions from BLE. Since the award element is repeatable, provide an award element for each funding source, including one for BLE.
 
+<a id="catalogs-of-data-at-other-repos"></a>
+### Catalogs of data at other repositories
+
+Sometimes we have to publish data elsewhere. For example, genomics data are better suited for GenBank than EDI. There are two broad cases to consider here: 1. We want the data to show up in our data catalog, and 2. The data were only partially funded by BLE and do not need to be discoverable from our primary data catalog.
+
+To make such data show up in our EDI-based data catalog, we publish a CSV table in EDI that summarizes the holdings at the other repository.
+
+For the GenBank case, this summary includes columns with identifiers such as "run" (example value: SRR12147740) and "biosample" (SAMN11293121), columns with links to those items, e.g., "run_link" (https://trace.ncbi.nlm.nih.gov/Traces/sra/?run=SRR12147740), and additional metadata columns that we thought might help end users decide which links they wanted to follow to access the data at GenBank such as the environment, collection date, latitude, and longitude.
+
+In the EML metadata, we put "Catalog" in the title of the dataset, and we link to the overall GenBank project in the abstract, as in, "This data package catalogs sequence read archive (SRA) entries available through GenBank BioProject PRJNA642637 at https://www.ncbi.nlm.nih.gov/bioproject/PRJNA642637."
+
+The above is just guidance. Do what you can based on what metadata you have and what you think would be useful to end users.
+
+For data that don't need to show up in our primary data catalog, you can add a reference to the dataset in our Zotero "Related Data" collection. Be sure to tag the dataset appropriately, using existing items in the collection as examples.
+
 <a href="#header">Back to top</a>
 <a id="website"></a>
 # Website
