@@ -1805,15 +1805,25 @@ Here are some issues, and sometimes solutions, we have for the lists.
 
 #### Missing Messages
 
-Some users don't get some mailing list messages even though they show up in the archives with no bounces, for example messages from Amber sent from vims.edu. In two cases, this was because messages are being flagged as spam by Microsoft Defender at the receipient institution. Defender thinks they are spoofed.
+Some messages, even though they are sent and show up in archives, don't show up, even in the user's junk folder. This is because the messages are being flagged as spam and outright rejected by the recipient's email domains.
 
-Solution: In Defender, release the message and mark it as "Not Junk".
+The solution is to change the DMARC protection mode to "DMARC policy suggests quarantine."
+
+1. Log in to UT Lists.
+2. Select the list to modify.
+3. Click Admin.
+4. Click Edit List Config > DKIM/DMARC/ARC.
+5. Change the DMARC protection mode to "DMARC policy suggests quarantine."
+6. Apply modifications.
+
+As an additional step in Defender if messages still aren't getting through, the user can release the message and mark it as "Not Junk".
 
 To safe list the sender:
+1.	Microsoft Defender > Policies and rules > Threat policies > Anti-spam policies.
+2.	Add the domain utlists.utexas.edu, and also the domain of the email that failed, e.g., vims.edu, to the Allowed Senders list.
+3.	If you don't have access to this setting, your IT department or email admin needs to do this.
 
-1.	Go to Microsoft Defender → Policies & rules → Threat policies → Anti-spam policies.
-2.	Add the domain utlists.utexas.edu, and also vims.edu, to the Allowed Senders list.
-3.	If you don’t have access to this setting, your IT department or email admin needs to do this.
+More info is at https://ut.service-now.com/sp?id=kb_article&number=KB0016738. Note that per that article, we did try "DMARC policy suggests rejection" but it didn't work. If the new setting fails, UT's IT department suggested trying "DMARC policy exists".
 
 #### Authorization Denied
 
@@ -1837,6 +1847,8 @@ config options of note:
 - Who can (un)subscribe? "Owners approval". Admin needs to approve (un)sub requests.
 
 - Include a footer message under "message templates". I go with variations on "Distribution list for BLE LTER *insert audience*. Replies will be sent to the whole group. Email *insert list email* to send a message to the group."
+
+- Change the DMARC protection mode to "DMARC policy suggests quarantine." This allows messages to get through some email filters which would otherwise flag the messages as spam.
 
 <a id="reporting"></a>
 # Reporting
