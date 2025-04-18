@@ -1166,7 +1166,7 @@ Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to
 - We don't enforce a specific time zone, but times will likely be in AKDT (-08) or UTC (+00).
 - When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time.
 
-#### Precision adn rounding
+#### Round to the specific precision
 
 When metadata includes precision, we round to the order of magnitude of that precision.
 For example, if precision is 0.004, we round to the nearest 0.001 (i.e., we round to the thousandths place).
@@ -1174,6 +1174,16 @@ For example, if precision is 0.004, we round to the nearest 0.001 (i.e., we roun
 ```R
 # Round temperature to three decimal places
 df[["temperature_C"]] <- round(df[["temperature_C"]], 3)
+```
+
+#### Avoid scientific notation
+
+Small or large values may show up in scientific notation, e.g., "2e-04".
+For maximum compatibility with end user software, we should write out the decimals, so 2e-04 becomes 0.0002 for example.
+If processing with R, you have to tell it not to use scientific notation as shown below.
+
+```R
+options(scipen = 999)  # Sets a high penalty for scientific notation
 ```
 
 <a id="core-program-data"></a>
