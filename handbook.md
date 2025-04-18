@@ -1166,6 +1166,16 @@ Following discussion in early 2022 with Yvette Spitz and El Brown, we decided to
 - We don't enforce a specific time zone, but times will likely be in AKDT (-08) or UTC (+00).
 - When dealing with previous data with dates-only but no times, or new data without times, use a standard noon local time.
 
+#### Precision adn rounding
+
+When metadata includes precision, we round to the order of magnitude of that precision.
+For example, if precision is 0.004, we round to the nearest 0.001 (i.e., we round to the thousandths place).
+
+```R
+# Round temperature to three decimal places
+df[["temperature_C"]] <- round(df[["temperature_C"]], 3)
+```
+
 <a id="core-program-data"></a>
 ### Core Program data
 
