@@ -837,7 +837,7 @@ Common pitfalls:
 
 Before entering info into these tables, one can scan for things that entries that might not be present in the List* tables yet, e.g. keywords we've never used before or a person we've never listed on previous datasets, and enter that information into corresponding parent List* tables. However, sometimes it's easier to just enter the info into the DataSet* tables and let DBeaver tell you what's missing from the parent table when you go to save it.
 
-You can search the following resources for semantic annotation terms. We typically use terms from ENVO, ECSO, or EnvThes. We almost always apply the term ENVO_00000038 for a dataset to indicate that it is about "lagoon". For attributes, in addition to describing what the variable is, we also use annotation to describe the units of measure. Whatever annotation you choose, make sure its ID URL actually points to it. Sometimes the links are stale. Note that EDI will only display a hyperlink if the link is a "purl" (persistent URL) link), since those are used to redirect to the location of the resource (much as a DOI does), e.g., http://purl.dataone.org/odo/ECSO_00000571.
+You can search the following resources for semantic annotation terms. We typically use terms from ENVO, ECSO, or EnvThes. We almost always apply the term ENVO_00000038 for a dataset to indicate that it is about "lagoon". For attributes, in addition to describing what the variable is, we also use annotation to describe the units of measure. Whatever annotation you choose, make sure its ID URL actually points to it. Sometimes the links are stale.
 
 - [ENVO](https://www.ebi.ac.uk/ols/ontologies/envo)
 - [BioPortal](https://bioportal.bioontology.org/search) - Searches many ontologies including ENVO and ECSO
