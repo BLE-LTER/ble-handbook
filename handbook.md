@@ -1716,6 +1716,7 @@ Once the metadata is harvested, make sure to:
 - Add data URLs if applicable to "Extra" field. URL **must** begin with "https://doi.org/". Each URL must appear on its own line.
 - If you added data URLs, find the data package in EDI, scroll to the bottom, and add the journal citation
 - Edit metadata fields as needed if Zotero wasn't able to fill them out
+- If any metadata fields contain the text "n/a", delete the "n/a" and leave the field blank. These usually come from missing information in the journal metadata, and leaving them in causes "n/a" to appear in the website citation.
 - If your Zotero desktop application does not automatically sync to the library in the cloud, initiate a sync
 - Update the BLE website. A cached copy of the bibliography harvested from Zotero is used for the website, so the cache must be updated each time an item is updated in our bibliography. To update the cache, use NodeJS to run the file harvest_zotero.mjs in the website root folder with this command: `node --loader ts-node/esm harvest_zotero.mjs`. This will update the file biblio_data.js in the public js folder. Git-commit and push to reflect changes onto the live website.
 
