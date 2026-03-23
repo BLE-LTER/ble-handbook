@@ -989,6 +989,21 @@ familiar with the archives for their field.
 
 We currently submit data and EML metadata manually via the [EDI data portal](https://portal.edirepository.org/nis/harvester.jsp).
 
+<a id="large-dataset-submission-workflow"></a>
+#### Large dataset submission workflow using EZeml
+
+For large datasets, the standard EDI submission process may fail with a *"413 Request Entity Too Large”* error. In these cases, use ezEML as an intermediate step for preparing and hosting the data files.
+
+First, log in to ezEML using your EDI credentials and import your existing EML file via **Import/Export → Import EML File**. This will automatically populate the metadata. After import, upload all associated data files (data tables and other entities) directly within ezEML and ensure they are properly validated.
+
+If the dataset requires review prior to submission, you can use the **Collaborate** feature in ezEML (top right) to share access with collaborators (e.g., Tim or other researchers) by providing their name and email address.
+
+Once the dataset is finalized, download the updated EML file using **Import/Export → Download EML File (XML)**. Then, upload this EML file to the EDI Data Portal via **Tools → Evaluate/Upload Data Package**.
+
+**Important:** Do not select the *“Manually upload data files”* option during upload. The data files are already hosted through ezEML and are referenced via web-accessible links included in the EML file.
+
+This workflow is required when dataset size exceeds EDI upload limits. The final upload step is similar to the MetaEgress/Metabase workflow, except that manual data file upload is not necessary.
+
 <a id="handling-large-files"></a>
 #### Handling large files
 
