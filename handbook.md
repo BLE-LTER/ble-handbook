@@ -1002,7 +1002,12 @@ Once the dataset is finalized, download the updated EML file using **Import/Expo
 
 **Important:** Do not select the *“Manually upload data files”* option during upload. The data files are already hosted through ezEML and are referenced via web-accessible links included in the EML file.
 
+After the data package has been successfully uploaded to EDI, return to ezEML and clean up unused packages. To do this, navigate to **EML Documents → Manage**, and delete any unused data packages to keep your ezEML workspace organized.
+
+Note: ezEML storage is limited and large datasets can quickly accumulate across multiple revisions of the same package. For example, retaining several dated versions of a dataset can consume tens of gigabytes of space. To avoid exceeding storage limits regularly delete older or unused versions once they are no longer needed.
+
 This workflow is required when dataset size exceeds EDI upload limits. The final upload step is similar to the MetaEgress/Metabase workflow, except that manual data file upload is not necessary.
+
 
 <a id="handling-large-files"></a>
 #### Handling large files
